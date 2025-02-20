@@ -1,0 +1,27 @@
+# Welcome to our wiki for the bomberman game
+__________________________________________
+# Genre, similar games & market positioning 
+
+# Technical profile 
+
+# History of the game 
+
+# Workflow of menus & HUD analysis
+
+# Sprites 
+
+# Narrative structutres 
+
+# Analisis of the levels 
+
+# Gameplay 
+
+# Controls 
+
+# Mood analysis 
+
+# Level art 
+
+# Game music 
+
+# Game sound effects 
