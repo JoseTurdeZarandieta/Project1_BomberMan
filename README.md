@@ -1,3 +1,17 @@
 # Project1_BomberMan
 
-https://trello.com/invite/b/67b30ec137e97d5ea989db3f/ATTIeaf29fb7cdd669862894f601fcbfa18c369ED158/project1-bomberman 
+## Project Camel/0
+Logo
+## Project members 
+
+**Jose Tur de Zarandieta** 
+[Github](https://github.com/JoseTurdeZarandieta)
+
+**Marc Amo Mateu**
+[Github](https://github.com/mxarc)
+
+**Iker Salas Gallardo** 
+[Github](https://github.com/Biker13)
+
+Image of the members 
+
