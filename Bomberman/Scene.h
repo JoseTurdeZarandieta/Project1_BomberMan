@@ -26,5 +26,5 @@ private:
     std::vector<Object*> objects;
 
     Camera2D camera;
-    DebugMode debug;
+    DebugMode Debug;
 };

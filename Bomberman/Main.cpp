@@ -39,3 +39,5 @@ int main (){
    
     return main_return;
 }
+
+//hay un debug que tendria que ser debugMode, pero no se cual es :)
