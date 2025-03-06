@@ -1,5 +1,5 @@
 
-
+enum class AppStatus{OK=0,ERROR,QUIT}
 
 #define WINDOW_WIDTH 592
 #define wINDOW_HEIGHT 518
