@@ -1,0 +1,5 @@
+The spritesheets were taken from the following webpages:
+
+
+Spritesheet: https://www.spriters-resource.com/nes/bomberman/
+SFX and Music: https://www.zophar.net/music/nintendo-nes-nsf/bomberman
