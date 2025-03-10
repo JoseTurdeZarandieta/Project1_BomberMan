@@ -1,34 +1,8 @@
 ﻿  Game.cpp
   main.cpp
   Object.cpp
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(12,20): error C2838: 'APPLE': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(12,25): error C2065: 'APPLE': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(12,25): error C2131: expression did not evaluate to a constant
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(12,25): message : a non-constant (sub-)expression was encountered
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(13,20): error C2838: 'CHILI': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(13,25): error C2065: 'CHILI': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(13,25): error C2131: expression did not evaluate to a constant
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(13,25): message : a non-constant (sub-)expression was encountered
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(12,1): error C2051: case expression not constant
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(13,1): error C2051: case expression not constant
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(16,2): warning C4065: switch statement contains 'default' but no 'case' labels
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(30,26): error C2838: 'APPLE': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(30,31): error C2065: 'APPLE': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(30,41): error C2065: 'POINTS_APPLE': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(31,31): error C2838: 'CHILI': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(31,36): error C2065: 'CHILI': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\Object.cpp(31,45): error C2065: 'POINTS_CHILI': undeclared identifier
+
   Player.cpp
   Scene.cpp
   TileMap.cpp
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(108,16): error C2838: 'SOLID_FIRST': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(108,28): error C2065: 'SOLID_FIRST': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(108,53): error C2838: 'SOLID_LAST': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(108,63): error C2065: 'SOLID_LAST': undeclared identifier
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(128,66): error C2677: binary '+': no global operator found which takes type 'Point' (or there is no acceptable conversion)
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(128,92): error C2660: 'TileMap::CollisionY': function does not take 1 arguments
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.h(64,7): message : see declaration of 'TileMap::CollisionY'
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(165,28): error C2059: syntax error: ')'
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(186,23): error C2838: 'LASER': illegal qualified name in member declaration
-C:\Users\ikers\OneDrive\Documentos\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(186,28): error C2065: 'LASER': undeclared identifier
-  Generating Code...
+

@@ -58,11 +58,8 @@ private:
 
 	Tile GetTileIndex(int x, int y) const;
 	bool IsTileSolid(Tile tile) const;
-	bool IsTileLadderTop(Tile tile) const;
-	bool IsTileLadder(Tile tile) const;
 	bool CollisionX(const Point& p, int distance) const;
 	bool CollisionY(const Point& p, int distance) const;
-	int GetLadderCenterPos(int pixel_x, int pixel_y) const;
 
 	//Tile map
 	Tile *map;
@@ -73,7 +70,7 @@ private:
 	//Dictionary of tile frames
 	std::unordered_map<int, Rectangle> dict_rect;
 
-	Sprite *laser;
+	
 	
 	//Tile sheet
 	const Texture2D *img_tiles;

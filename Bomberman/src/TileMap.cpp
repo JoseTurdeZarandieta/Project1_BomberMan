@@ -8,7 +8,7 @@ TileMap::TileMap()
 	map = nullptr;
 	width = 0;
 	height = 0;
-	laser = nullptr;
+	
 	img_tiles = nullptr;
 
 	InitTileDictionary();
@@ -20,12 +20,7 @@ TileMap::~TileMap()
 		delete[] map;
 		map = nullptr;
 	}
-	if (laser != nullptr)
-	{
-		laser->Release();
-		delete laser;
-		laser = nullptr;
-	}
+	
 }
 void TileMap::InitTileDictionary()
 {
@@ -91,7 +86,7 @@ AppStatus TileMap::Load(int data[], int w, int h)
 }
 void TileMap::Update()
 {
-	laser->Update();
+	
 }
 Tile TileMap::GetTileIndex(int x, int y) const
 {
@@ -105,7 +100,7 @@ Tile TileMap::GetTileIndex(int x, int y) const
 }
 bool TileMap::IsTileSolid(Tile tile) const
 {
-	return (Tile::SOLID_FIRST <= tile && tile <= Tile::SOLID_LAST);
+	return (Tile::BLOCK <= tile && tile <= Tile::BOMB);//creo
 }
 
 
@@ -162,7 +157,7 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 		tile = GetTileIndex(x, y);
 
 		//One solid or laddertop tile is sufficient
-		if (IsTileSolid(tile) || )
+		if (IsTileSolid(tile)  )
 			return true;
 	}
 	return false;
@@ -183,15 +178,7 @@ void TileMap::Render()
 				pos.x = (float)j * TILE_SIZE;
 				pos.y = (float)i * TILE_SIZE;
 
-				if (tile != Tile::LASER)
-				{
-					rc = dict_rect[(int)tile];
-					DrawTextureRec(*img_tiles, rc, pos, WHITE);
-				}
-				else
-				{
-					laser->Draw((int)pos.x, (int)pos.y);
-				}
+				
 			}
 		}
 	}
