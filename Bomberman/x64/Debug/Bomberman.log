@@ -1,8 +1,1 @@
-﻿  Game.cpp
-  main.cpp
-  Object.cpp
-
-  Player.cpp
-  Scene.cpp
-  TileMap.cpp
-
+﻿LINK : fatal error LNK1104: no se puede abrir el archivo 'raylib.lib'

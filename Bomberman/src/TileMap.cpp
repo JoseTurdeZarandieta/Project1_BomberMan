@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include <cstring>
 
+
 TileMap::TileMap()
 {
 	map = nullptr;
@@ -120,8 +121,23 @@ bool TileMap::TestCollisionWallUp(const AABB& box) const
 bool TileMap::TestCollisionWallDown(const AABB& box) const
 {
 	//comprobar que funcione 
-	return CollisionY(box.pos + Point(box.width - 1, 0), box.height + Point(box.height - 1, 0));
+	//return CollisionY(box.pos + Point(box.width - 1, 0), box.height + Point(box.height - 1, 0));
+	return 0;
 }
+//test collision inner blocks
+/*bool TileMap::TestCollisionInnerBlocks(const AABB& box) const
+{
+	AABB player_box, obj_box = box ;
+
+	player_box = player->GetHitbox();
+	return (player_box.TestAABB(obj_box));
+	
+}*/
+
+
+
+
+
 
 bool TileMap::CollisionX(const Point& p, int distance) const
 {

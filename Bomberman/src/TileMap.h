@@ -49,6 +49,8 @@ public:
 	bool TestCollisionWallRight(const AABB& box) const;
 	bool TestCollisionWallUp(const AABB& box) const;
 	bool TestCollisionWallDown(const AABB& box) const;
+
+/*	bool TestCollisionInnerBlocks() const;*/
 	
 	
 	

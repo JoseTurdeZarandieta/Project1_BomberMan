@@ -230,7 +230,7 @@ void Player::MoveX()
 		}
 
 		box = GetHitbox();
-		if (map->TestCollisionWallRight(box))
+		if (map->TestCollisionWallRight(box)|| TestCollisionInnerBlocks()
 		{
 			pos.x = prev_x;
 			if (state == State::WALKING) Stop();
