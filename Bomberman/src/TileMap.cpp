@@ -26,10 +26,11 @@ void TileMap::InitTileDictionary()
 {
 	const int n = TILE_SIZE;
 
-	dict_rect[(int)Tile::BLOCK] = { 3*n , 3*n , 4*n , 4*n };
-	dict_rect[(int)Tile::SOFT_BLOCK] = { 4*n ,  0 , 5*n , n };
-	dict_rect[(int)Tile::BOMB] = { 0, 3*n , n , 4*n };
-	
+	dict_rect[(int)Tile::GREEN_BLOCK] =	{ 12 * n, 3 * n , n , n };
+	dict_rect[(int)Tile::SOFT_BLOCK] =	{ 4 * n ,  0 , n , n };
+	dict_rect[(int)Tile::BOMB] =		{ 0, 3 * n , n , 4 * n };
+	dict_rect[(int)Tile::BLOCK] =		{ 3 * n , 3 * n , n , n };
+
 
 	dict_rect[(int)Tile::DOOR] = { 11*n , 3*n , 12*n , 4*n };
 
@@ -57,7 +58,7 @@ AppStatus TileMap::Initialise()
 {
 	ResourceManager& data = ResourceManager::Instance();
 
-	if (data.LoadTexture(Resource::IMG_TILES, "./resources/Sprites/General.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_TILES, "resources/Sprites/General.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
@@ -120,6 +121,7 @@ bool TileMap::TestCollisionWallUp(const AABB& box) const
 bool TileMap::TestCollisionWallDown(const AABB& box) const
 {
 	//comprobar que funcione 1
+	//return CollisionY(box.pos + Point(box.width - 1, 0), box.height + Point(box.height - 1, 0));
 	return CollisionY(box.pos + Point(box.width - 1, 0), box.height);
 }
 

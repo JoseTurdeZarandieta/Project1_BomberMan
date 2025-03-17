@@ -22,7 +22,7 @@ AppStatus Player::Initialise()
 	const int n = PLAYER_FRAME_SIZE;
 
 	ResourceManager& data = ResourceManager::Instance();
-	if (data.LoadTexture(Resource::IMG_PLAYER, "./resources/Sprites/General.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_PLAYER, "resources/Sprites/General.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
@@ -38,21 +38,26 @@ AppStatus Player::Initialise()
 	sprite->SetNumberAnimations((int)PlayerAnim::NUM_ANIMATIONS);
 	
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { n, n, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { n, 0, n, n });
+
+
+
 	//Arreglar animaciones 
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_UP, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 0, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 4*n, n, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_DOWN, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 0, 0, n, -n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 4*n, 0, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_RIGHT, ANIM_DELAY);
-	for (i = 0; i < 8; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i*n, 4*n, n, n });
+	for (i = 0; i < 3; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i*n, n, n, n });
+
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_LEFT, ANIM_DELAY);
-	for (i = 0; i < 8; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i*n, 4*n, -n, n });
+	for (i = 0; i < 3; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i*n, 0, n, n });
+
 	//Arreglar animaciones 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_UP, ANIM_DELAY);
 	for (i = 0; i < 8; ++i)
@@ -123,7 +128,9 @@ void Player::Stop()
 	dir = { 0,0 };
 	state = State::IDLE;
 	if (IsLookingRight())	SetAnimation((int)PlayerAnim::IDLE_RIGHT);
-	else					SetAnimation((int)PlayerAnim::IDLE_LEFT);
+	else if(IsLookingLeft())		 			SetAnimation((int)PlayerAnim::IDLE_LEFT);
+	else if(IsLookingDown())		 			SetAnimation((int)PlayerAnim::IDLE_DOWN);
+	else 		SetAnimation((int)PlayerAnim::IDLE_UP);
 }
 void Player::StartWalkingLeft()
 {
@@ -249,7 +256,7 @@ void Player::MoveY()
 
 	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_DOWN))
 	{
-		pos.y += PLAYER_SPEED;
+		pos.y -= PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingUp();
 		else
 		{
@@ -265,7 +272,7 @@ void Player::MoveY()
 	}
 	else if (IsKeyDown(KEY_DOWN))
 	{
-		pos.y += -PLAYER_SPEED;
+		pos.y += PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingDown();
 		else
 		{

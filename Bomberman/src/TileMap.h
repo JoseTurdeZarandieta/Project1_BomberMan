@@ -14,7 +14,7 @@ enum class Tile {
 	AIR = 0,
 
 	// 0 < id < 50: static tiles
-	BLOCK = 1, SOFT_BLOCK, BOMB,
+	GREEN_BLOCK = 1, BLOCK, SOFT_BLOCK, BOMB,
 	
 	
 

@@ -33,6 +33,7 @@ void Sprite::AddKeyFrame(int id, const Rectangle& rect)
 }
 void Sprite::SetAnimation(int id)
 {
+
     if (id >= 0 && id < animations.size())
     {
         current_anim = id;

@@ -1,1 +1,13 @@
-﻿  Bomberman.vcxproj -> C:\Users\josetdz\Documents\GitHub\Project1_BomberMan\Bomberman\x64\Debug\Bomberman.exe
+﻿  Entity.cpp
+  Game.cpp
+  Object.cpp
+  Player.cpp
+  ResourceManager.cpp
+  Scene.cpp
+  TileMap.cpp
+C:\Users\josetdz\Documents\GitHub\Project1_BomberMan\Bomberman\src\TileMap.cpp(170,12): warning C4101: 'rc': variable local sin referencia
+  main.cpp
+  Generando código...
+  LINK : no se encontró C:\Users\josetdz\Documents\GitHub\Project1_BomberMan\Bomberman\x64\Debug\Bomberman.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Bomberman.vcxproj -> C:\Users\josetdz\Documents\GitHub\Project1_BomberMan\Bomberman\x64\Debug\Bomberman.exe
