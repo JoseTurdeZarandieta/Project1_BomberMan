@@ -24,8 +24,10 @@ int main()
         status = game->Update();
         if(status != AppStatus::OK)
         {
-            if(status == AppStatus::ERROR)      main_return = EXIT_FAILURE;
-            else if(status == AppStatus::QUIT)  main_return = EXIT_SUCCESS;
+            if(status == AppStatus::ERROR)      
+                main_return = EXIT_FAILURE;
+            else if(status == AppStatus::QUIT)  
+                main_return = EXIT_SUCCESS;
             break;
         }
         game->Render();

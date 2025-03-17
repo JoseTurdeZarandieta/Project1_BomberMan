@@ -1,12 +1,110 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\joset\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\ResourceManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|solutionrelative:src\\ResourceManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|solutionrelative:src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|solutionrelative:src\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\TileMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A880C53-84E9-4D37-AA1B-E5A05AE7D812}|Bomberman.vcxproj|solutionrelative:src\\TileMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v160\\Microsoft.CppCommon.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 179,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\Game.cpp",
+              "RelativeDocumentMoniker": "src\\Game.cpp",
+              "ToolTip": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\Game.cpp",
+              "RelativeToolTip": "src\\Game.cpp",
+              "ViewState": "AgIAACgAAAAAAAAAAAAcwDAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-17T10:24:34.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\main.cpp",
+              "RelativeDocumentMoniker": "src\\main.cpp",
+              "ToolTip": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\main.cpp",
+              "RelativeToolTip": "src\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-17T10:23:03.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Microsoft.CppCommon.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v160\\Microsoft.CppCommon.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v160\\Microsoft.CppCommon.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v160\\Microsoft.CppCommon.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v160\\Microsoft.CppCommon.targets",
+              "ViewState": "AgIAAB0EAAAAAAAAAAAewDEEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-03-17T10:17:48.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TileMap.cpp",
+              "DocumentMoniker": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\TileMap.cpp",
+              "RelativeDocumentMoniker": "src\\TileMap.cpp",
+              "ToolTip": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\TileMap.cpp",
+              "RelativeToolTip": "src\\TileMap.cpp",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAEwJcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-17T10:16:34.45Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 221,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ResourceManager.cpp",
+              "DocumentMoniker": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\ResourceManager.cpp",
+              "RelativeDocumentMoniker": "src\\ResourceManager.cpp",
+              "ToolTip": "C:\\Users\\josetdz\\Documents\\GitHub\\Project1_BomberMan\\Bomberman\\src\\ResourceManager.cpp",
+              "RelativeToolTip": "src\\ResourceManager.cpp",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAADcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-17T10:24:28.853Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

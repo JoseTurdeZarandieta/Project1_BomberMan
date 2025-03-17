@@ -119,8 +119,8 @@ bool TileMap::TestCollisionWallUp(const AABB& box) const
 } 
 bool TileMap::TestCollisionWallDown(const AABB& box) const
 {
-	//comprobar que funcione 
-	return CollisionY(box.pos + Point(box.width - 1, 0), box.height + Point(box.height - 1, 0));
+	//comprobar que funcione 1
+	return CollisionY(box.pos + Point(box.width - 1, 0), box.height);
 }
 
 bool TileMap::CollisionX(const Point& p, int distance) const
