@@ -5,9 +5,11 @@
 
 Game::Game()
 {
-    state = GameState::MAIN_MENU;
+    state = GameState::SCREEN1;
     scene = nullptr;
     img_menu = nullptr;
+    img_screen1 = nullptr;
+    img_screen2 = nullptr;
 
     target = {};
     src = {};
@@ -60,6 +62,18 @@ AppStatus Game::LoadResources()
 {
     ResourceManager& data = ResourceManager::Instance();
     
+    if (data.LoadTexture(Resource::IMG_SCREEN1, "resources/UI/BombermanScreen1.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_screen1 = data.GetTexture(Resource::IMG_SCREEN1);
+
+    if (data.LoadTexture(Resource::IMG_SCREEN2, "resources/UI/BombermanScreen2.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_screen2 = data.GetTexture(Resource::IMG_SCREEN2);
+
     if (data.LoadTexture(Resource::IMG_MENU, "resources/UI/Title.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
@@ -97,46 +111,63 @@ AppStatus Game::Update()
 
     switch (state)
     {
-        case GameState::MAIN_MENU: 
-            if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
-            if (IsKeyPressed(KEY_SPACE))
-            {
-                if(BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
-                state = GameState::PLAYING;
-            }
-            break;
+    case GameState::SCREEN1:
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            state = GameState::SCREEN2;
+        }
+        break;
 
-        case GameState::PLAYING:  
-            if (IsKeyPressed(KEY_ESCAPE))
-            {
-                FinishPlay();
-                state = GameState::MAIN_MENU;
-            }
-            else
-            {
-                //Game logic
-                scene->Update();
-            }
-            break;
+    case GameState::SCREEN2:
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            state = GameState::MAIN_MENU;
+        }
+        break;
+
+    case GameState::MAIN_MENU:
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            if (BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
+            state = GameState::PLAYING;
+        }
+        break;
+
+    case GameState::PLAYING:
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            FinishPlay();
+            state = GameState::MAIN_MENU;
+        }
+        else
+        {
+            scene->Update();
+        }
+        break;
     }
     return AppStatus::OK;
 }
 void Game::Render()
 {
-    //Draw everything in the render texture, note this will not be rendered on screen, yet
     BeginTextureMode(target);
     ClearBackground(BLACK);
-    
+
     switch (state)
     {
-        case GameState::MAIN_MENU:
-            DrawTexture(*img_menu, 0, 0, WHITE);
-            break;
-
-        case GameState::PLAYING:
-            scene->Render();
-            break;
+    case GameState::SCREEN1:
+        DrawTexture(*img_screen1, 0, 0, WHITE);
+        break;
+    case GameState::SCREEN2:
+        DrawTexture(*img_screen2, 0, 0, WHITE);
+        break;
+    case GameState::MAIN_MENU:
+        DrawTexture(*img_menu, 0, 0, WHITE);
+        break;
+    case GameState::PLAYING:
+        scene->Render();
+        break;
     }
+
     
     EndTextureMode();
 

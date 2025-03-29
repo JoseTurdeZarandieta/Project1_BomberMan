@@ -6,6 +6,8 @@
 #include <string>
 
 enum class Resource {
+    IMG_SCREEN1,
+    IMG_SCREEN2,
     IMG_MENU,
     IMG_PLAYER, 
     IMG_TILES,
