@@ -38,31 +38,31 @@ AppStatus Player::Initialise()
 	sprite->SetNumberAnimations((int)PlayerAnim::NUM_ANIMATIONS);
 
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { n, n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { n, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, n, n, n });
 
 	
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_UP, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 4*n, n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 0, 3*n, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_DOWN, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 4*n,0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 0,2*n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_RIGHT, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i * n, n, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i * n, 0, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_LEFT, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i * n, 0, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i * n, n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_UP, ANIM_DELAY);
-	for (i = 3; i < 5; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_UP, { (float)i * n, n, n, n });
+	for (i = 0; i < 3; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_UP, { (float)i * n, 3*n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_DOWN, ANIM_DELAY);
-	for (i = 3; i < 5; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_DOWN, { (float)i * n, 0, n, n });
+	for (i = 0; i < 3; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_DOWN, { (float)i * n, 2*n, n, n });
 
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
 
@@ -146,12 +146,14 @@ void Player::StartWalkingUp()
 	state = State::WALKING;
 	look = Look::UP;
 	SetAnimation((int)PlayerAnim::WALKING_UP);
+	LOG("Started walking UP");
 }
 void Player::StartWalkingDown()
 {
 	state = State::WALKING;
 	look = Look::DOWN;
 	SetAnimation((int)PlayerAnim::WALKING_DOWN);
+
 }
 
 void Player::ChangeAnimRight()
@@ -194,6 +196,7 @@ void Player::ChangeAnimUp()
 
 void Player::Update()
 {
+
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
