@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|solutionrelative:src\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Globals.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|solutionrelative:src\\Globals.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|solutionrelative:src\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|solutionrelative:src\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\ResourceManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BF256983-AB09-2AD9-146A-242C006D145B}|build\\build_files\\Project1_BomberMan.vcxproj|solutionrelative:src\\ResourceManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Globals.h",
+              "DocumentMoniker": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Globals.h",
+              "RelativeDocumentMoniker": "src\\Globals.h",
+              "ToolTip": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Globals.h",
+              "RelativeToolTip": "src\\Globals.h",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAIwBsAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-30T18:45:48.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Player.cpp",
+              "RelativeDocumentMoniker": "src\\Player.cpp",
+              "ToolTip": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Player.cpp",
+              "RelativeToolTip": "src\\Player.cpp",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAYwEEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-29T21:05:02.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ResourceManager.h",
+              "DocumentMoniker": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\ResourceManager.h",
+              "RelativeDocumentMoniker": "src\\ResourceManager.h",
+              "ToolTip": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\ResourceManager.h",
+              "RelativeToolTip": "src\\ResourceManager.h",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAAkAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-29T20:44:03.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.h",
+              "RelativeDocumentMoniker": "src\\Game.h",
+              "ToolTip": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.h",
+              "RelativeToolTip": "src\\Game.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-29T20:41:53.473Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.cpp",
+              "RelativeDocumentMoniker": "src\\Game.cpp",
+              "ToolTip": "C:\\Users\\Marc Amo\\OneDrive\\Desktop\\Project1_BomberMan\\src\\Game.cpp",
+              "RelativeToolTip": "src\\Game.cpp",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACsAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-29T20:40:02.168Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

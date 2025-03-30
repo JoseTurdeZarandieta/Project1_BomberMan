@@ -1,0 +1,11 @@
+﻿  Entity.cpp
+  Game.cpp
+  Object.cpp
+  Player.cpp
+  ResourceManager.cpp
+  Scene.cpp
+  TileMap.cpp
+C:\Users\Marc Amo\OneDrive\Desktop\Project1_BomberMan\src\TileMap.cpp(170,12): warning C4101: 'rc': variable local sin referencia
+  main.cpp
+  Generando código...
+  Project1_BomberMan.vcxproj -> C:\Users\Marc Amo\OneDrive\Desktop\Project1_BomberMan\bin\Debug\Project1_BomberMan.exe
