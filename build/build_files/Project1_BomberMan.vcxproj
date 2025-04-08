@@ -545,16 +545,10 @@
     <ClInclude Include="..\..\src\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="raylib.vcxproj">
-      <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\src\AABB.cpp" />
     <ClCompile Include="..\..\src\Entity.cpp" />
     <ClCompile Include="..\..\src\Game.cpp" />
     <ClCompile Include="..\..\src\Globals.cpp" />
-    <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Object.cpp" />
     <ClCompile Include="..\..\src\Player.cpp" />
     <ClCompile Include="..\..\src\RenderComponent.cpp" />
@@ -563,6 +557,12 @@
     <ClCompile Include="..\..\src\Sprite.cpp" />
     <ClCompile Include="..\..\src\StaticImage.cpp" />
     <ClCompile Include="..\..\src\TileMap.cpp" />
+    <ClCompile Include="..\..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="raylib.vcxproj">
+      <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
