@@ -82,5 +82,9 @@ public:
 
 	int score;
 	int health = 3;
+
+private:
+	Point direction = { 0, 0 };
+
 };
 

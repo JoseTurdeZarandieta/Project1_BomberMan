@@ -200,8 +200,14 @@ void Player::Update()
 
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
-	MoveX();
 	MoveY();
+	MoveX();
+
+	//quizas para esta enytrega, pero corregir para la siguiente
+
+	if (direction.x == 0 && direction.y == 0) {
+		if (state == State::WALKING) Stop();
+	}
 
 	AABB box = GetHitbox();
 	int doorX;
@@ -215,6 +221,7 @@ void Player::Update()
 }
 void Player::MoveX()
 {
+	
 	AABB box;
 	int prev_x = pos.x;
 
@@ -222,6 +229,7 @@ void Player::MoveX()
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT) )
 	{ 
 		pos.x += -PLAYER_SPEED;
+		direction.x = -1;
 		if (state == State::IDLE) StartWalkingLeft();
 		else
 		{
@@ -232,12 +240,14 @@ void Player::MoveX()
 		if (map->TestCollisionWallLeft(box))
 		{
 			pos.x = prev_x;
-			if (state == State::WALKING) Stop();
+			if (state == State::WALKING) direction.x = 0;
+			
 		}
 	}
 	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
 	{
 		pos.x += PLAYER_SPEED;
+		direction.x = 1;
 		if (state == State::IDLE) StartWalkingRight();
 		else
 		{
@@ -248,12 +258,11 @@ void Player::MoveX()
 		if (map->TestCollisionWallRight(box))
 		{
 			pos.x = prev_x;
-			if (state == State::WALKING) Stop();
+			if (state == State::WALKING) direction.x = 0;
 		}
 	}
-	else
-	{
-		if (state == State::WALKING) Stop();
+	else {
+		direction.x = 0;
 	}
 }
 void Player::MoveY()
@@ -265,6 +274,7 @@ void Player::MoveY()
 	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
 	{
 		pos.y -= PLAYER_SPEED;
+		direction.y = 1;
 		if (state == State::IDLE) StartWalkingUp();
 		else if (!IsLookingUp())
 			ChangeAnimUp();
@@ -273,12 +283,13 @@ void Player::MoveY()
 		if (map->TestCollisionWallUp(box))
 		{
 			pos.y = prev_y;
-			if (state == State::WALKING) Stop();
+			if (state == State::WALKING) direction.y = 0;
 		}
 	}
 	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
 	{
 		pos.y += PLAYER_SPEED;
+		direction.y = -1;
 		if (state == State::IDLE) StartWalkingDown();
 		else if (!IsLookingDown())
 			ChangeAnimDown();
@@ -287,14 +298,12 @@ void Player::MoveY()
 		if (map->TestCollisionGround(box, &pos.y))
 		{
 			pos.y = prev_y;
-			if (state == State::WALKING) Stop();
+			if (state == State::WALKING) direction.y = 0;
 		}
 	}
-	else
-	{
-		if (state == State::WALKING) Stop();
+	else {
+		direction.y = 0;
 	}
-	
 }
 
 void Player::DrawDebug(const Color& col) const
