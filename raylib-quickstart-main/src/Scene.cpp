@@ -193,6 +193,23 @@ void Scene::Update()
 	{
 		debug = (DebugMode)(((int)debug + 1) % (int)DebugMode::SIZE);
 	}
+	else if (IsKeyPressed(KEY_F2))
+	{
+		victory = true;
+	}
+	else if (IsKeyPressed(KEY_F3))
+	{
+		game_over = true;
+	}
+	if (IsKeyPressed(KEY_F4))
+	{
+		player->health -= 1;
+	}
+	if (player->GetHealth() <= 0)
+	{
+		game_over = true;
+
+	}
 	//Debug levels instantly
 	if (IsKeyPressed(KEY_ONE))		LoadLevel(1);
 	else if (IsKeyPressed(KEY_TWO))	LoadLevel(2);
@@ -255,6 +272,15 @@ void Scene::Update()
 							level->map[tileIndex] = Tile::AIR;
 						}// Asumiendo que Tile::AIR es el valor para una tile vacía
 					}
+					if (adjTileX == player->GetX() / TILE_SIZE && adjTileY == player->GetY() / TILE_SIZE)
+					{
+						player->takeDamage(1);
+						if (player->GetHealth() <= 0)
+						{
+							game_over = true;
+
+						}
+					}
 				}
 			}
 
@@ -262,6 +288,12 @@ void Scene::Update()
 			startTimer = false;
 		}
 	}
+
+	if (player->victory)
+	{
+		victory = true;
+	}
+
 	level->Update();
 	player->Update();
 	CheckCollisions();
@@ -343,4 +375,5 @@ void Scene::RenderGUI() const
 {
 	//Temporal approach
 	DrawText(TextFormat("SCORE : %d", player->GetScore()), 10, 10, 8, LIGHTGRAY);
+	DrawText(TextFormat("HEALTH : %d", player->GetHealth()), 325, 10, 8, LIGHTGRAY);
 }

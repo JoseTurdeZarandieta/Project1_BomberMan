@@ -20,7 +20,7 @@ public:
     float timer;
     Point initialPlayerPos;
 
-private:
+public:
     AppStatus LoadLevel(int stage);
     
     void CheckCollisions(); 
@@ -37,5 +37,8 @@ private:
 
     Camera2D camera;
     DebugMode debug;
+
+    bool game_over = false;
+    bool victory = false;
 };
 

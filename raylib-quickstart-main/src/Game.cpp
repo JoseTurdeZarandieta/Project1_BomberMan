@@ -10,6 +10,8 @@ Game::Game()
     img_menu = nullptr;
     img_screen1 = nullptr;
     img_screen2 = nullptr;
+    img_win = nullptr;
+    img_lose = nullptr;
 
     target = {};
     src = {};
@@ -79,7 +81,18 @@ AppStatus Game::LoadResources()
         return AppStatus::ERROR;
     }
     img_menu = data.GetTexture(Resource::IMG_MENU);
+    if (data.LoadTexture(Resource::IMG_WIN, "resources/UI/Win.jpg") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_win = data.GetTexture(Resource::IMG_WIN);
 
+    if (data.LoadTexture(Resource::IMG_LOSE, "resources/UI/GameOver.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_lose = data.GetTexture(Resource::IMG_LOSE);
+    
     
     return AppStatus::OK;
 }
@@ -140,9 +153,30 @@ AppStatus Game::Update()
             FinishPlay();
             state = GameState::MAIN_MENU;
         }
-        else
+        else if (scene->game_over)
+        {
+            state = GameState::LOSE;
+        }
+        else if (scene->victory)
+        {
+            state = GameState::WIN;
+        }
         {
             scene->Update();
+        }
+        break;
+    case GameState::WIN:
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            FinishPlay();
+            state = GameState::MAIN_MENU;
+        }
+        break;
+    case GameState::LOSE:
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            FinishPlay();
+            state = GameState::MAIN_MENU;
         }
         break;
     }
@@ -170,6 +204,8 @@ void Game::Render()
     case GameState::WIN:
         DrawTexture(*img_win, 0, 0, WHITE);
         break;
+    case GameState::LOSE:
+        DrawTexture(*img_lose, 0, 0, WHITE);
     }
 
     

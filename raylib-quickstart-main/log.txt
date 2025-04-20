@@ -1,4 +1,54 @@
-Project executed on 16-04-2025 at 18:14:13.
+Project executed on 20-04-2025 at 12:54:36.
 main.cpp(13): Application start
-main.cpp(36): Application finish
-main.cpp(39): Bye :)
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP
+Player.cpp(150): Started walking UP

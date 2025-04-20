@@ -12,6 +12,7 @@ Player::Player(const Point& p, State s, Look view) :
 	look = view;
 	map = nullptr;
 	score = 0;
+	victory = false;
 }
 Player::~Player()
 {
@@ -202,6 +203,13 @@ void Player::Update()
 	MoveX();
 	MoveY();
 
+	AABB box = GetHitbox();
+	int doorX;
+	if (IsKeyPressed(KEY_SPACE) && map->TestOnDoor(box, &doorX))
+	{
+		victory = true;
+	}
+
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
 }
@@ -211,13 +219,13 @@ void Player::MoveX()
 	int prev_x = pos.x;
 
 
-	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT)&& !IsKeyDown(KEY_UP)&& !IsKeyDown(KEY_DOWN) )
+	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT) )
 	{ 
 		pos.x += -PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingLeft();
 		else
 		{
-			if (IsLookingRight()||IsLookingUp()||IsLookingDown()) ChangeAnimLeft();
+			if (IsLookingRight()) ChangeAnimLeft();
 		}
 
 		box = GetHitbox();
@@ -227,13 +235,13 @@ void Player::MoveX()
 			if (state == State::WALKING) Stop();
 		}
 	}
-	else if (IsKeyDown(KEY_RIGHT))
+	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
 	{
 		pos.x += PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingRight();
 		else
 		{
-			if (IsLookingLeft()||IsLookingDown() || IsLookingUp()) ChangeAnimRight();
+			if (IsLookingLeft()) ChangeAnimRight();
 		}
 
 		box = GetHitbox();
@@ -254,14 +262,12 @@ void Player::MoveY()
 	int prev_y = pos.y;
 
 
-	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_DOWN))
+	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
 	{
 		pos.y -= PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingUp();
-		else
-		{
-			if (IsLookingDown()||IsLookingLeft()||IsLookingRight()) ChangeAnimUp();
-		}
+		else if (!IsLookingUp())
+			ChangeAnimUp();
 
 		box = GetHitbox();
 		if (map->TestCollisionWallUp(box))
@@ -270,17 +276,15 @@ void Player::MoveY()
 			if (state == State::WALKING) Stop();
 		}
 	}
-	else if (IsKeyDown(KEY_DOWN))
+	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
 	{
 		pos.y += PLAYER_SPEED;
 		if (state == State::IDLE) StartWalkingDown();
-		else
-		{
-			if (IsLookingLeft()||IsLookingRight()||IsLookingUp()) ChangeAnimDown();
-		}
+		else if (!IsLookingDown())
+			ChangeAnimDown();
 
 		box = GetHitbox();
-		if (map->TestCollisionWallDown(box))
+		if (map->TestCollisionGround(box, &pos.y))
 		{
 			pos.y = prev_y;
 			if (state == State::WALKING) Stop();
@@ -306,4 +310,17 @@ void Player::Release()
 	data.ReleaseTexture(Resource::IMG_PLAYER);
 
 	render->Release();
+}
+void Player::takeDamage(int damage)
+{
+	if (health > 0)
+	{
+		health -= damage;
+		if (health <= 0)
+		{
+			state = State::DEAD;
+			victory = false;
+		}
+	}
+
 }

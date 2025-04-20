@@ -51,6 +51,7 @@ public:
 	//Test for collisions with walls
 	bool TestCollisionWallLeft(const AABB& box) const;
 	bool TestCollisionWallRight(const AABB& box) const;
+	bool TestCollisionGround(const AABB& box, int* py) const;
 	bool TestCollisionWallUp(const AABB& box) const;
 	bool TestCollisionWallDown(const AABB& box) const;
 	

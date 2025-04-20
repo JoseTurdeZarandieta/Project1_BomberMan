@@ -40,9 +40,12 @@ public:
 	void DrawDebug(const Color& col) const;
 	void Release();
 	Point GetPos() const { return pos; }
+	void SetPos(const Point& p) { pos = p; }
+	int GetHealth() const { return health; }
+	void takeDamage(int damage);
 	bool victory= false;
 
-private:
+public:
 	bool IsLookingRight() const;
 	bool IsLookingLeft() const;
 	bool IsLookingUp() const;
@@ -78,5 +81,6 @@ private:
 	TileMap *map;
 
 	int score;
+	int health = 3;
 };
 
