@@ -2,6 +2,8 @@
 #include "Globals.h"
 #include "ResourceManager.h"
 #include <stdio.h>
+#include "AudioManager.h"
+
 
 Game::Game()
 {
@@ -93,6 +95,15 @@ AppStatus Game::LoadResources()
     }
     img_lose = data.GetTexture(Resource::IMG_LOSE);
     
+    AudioManager::Instance().CreateMusic("resources/Audio/01. TitleScreen_Music.ogg", "TitleMusic");
+    AudioManager::Instance().CreateMusic("resources/Audio/03. InGame_Music.ogg", "InGameMusic");
+    
+    AudioManager::Instance().CreateSound("resources/Audio/02. StartPlay_Music.ogg", "StartGame");
+
+
+
+
+
     
     return AppStatus::OK;
 }
@@ -123,6 +134,9 @@ AppStatus Game::Update()
     //Check if user attempts to close the window, either by clicking the close button or by pressing Alt+F4
     if(WindowShouldClose()) return AppStatus::QUIT;
 
+    AudioManager::Instance().Update();
+
+
     switch (state)
     {
     case GameState::SCREEN1:
@@ -136,18 +150,27 @@ AppStatus Game::Update()
         if (IsKeyPressed(KEY_SPACE))
         {
             state = GameState::MAIN_MENU;
+            AudioManager::Instance().PlayMusicByName("TitleMusic");
+
         }
         break;
 
     case GameState::MAIN_MENU:
+        
         if (IsKeyPressed(KEY_SPACE))
         {
             if (BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
             state = GameState::PLAYING;
+            AudioManager::Instance().StopMusicByName("TitleMusic");
+            AudioManager::Instance().PlaySoundByName("StartGame");
+            // fer un delay timer per a que el SFX i la musica no sonin alhora
+            AudioManager::Instance().PlayMusicByName("InGameMusic");
+
         }
         break;
 
     case GameState::PLAYING:
+
         if (IsKeyPressed(KEY_ESCAPE))
         {
             FinishPlay();

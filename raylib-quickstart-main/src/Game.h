@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Scene.h"
 
+
 enum class GameState { SCREEN1, SCREEN2, MAIN_MENU, PLAYING, SETTINGS, CREDITS ,WIN, LOSE};
 
 class Game
@@ -13,6 +14,7 @@ public:
     AppStatus Initialise(float scale);
     AppStatus Update();
     void Render();
+    
     void Cleanup();
 
 private:

@@ -203,8 +203,6 @@ void Player::Update()
 	MoveY();
 	MoveX();
 
-	//quizas para esta enytrega, pero corregir para la siguiente
-
 	if (direction.x == 0 && direction.y == 0) {
 		if (state == State::WALKING) Stop();
 	}
