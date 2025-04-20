@@ -1,4 +1,4 @@
-Project executed on 20-04-2025 at 12:54:36.
+Project executed on 20-04-2025 at 19:13:57.
 main.cpp(13): Application start
 Player.cpp(150): Started walking UP
 Player.cpp(150): Started walking UP
@@ -10,45 +10,5 @@ Player.cpp(150): Started walking UP
 Player.cpp(150): Started walking UP
 Player.cpp(150): Started walking UP
 Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
-Player.cpp(150): Started walking UP
+main.cpp(36): Application finish
+main.cpp(39): Bye :)
