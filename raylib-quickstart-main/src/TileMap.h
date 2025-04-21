@@ -5,6 +5,8 @@
 #include "AABB.h"
 #include "Globals.h"
 #include <unordered_map>
+#include "Enemy.h"
+#include <vector>
 
 enum class Tile {
 
@@ -25,7 +27,7 @@ enum class Tile {
 	ITEM_B_PANEL = 70, ITEM_GODDESS, ITEM_COLA, ITEM_FAMICOM, ITEM_PROGRAMMER_NAKAMOTO, ITEM_DEZENIMAN,
 
 	// id >= 100: entities' initial locations
-	PLAYER = 100,
+	PLAYER = 100,ENEMY = 101,
 
 	//Intervals hay que mirarlo
 
@@ -75,9 +77,6 @@ public:
 	//Dictionary of tile frames
 	std::unordered_map<int, Rectangle> dict_rect;
 
-	
-	
 	//Tile sheet
 	const Texture2D *img_tiles;
 };
-

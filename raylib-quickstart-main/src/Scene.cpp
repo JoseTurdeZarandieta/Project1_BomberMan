@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Globals.h"
 #include "Entity.h"
+#include "Enemy.h"
 
 Scene::Scene()
 {
@@ -34,6 +35,12 @@ Scene::~Scene()
 		delete obj;
 	}
 	objects.clear();
+	
+	for (Entity* enem : enemies)
+	{
+		delete enem;
+	}
+	enemies.clear();
 }
 AppStatus Scene::Init()
 {
@@ -72,6 +79,14 @@ AppStatus Scene::Init()
 	}
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
+
+	//create and initialise enemy
+	Enemy* enemy = new Enemy({ 160, 184 });
+	enemy->SetTileMap(level);
+	if (enemy->Initialise() != AppStatus::OK) {
+		return AppStatus::ERROR;
+	}
+	enemies.push_back(enemy);
 
     return AppStatus::OK;
 }
@@ -296,6 +311,8 @@ void Scene::Update()
 
 	level->Update();
 	player->Update();
+	for (Enemy* enemy : enemies)
+		enemy->Update();
 	CheckCollisions();
 }
 void Scene::Render()
@@ -307,6 +324,8 @@ void Scene::Render()
 	{
 		RenderObjects(); 
 		player->Draw();
+		for (Enemy* enemy : enemies)
+			enemy->Draw();
 	}
 	if (debug == DebugMode::SPRITES_AND_HITBOXES || debug == DebugMode::ONLY_HITBOXES)
 	{
@@ -356,6 +375,11 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
+	for (Enemy* enem : enemies)
+	{
+		delete enem;
+	}
+	enemies.clear();
 }
 void Scene::RenderObjects() const
 {
