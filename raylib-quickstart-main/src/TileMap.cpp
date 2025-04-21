@@ -74,7 +74,7 @@ AppStatus TileMap::Load(int data[], int w, int h)
 	height = h;
 
 	if (map != nullptr)	delete[] map;
-
+								/* a veces se peta, y al cargar la otra pantalla elimina al enemigo de la primera al volver a ella. revisar */
 	map = new Tile[size];
 
 	if (map == nullptr)	
