@@ -7,8 +7,8 @@
 
 
 #define ENEMY_FRAME_SIZE      16
-#define ENEMY_PHYSICAL_WIDTH  8
-#define ENEMY_PHYSICAL_HEIGHT 8
+#define ENEMY_PHYSICAL_WIDTH  14
+#define ENEMY_PHYSICAL_HEIGHT 14
 #define ENEMY_SPEED           0.5
 
 enum class EnemyAnim {

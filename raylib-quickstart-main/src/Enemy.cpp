@@ -199,7 +199,7 @@ void Enemy::UpdateAnimation() {
 }
 
 void Enemy::Draw() const {
-    dynamic_cast<Sprite*>(render)->Draw((int)pos.x, (int)pos.y);
+    dynamic_cast<Sprite*>(render)->Draw((int)pos.x-1, (int)pos.y-height);
     Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
 }
 
