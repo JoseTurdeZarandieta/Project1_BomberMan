@@ -12,7 +12,7 @@ Bomberman is a maze game where the player controls a robot that places bombs to 
 
 ## 1 minute YT Video
 
-
+[Link to YT Video](https://youtu.be/e2bBwgPrm1M)
 
 ## Game Controls
 ### Intro    
