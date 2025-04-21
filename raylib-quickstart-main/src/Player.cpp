@@ -1,4 +1,4 @@
-
+#include "AudioManager.h"
 #include "Player.h"
 #include "Sprite.h"
 #include "TileMap.h"
@@ -135,18 +135,21 @@ void Player::StartWalkingLeft()
 	state = State::WALKING;
 	look = Look::LEFT;
 	SetAnimation((int)PlayerAnim::WALKING_LEFT);
+	AudioManager::Instance().PlaySoundByName("HorizontalSteps");
 }
 void Player::StartWalkingRight()
 {
 	state = State::WALKING;
 	look = Look::RIGHT;
 	SetAnimation((int)PlayerAnim::WALKING_RIGHT);
+	AudioManager::Instance().PlaySoundByName("HorizontalSteps");
 }
 void Player::StartWalkingUp()
 {
 	state = State::WALKING;
 	look = Look::UP;
 	SetAnimation((int)PlayerAnim::WALKING_UP);
+	AudioManager::Instance().PlaySoundByName("VerticalSteps");
 	LOG("Started walking UP");
 }
 void Player::StartWalkingDown()
@@ -154,7 +157,7 @@ void Player::StartWalkingDown()
 	state = State::WALKING;
 	look = Look::DOWN;
 	SetAnimation((int)PlayerAnim::WALKING_DOWN);
-
+	AudioManager::Instance().PlaySoundByName("VerticalSteps");
 }
 
 void Player::ChangeAnimRight()
@@ -181,7 +184,7 @@ void Player::ChangeAnimUp()
 	switch (state)
 	{
 		case State::IDLE:	 SetAnimation((int)PlayerAnim::IDLE_UP);    break;
-		case State::WALKING: SetAnimation((int)PlayerAnim::WALKING_UP); break;
+		case State::WALKING: SetAnimation((int)PlayerAnim::WALKING_UP);	break;
 		
 	}
 }void Player::ChangeAnimDown()
@@ -202,6 +205,8 @@ void Player::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveY();
 	MoveX();
+	StepsBrain();
+	stepsTimer += GetFrameTime();
 
 	if (direction.x == 0 && direction.y == 0) {
 		if (state == State::WALKING) Stop();
@@ -216,7 +221,23 @@ void Player::Update()
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
+
 }
+
+void Player::StepsBrain() {
+	if (stepsTimer < 0.3) {
+		return;
+	}
+	
+	if (direction.x != 0) {
+		AudioManager::Instance().PlaySoundByName("HorizontalSteps");
+	}
+	else if (direction.y != 0) {
+		AudioManager::Instance().PlaySoundByName("VerticalSteps");
+	}
+	stepsTimer = 0;
+}
+
 void Player::MoveX()
 {
 	

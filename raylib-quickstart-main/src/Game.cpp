@@ -97,12 +97,15 @@ AppStatus Game::LoadResources()
     
     AudioManager::Instance().CreateMusic("resources/Audio/01. TitleScreen_Music.ogg", "TitleMusic");
     AudioManager::Instance().CreateMusic("resources/Audio/03. InGame_Music.ogg", "InGameMusic");
+    AudioManager::Instance().CreateMusic("resources/Audio/08. EndOfGame.ogg", "EndGame");
+    AudioManager::Instance().CreateMusic("resources/Audio/09. Death_Music.ogg", "Death");
+
     
     AudioManager::Instance().CreateSound("resources/Audio/02. StartPlay_Music.ogg", "StartGame");
-
-
-
-
+    AudioManager::Instance().CreateSound("resources/Audio/SFX1. Steps_Horizontal.ogg", "HorizontalSteps");
+    AudioManager::Instance().CreateSound("resources/Audio/SFX2. Steps_Vertical.ogg", "VerticalSteps");
+    AudioManager::Instance().CreateSound("resources/Audio/SFX3. Bomb_Down.ogg", "BombDown");
+    AudioManager::Instance().CreateSound("resources/Audio/SFX4. Bomb_Explode.ogg", "BombExplode");
 
     
     return AppStatus::OK;
@@ -173,16 +176,22 @@ AppStatus Game::Update()
 
         if (IsKeyPressed(KEY_ESCAPE))
         {
+            AudioManager::Instance().StopMusicByName("InGameMusic");
             FinishPlay();
             state = GameState::MAIN_MENU;
+            AudioManager::Instance().PlayMusicByName("TitleMusic");
         }
         else if (scene->game_over)
         {
+            AudioManager::Instance().StopMusicByName("InGameMusic");
             state = GameState::LOSE;
+            AudioManager::Instance().PlayMusicByName("Death");
         }
         else if (scene->victory)
         {
+            AudioManager::Instance().StopMusicByName("InGameMusic");
             state = GameState::WIN;
+            AudioManager::Instance().PlayMusicByName("EndGame");
         }
         else
         {
@@ -192,15 +201,19 @@ AppStatus Game::Update()
     case GameState::WIN:
         if (IsKeyPressed(KEY_SPACE))
         {
+            AudioManager::Instance().StopMusicByName("EndGame");
             FinishPlay();
             state = GameState::MAIN_MENU;
+            AudioManager::Instance().PlayMusicByName("TitleMusic");
         }
         break;
     case GameState::LOSE:
         if (IsKeyPressed(KEY_SPACE))
         {
+            AudioManager::Instance().StopMusicByName("Death");
             FinishPlay();
             state = GameState::MAIN_MENU;
+            AudioManager::Instance().PlayMusicByName("TitleMusic");
         }
         break;
     }

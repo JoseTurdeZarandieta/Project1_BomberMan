@@ -84,6 +84,10 @@ public:
 	int health = 3;
 
 private:
+
+	void StepsBrain();
+	float stepsTimer = 1;
+
 	Point direction = { 0, 0 };
 
 };

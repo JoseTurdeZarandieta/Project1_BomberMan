@@ -1,3 +1,4 @@
+#include "AudioManager.h"
 #include "Scene.h"
 #include <stdio.h>
 #include "Globals.h"
@@ -243,6 +244,7 @@ void Scene::Update()
 	if (IsKeyPressed(KEY_D))
 	{
 		// Iniciar el temporizador y almacenar la posición actual del jugador
+		AudioManager::Instance().PlaySoundByName("BombDown");
 		startTimer = true;
 		timer = 0.0f;
 		initialPlayerPos = player->GetPos();
@@ -259,9 +261,11 @@ void Scene::Update()
 	{
 		timer += GetFrameTime(); // Obtener el tiempo transcurrido desde el último frame
 
+
 		// Si han pasado 3 segundos, eliminar las tiles
 		if (timer >= 3.0f)
 		{
+			AudioManager::Instance().PlaySoundByName("BombExplode");
 			// Calcular la posición de las tiles adyacentes al jugador
 			int tileX = initialPlayerPos.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
 			int tileY = initialPlayerPos.y / TILE_SIZE;
@@ -287,6 +291,7 @@ void Scene::Update()
 							level->map[tileIndex] = Tile::AIR;
 						}// Asumiendo que Tile::AIR es el valor para una tile vacía
 					}
+					//else if (adjTileX == enemy)
 					if (adjTileX == player->GetX() / TILE_SIZE && adjTileY == player->GetY() / TILE_SIZE)
 					{
 						player->takeDamage(1);
