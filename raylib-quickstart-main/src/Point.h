@@ -68,6 +68,10 @@ public:
         return (x != p.x) || (y != p.y);
     }
 
+    bool operator==(const Point& p) const {
+        return (x == p.x) && (y == p.y);
+    }
+
     //Distance method
     double distance(const Point& p) const {
         int dx = x - p.x;

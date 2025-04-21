@@ -76,6 +76,7 @@ AppStatus TileMap::Load(int data[], int w, int h)
 	if (map != nullptr)	delete[] map;
 
 	map = new Tile[size];
+
 	if (map == nullptr)	
 	{
 		LOG("Failed to allocate memory for tile map");
@@ -85,9 +86,11 @@ AppStatus TileMap::Load(int data[], int w, int h)
 
 	return AppStatus::OK;
 }
+
+
 void TileMap::Update()
 {
-	
+
 }
 Tile TileMap::GetTileIndex(int x, int y) const
 {
@@ -192,12 +195,10 @@ void TileMap::Render()
 			tile = map[i * width + j];
 			if (tile != Tile::AIR && tile != Tile::EMPTY)
 			{
-				// Obtener el rectángulo de la textura correspondiente al tile
 				rc = dict_rect[(int)tile];
 				pos.x = (float)j * TILE_SIZE;
 				pos.y = (float)i * TILE_SIZE;
 
-				// Dibujar el tile
 				DrawTextureRec(*img_tiles, rc, pos, WHITE);
 			}
 		}
