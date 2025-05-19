@@ -193,4 +193,37 @@ void TileMap::Release()
 
 
 	dict_rect.clear();
+<<<<<<< Updated upstream:src/TileMap.cpp
 }
+=======
+}
+Tile TileMap::GetObjectAtPosition(const AABB& box, int* px) const
+{
+	int left, right, bottom;
+	int tx1, tx2, ty;
+
+	// Control points
+	left = box.pos.x;
+	right = box.pos.x + box.width;
+	bottom = box.pos.y + box.height - 1;
+
+	// Calculate the tile coordinates (usando el punto inferior izquierdo de la caja)
+	tx1 = left / TILE_SIZE;
+	ty = bottom / TILE_SIZE;
+
+	// Ensure the tile coordinates are within the map bounds
+	if (tx1 >= 0 && tx1 < LEVEL_WIDTH && ty >= 0 && ty < LEVEL_HEIGHT)
+	{
+		return GetTileIndex(tx1, ty);
+	}
+	else
+	{
+		// Si las coordenadas están fuera del mapa, devuelve un valor que indique "fuera de los límites"
+		return Tile::EMPTY; // Asumiendo que Tile::EMPTY representa un espacio vacío o fuera de los límites
+	}
+}
+bool TileMap::IsTileDoor(Tile tile) const
+{
+	return (tile == Tile::DOOR);
+}
+>>>>>>> Stashed changes:raylib-quickstart-main/src/TileMap.cpp

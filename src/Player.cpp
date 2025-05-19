@@ -200,7 +200,26 @@ void Player::Update()
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
+<<<<<<< Updated upstream:src/Player.cpp
 	MoveY();
+=======
+	StepsBrain();
+	stepsTimer += GetFrameTime();
+	if (direction.x == 0 && direction.y == 0) {
+		if (state == State::WALKING) Stop();
+	}
+	
+
+	AABB box = GetHitbox();
+	int doorX;
+	if (map->GetObjectAtPosition(box, &doorX) == Tile::ITEM_BOMB_UP) {
+		maxBombs += 1;
+	}
+	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &doorX)==Tile::DOOR)
+	{
+		victory = true;
+	}
+>>>>>>> Stashed changes:raylib-quickstart-main/src/Player.cpp
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();

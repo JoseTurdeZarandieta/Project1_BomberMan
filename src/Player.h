@@ -74,7 +74,25 @@ private:
 	Look look;
 
 	TileMap *map;
-
+	struct Bomb {
+		Point position;
+		float timer;
+	};
 	int score;
+<<<<<<< Updated upstream:src/Player.h
+=======
+	int health = 3;
+	std::vector<Bomb> activeBombs;
+	int maxBombs = 2;
+	
+private:
+
+	void StepsBrain();
+	float stepsTimer = 1;
+	
+
+	Point direction = { 0, 0 };
+
+>>>>>>> Stashed changes:raylib-quickstart-main/src/Player.h
 };
 
