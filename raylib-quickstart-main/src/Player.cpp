@@ -212,9 +212,13 @@ void Player::Update()
 		if (state == State::WALKING) Stop();
 	}
 
+
 	AABB box = GetHitbox();
 	int doorX;
-	if (IsKeyPressed(KEY_SPACE) && map->TestOnDoor(box, &doorX))
+	if (map->GetObjectAtPosition(box, &doorX) == Tile::ITEM_BOMB_UP) {
+		maxBombs += 1;
+	}
+	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &doorX) == Tile::DOOR)
 	{
 		victory = true;
 	}
