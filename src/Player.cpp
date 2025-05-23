@@ -200,9 +200,9 @@ void Player::Update()
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
-<<<<<<< Updated upstream:src/Player.cpp
+
 	MoveY();
-=======
+
 	StepsBrain();
 	stepsTimer += GetFrameTime();
 	if (direction.x == 0 && direction.y == 0) {
@@ -219,7 +219,7 @@ void Player::Update()
 	{
 		victory = true;
 	}
->>>>>>> Stashed changes:raylib-quickstart-main/src/Player.cpp
+
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();

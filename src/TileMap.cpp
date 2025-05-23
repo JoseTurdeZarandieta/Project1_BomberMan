@@ -193,10 +193,10 @@ void TileMap::Release()
 
 
 	dict_rect.clear();
-<<<<<<< Updated upstream:src/TileMap.cpp
+
 }
-=======
-}
+
+
 Tile TileMap::GetObjectAtPosition(const AABB& box, int* px) const
 {
 	int left, right, bottom;
@@ -226,4 +226,3 @@ bool TileMap::IsTileDoor(Tile tile) const
 {
 	return (tile == Tile::DOOR);
 }
->>>>>>> Stashed changes:raylib-quickstart-main/src/TileMap.cpp

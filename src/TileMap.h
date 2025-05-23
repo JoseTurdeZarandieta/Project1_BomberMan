@@ -44,13 +44,12 @@ public:
 	void Render();
 	void Release();
 
-<<<<<<< Updated upstream:src/TileMap.h
-=======
+
 	Tile GetObjectAtPosition(const AABB& box, int* px) const;
 
 	bool IsTileDoor(Tile tile) const;
 
->>>>>>> Stashed changes:raylib-quickstart-main/src/TileMap.h
+
 	//Test for collisions with walls
 	bool TestCollisionWallLeft(const AABB& box) const;
 	bool TestCollisionWallRight(const AABB& box) const;
