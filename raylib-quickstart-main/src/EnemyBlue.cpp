@@ -30,10 +30,10 @@ AppStatus EnemyBlue::Initialise() {
 
     auto& rm = ResourceManager::Instance();
     
-    if (rm.LoadTexture(Resource::IMG_ENEMY, "resources/Sprites/Enemies.png") != AppStatus::OK)
+    if (rm.LoadTexture(Resource::IMG_ENEMY_BLUE, "resources/Sprites/Enemies.png") != AppStatus::OK)
         return AppStatus::ERROR;
 
-    render = new Sprite(rm.GetTexture(Resource::IMG_ENEMY));
+    render = new Sprite(rm.GetTexture(Resource::IMG_ENEMY_BLUE));
     if (!render) {
         LOG("Failed to create enemy sprite");
         return AppStatus::ERROR;
@@ -235,6 +235,6 @@ void EnemyBlue::DrawBlue() const {
 }
 
 void EnemyBlue::ReleaseBlue() {
-    ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY);
+    ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY_BLUE);
     render->Release();
 }

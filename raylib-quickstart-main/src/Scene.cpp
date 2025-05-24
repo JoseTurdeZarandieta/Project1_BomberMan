@@ -94,7 +94,7 @@ AppStatus Scene::Init()
 	//create and initialise enemyRed
 	EnemyRed* enemyRed = new EnemyRed({ 16, 32 });
 	enemyRed->SetTileMap(level);
-	if (enemyRed->InitialiseRed() != AppStatus::OK) {
+	if (enemyRed->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;
 	}
 	enemiesRed.push_back(enemyRed);
@@ -184,7 +184,7 @@ AppStatus Scene::LoadLevel(int stage)
 				pos.y = y * TILE_SIZE - 1;
 				EnemyRed* enemyRed = new EnemyRed(pos);
 				enemyRed->SetTileMap(level);
-				if (enemyRed->InitialiseRed() == AppStatus::OK) {
+				if (enemyRed->Initialise() == AppStatus::OK) {
 					enemiesRed.push_back(enemyRed);
 				}
 				else {
@@ -533,7 +533,7 @@ void Scene::Render()
 		RenderObjects(); 
 		player->Draw();
 		for (EnemyRed* enemyRed : enemiesRed)
-			enemyRed->DrawRed();
+			enemyRed->Draw();
 		for (EnemyBlue* enemyBlue : enemiesBlue)
 			enemyBlue->DrawBlue();
 	}

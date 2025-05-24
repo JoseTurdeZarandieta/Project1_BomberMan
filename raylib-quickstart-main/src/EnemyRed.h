@@ -24,20 +24,21 @@ public:
     EnemyRed(const Point& startPos);
     ~EnemyRed();
 
-    AppStatus InitialiseRed();
+    AppStatus Initialise();
 
     void SetTileMap(TileMap* tilemap);
 
-    void UpdateRed();
-    void DrawRed() const;
-    void ReleaseRed();
+    void Update();
+    void Draw() const;
+    void Release();
 
+    void UpdateAnimation();
 
 private:
     void MoveX();
     void MoveY();
 
-    void UpdateAnimation();
+
 
     void CheckDirection();
 

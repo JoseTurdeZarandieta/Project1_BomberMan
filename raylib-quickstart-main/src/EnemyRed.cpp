@@ -21,7 +21,7 @@ EnemyRed::~EnemyRed()
 {
 }
 
-AppStatus EnemyRed::InitialiseRed() {
+AppStatus EnemyRed::Initialise() {
 
     enemyX = pos.x;
     enemyY = pos.y;
@@ -30,10 +30,10 @@ AppStatus EnemyRed::InitialiseRed() {
 
     auto& rm = ResourceManager::Instance();
     
-    if (rm.LoadTexture(Resource::IMG_ENEMY, "resources/Sprites/Enemies.png") != AppStatus::OK)
+    if (rm.LoadTexture(Resource::IMG_ENEMY_RED, "resources/Sprites/Enemies.png") != AppStatus::OK)
         return AppStatus::ERROR;
 
-    render = new Sprite(rm.GetTexture(Resource::IMG_ENEMY));
+    render = new Sprite(rm.GetTexture(Resource::IMG_ENEMY_RED ));
     if (!render) {
         LOG("Failed to create enemy sprite");
         return AppStatus::ERROR;
@@ -60,7 +60,7 @@ void EnemyRed::SetTileMap(TileMap* tilemap) {
     e_tileMap = tilemap;
 }
 
-void EnemyRed::UpdateRed() {
+void EnemyRed::Update() {
 
     UpdateAnimation();
     dynamic_cast<Sprite*>(render)->Update();
@@ -229,22 +229,12 @@ void EnemyRed::UpdateAnimation() {
         spr->SetAnimation((int)EnemyRedAnim::WALK_LEFT);
 }
 
-void EnemyRed::DrawRed() const {
-    if (!render) {
-        LOG("EnemyRed::DrawRed failed: render is null");
-        return;
-    }
-
-    Sprite* spr = dynamic_cast<Sprite*>(render);
-    if (spr) {
-        spr->Draw((int)pos.x - 1, (int)pos.y - height);
-    }
-    else {
-        LOG("EnemyRed::DrawRed failed: dynamic_cast to Sprite* returned nullptr");
-    }
+void EnemyRed::Draw() const {
+    dynamic_cast<Sprite*>(render)->Draw((int)pos.x - 1, (int)pos.y - height);
+    Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
 }
 
-void EnemyRed::ReleaseRed() {
-    ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY);
+void EnemyRed::Release() {
+    ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY_RED);
     render->Release();
 }
