@@ -90,7 +90,7 @@ public:
 	int score;
 	int health = 3;
 	int maxBombs = 1;
-
+	float bombCooldown = 0.0f;
 private:
 
 	void StepsBrain();

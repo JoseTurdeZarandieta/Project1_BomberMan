@@ -14,6 +14,7 @@ public:
     ~Scene();
 
     AppStatus Init();
+    bool LoadMapFromFile(const std::string& filename, int* map, int size);
     void Update();
     void Render();
     void Release();
@@ -31,7 +32,7 @@ public:
 
     void RenderGUI() const;
    
-    int currentstage = 0;
+    int currentstage = 1;
     Player *player;
     TileMap *level;
     std::vector<Object*> objects;
@@ -42,5 +43,7 @@ public:
 
     bool game_over = false;
     bool victory = false;
+    Point doorPos;
+    bool doorHidden;
 };
 
