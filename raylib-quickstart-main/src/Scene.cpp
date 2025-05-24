@@ -83,7 +83,7 @@ AppStatus Scene::Init()
 	player->SetTileMap(level);
 
 	//create and initialise enemy
-	Enemy* enemy = new Enemy({ 160, 184 });
+	Enemy* enemy = new Enemy({ 176, 192 });
 	enemy->SetTileMap(level);
 	if (enemy->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;

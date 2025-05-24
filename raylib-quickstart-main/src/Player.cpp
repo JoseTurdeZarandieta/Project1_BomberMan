@@ -129,6 +129,7 @@ void Player::Stop()
 	else if(IsLookingLeft())		 			SetAnimation((int)PlayerAnim::IDLE_LEFT);
 	else if(IsLookingDown())		 			SetAnimation((int)PlayerAnim::IDLE_DOWN);
 	else 		SetAnimation((int)PlayerAnim::IDLE_UP);
+
 }
 void Player::StartWalkingLeft()
 {
@@ -201,8 +202,6 @@ void Player::ChangeAnimUp()
 void Player::Update()
 {
 
-	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
-	//Instead, uses an independent behaviour for each axis.
 	MoveY();
 	MoveX();
 	StepsBrain();
@@ -330,6 +329,7 @@ void Player::MoveX()
 		direction.x = 0;
 	}
 }
+<<<<<<< Updated upstream
 //check1
 //void Player::MoveY()
 //{
@@ -371,6 +371,9 @@ void Player::MoveX()
 //		direction.y = 0;
 //	}
 //}
+=======
+
+>>>>>>> Stashed changes
 void Player::MoveY()
 {
 	AABB box;

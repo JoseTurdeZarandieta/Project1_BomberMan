@@ -9,7 +9,7 @@
 #define ENEMY_FRAME_SIZE      16
 #define ENEMY_PHYSICAL_WIDTH  16
 #define ENEMY_PHYSICAL_HEIGHT 16
-#define ENEMY_SPEED           0.5
+#define ENEMY_SPEED           1.0f
 
 enum class EnemyAnim {
     WALK_RIGHT = 0,
@@ -53,6 +53,14 @@ private:
     float timer = 2;
     Point selectedDirection = { 1,0 };
     void LogicBrain();
+
+    bool IsTileAligned() const {
+        return ((int)enemyX % TILE_SIZE == 0) && ((int)enemyY % TILE_SIZE == 0);
+    }
+    Point lastDirection = { 0, 0 };
+    bool IsTileWalkable(int x, int y) const;
+    Point targetTile;
+    bool isMoving = false;
 
     Point       e_direction;
     TileMap*    e_tileMap;
