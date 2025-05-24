@@ -504,6 +504,10 @@ void Scene::Update()
 		enemy->Update();
 	CheckCollisions();
 
+	camera.target = {
+		static_cast<float>(player->GetX()), static_cast<float>(player->GetY()) - WINDOW_HEIGHT / 2 + MARGIN_GUI_Y
+	};
+
 
 }
 void Scene::Render()

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "TileMap.h"
+#include <vector>
 
 //Representation model size: 16x16
 #define PLAYER_FRAME_SIZE		16
@@ -84,6 +85,7 @@ public:
 		Point position;
 		float timer;
 	};
+	std::vector<Bomb> activeBombs;
 
 	int score;
 	int health = 3;
