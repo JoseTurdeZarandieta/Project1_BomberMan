@@ -3,7 +3,8 @@
 #include "Player.h"
 #include "TileMap.h"
 #include "Object.h"
-#include "Enemy.h"
+#include "EnemyRed.h"
+#include "EnemyBlue.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -36,7 +37,9 @@ public:
     Player *player;
     TileMap *level;
     std::vector<Object*> objects;
-    std::vector<Enemy*> enemies;
+    std::vector<EnemyRed*> enemiesRed;
+    std::vector<EnemyBlue*> enemiesBlue;
+
 
     Camera2D camera;
     DebugMode debug;

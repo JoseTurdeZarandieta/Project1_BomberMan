@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "EnemyRed.h"
 #include "Sprite.h"
 #include "TileMap.h"
 #include "ResourceManager.h"
@@ -6,8 +6,8 @@
 #include <algorithm>
 
 
-Enemy::Enemy(const Point& startPos) : Entity(startPos,
-        ENEMY_PHYSICAL_WIDTH, ENEMY_PHYSICAL_HEIGHT, ENEMY_FRAME_SIZE, ENEMY_FRAME_SIZE)
+EnemyRed::EnemyRed(const Point& startPos) : Entity(startPos,
+        ENEMYRED_PHYSICAL_WIDTH, ENEMYRED_PHYSICAL_HEIGHT, ENEMYRED_FRAME_SIZE, ENEMYRED_FRAME_SIZE)
 {
     e_direction = { 1, 0 };
     e_tileMap = nullptr;
@@ -17,16 +17,16 @@ Enemy::Enemy(const Point& startPos) : Entity(startPos,
 
 }
 
-Enemy::~Enemy()
+EnemyRed::~EnemyRed()
 {
 }
 
-AppStatus Enemy::Initialise() {
+AppStatus EnemyRed::InitialiseRed() {
 
     enemyX = pos.x;
     enemyY = pos.y;
 
-    const int n = ENEMY_FRAME_SIZE;
+    const int n = ENEMYRED_FRAME_SIZE;
 
     auto& rm = ResourceManager::Instance();
     
@@ -40,34 +40,34 @@ AppStatus Enemy::Initialise() {
     }
 
     Sprite* spr = dynamic_cast<Sprite*>(render);
-    spr->SetNumberAnimations((int)EnemyAnim::NUM_ANIMATIONS);
+    spr->SetNumberAnimations((int)EnemyRedAnim::NUM_ANIMATIONS);
 
     //right and up
-    spr->SetAnimationDelay((int)EnemyAnim::WALK_RIGHT, ANIM_DELAY);
+    spr->SetAnimationDelay((int)EnemyRedAnim::WALK_RIGHT, ANIM_DELAY);
     for (int i = 0; i < 3; ++i)
-        spr->AddKeyFrame((int)EnemyAnim::WALK_RIGHT, { (float)i * n, 0, n, n });
+        spr->AddKeyFrame((int)EnemyRedAnim::WALK_RIGHT, { (float)i * n, 0, n, n });
 
     //left and down
-    spr->SetAnimationDelay((int)EnemyAnim::WALK_LEFT, ANIM_DELAY);
+    spr->SetAnimationDelay((int)EnemyRedAnim::WALK_LEFT, ANIM_DELAY);
     for (int i = 0; i < 3; ++i)
-        spr->AddKeyFrame((int)EnemyAnim::WALK_LEFT, { (float)(i + 3) * n, 0, n, n });
+        spr->AddKeyFrame((int)EnemyRedAnim::WALK_LEFT, { (float)(i + 3) * n, 0, n, n });
 
-    spr->SetAnimation((int)EnemyAnim::WALK_RIGHT);
+    spr->SetAnimation((int)EnemyRedAnim::WALK_RIGHT);
     return AppStatus::OK;
 }
 
-void Enemy::SetTileMap(TileMap* tilemap) {
+void EnemyRed::SetTileMap(TileMap* tilemap) {
     e_tileMap = tilemap;
 }
 
-void Enemy::Update() {
+void EnemyRed::UpdateRed() {
 
     UpdateAnimation();
     dynamic_cast<Sprite*>(render)->Update();
 
     if (!isMoving) {
 
-        CheckDirection();
+        //CheckDirection();
         timer += GetFrameTime();
 
         pos.x = (pos.x / TILE_SIZE) * TILE_SIZE;
@@ -87,8 +87,8 @@ void Enemy::Update() {
         isMoving = true;
     }
     if (isMoving) {
-        enemyX += e_direction.x * ENEMY_SPEED;
-        enemyY += e_direction.y * ENEMY_SPEED;
+        enemyX += e_direction.x * ENEMYRED_SPEED;
+        enemyY += e_direction.y * ENEMYRED_SPEED;
 
         bool reachedX = (e_direction.x > 0 && enemyX >= targetTile.x) ||
             (e_direction.x < 0 && enemyX <= targetTile.x);
@@ -107,7 +107,7 @@ void Enemy::Update() {
     }
 }
 
-void Enemy::LogicBrain() {
+void EnemyRed::LogicBrain() {
     printf("Checking walkability at (%d, %d)\n", pos.x, pos.y);
 
     std::vector<Point> possibleDirection;
@@ -144,7 +144,7 @@ void Enemy::LogicBrain() {
     lastDirection = e_direction;
 }
 
-bool Enemy::IsTileWalkable(int x, int y) {
+bool EnemyRed::IsTileWalkable(int x, int y) {
     if (x < 0 || x >= e_tileMap->width || y < 0 || y >= e_tileMap->height)
         return false;
 
@@ -152,9 +152,9 @@ bool Enemy::IsTileWalkable(int x, int y) {
     return !e_tileMap->IsTileSolid(tile);
 }
 
-void Enemy::CheckDirection() {
+void EnemyRed::CheckDirection() {
     AABB box = GetHitbox();
-    int candidate = enemyY + e_direction.y * ENEMY_SPEED;
+    int candidate = enemyY + e_direction.y * ENEMYRED_SPEED;
     if (e_tileMap->TestCollisionGround(box, &candidate)) {
         canMoveDown = false;
     }
@@ -186,10 +186,10 @@ void Enemy::CheckDirection() {
     }
 }
 
-void Enemy::MoveX() {
+void EnemyRed::MoveX() {
     if (!e_tileMap) return;
 
-    float nextX = enemyX + e_direction.x * ENEMY_SPEED;
+    float nextX = enemyX + e_direction.x * ENEMYRED_SPEED;
     AABB futurePos = GetHitbox();
     futurePos.pos.x = (int)nextX;
 
@@ -201,7 +201,7 @@ void Enemy::MoveX() {
     enemyX = nextX;
 }
 
-void Enemy::MoveY() {
+void EnemyRed::MoveY() {
     if (!e_tileMap) return;
     int prevY = pos.y;
 
@@ -221,20 +221,30 @@ void Enemy::MoveY() {
     }
 }
 
-void Enemy::UpdateAnimation() {
+void EnemyRed::UpdateAnimation() {
     Sprite* spr = dynamic_cast<Sprite*>(render);
     if (e_direction.y < 0 || e_direction.x > 0)
-        spr->SetAnimation((int)EnemyAnim::WALK_RIGHT);
+        spr->SetAnimation((int)EnemyRedAnim::WALK_RIGHT);
     else
-        spr->SetAnimation((int)EnemyAnim::WALK_LEFT);
+        spr->SetAnimation((int)EnemyRedAnim::WALK_LEFT);
 }
 
-void Enemy::Draw() const {
-    dynamic_cast<Sprite*>(render)->Draw((int)pos.x-1, (int)pos.y-height);
-    Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
+void EnemyRed::DrawRed() const {
+    if (!render) {
+        LOG("EnemyRed::DrawRed failed: render is null");
+        return;
+    }
+
+    Sprite* spr = dynamic_cast<Sprite*>(render);
+    if (spr) {
+        spr->Draw((int)pos.x - 1, (int)pos.y - height);
+    }
+    else {
+        LOG("EnemyRed::DrawRed failed: dynamic_cast to Sprite* returned nullptr");
+    }
 }
 
-void Enemy::Release() {
+void EnemyRed::ReleaseRed() {
     ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY);
     render->Release();
 }

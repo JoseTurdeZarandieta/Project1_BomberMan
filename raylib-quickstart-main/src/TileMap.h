@@ -5,7 +5,8 @@
 #include "AABB.h"
 #include "Globals.h"
 #include <unordered_map>
-#include "Enemy.h"
+#include "EnemyRed.h"
+#include "EnemyBlue.h"
 #include <vector>
 
 enum class Tile {
@@ -27,7 +28,7 @@ enum class Tile {
 	ITEM_B_PANEL = 70, ITEM_GODDESS, ITEM_COLA, ITEM_FAMICOM, ITEM_PROGRAMMER_NAKAMOTO, ITEM_DEZENIMAN,
 
 	// id >= 100: entities' initial locations
-	PLAYER = 100,ENEMY = 101,
+	PLAYER = 100,ENEMY_RED = 101, ENEMY_BLUE = 102,
 
 	//Intervals hay que mirarlo
 

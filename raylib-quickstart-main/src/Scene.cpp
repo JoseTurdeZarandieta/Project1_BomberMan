@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include "Globals.h"
 #include "Entity.h"
-#include "Enemy.h"
+#include "EnemyRed.h"
+#include "EnemyBlue.h"
 #include "player.h"
 #include <fstream>
 #include <sstream>
@@ -41,11 +42,16 @@ Scene::~Scene()
 	}
 	objects.clear();
 	
-	for (Entity* enem : enemies)
+	for (Entity* enemRed : enemiesRed)
 	{
-		delete enem;
+		delete enemRed;
 	}
-	enemies.clear();
+	enemiesRed.clear();
+	for (Entity* enemBlue : enemiesBlue)
+	{
+		delete enemBlue;
+	}
+	enemiesBlue.clear();
 }
 AppStatus Scene::Init()
 {
@@ -85,13 +91,21 @@ AppStatus Scene::Init()
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
-	//create and initialise enemy
-	Enemy* enemy = new Enemy({ 16, 32 });
-	enemy->SetTileMap(level);
-	if (enemy->Initialise() != AppStatus::OK) {
+	//create and initialise enemyRed
+	EnemyRed* enemyRed = new EnemyRed({ 16, 32 });
+	enemyRed->SetTileMap(level);
+	if (enemyRed->InitialiseRed() != AppStatus::OK) {
 		return AppStatus::ERROR;
 	}
-	enemies.push_back(enemy);
+	enemiesRed.push_back(enemyRed);
+
+	//create and initialise enemyBlue
+	EnemyBlue* enemyBlue = new EnemyBlue({ 16, 32 });
+	enemyBlue->SetTileMap(level);
+	if (enemyBlue->Initialise() != AppStatus::OK) {
+		return AppStatus::ERROR;
+	}
+	enemiesBlue.push_back(enemyBlue);
 
     return AppStatus::OK;
 
@@ -115,7 +129,7 @@ AppStatus Scene::LoadLevel(int stage)
 		return AppStatus::ERROR;
 	}
 
-	// --- POSICI�N DE LA PUERTA SEG�N EL NIVEL ---
+	// --- POSICION DE LA PUERTA SEGUN EL NIVEL ---
 	int doorX = 5, doorY = 5; // Por defecto
 	switch (stage) {
 	case 1: doorX = 3;  doorY = 3;  break;
@@ -164,18 +178,33 @@ AppStatus Scene::LoadLevel(int stage)
 				objects.push_back(obj);
 				map[i] = 0;
 			}
-			else if (tile == Tile::ENEMY)
+			else if (tile == Tile::ENEMY_RED)
 			{
 				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE;
-				Enemy* enemy = new Enemy(pos);
-				enemy->SetTileMap(level);
-				if (enemy->Initialise() == AppStatus::OK) {
-					enemies.push_back(enemy);
+				pos.y = y * TILE_SIZE - 1;
+				EnemyRed* enemyRed = new EnemyRed(pos);
+				enemyRed->SetTileMap(level);
+				if (enemyRed->InitialiseRed() == AppStatus::OK) {
+					enemiesRed.push_back(enemyRed);
 				}
 				else {
 					LOG("Failed to initialise enemy at (%d, &d)", pos.x, pos.y);
-					delete enemy;
+					delete enemyRed;
+				}
+				map[i] = 0; //when enemy moves, it places AIR
+			}
+			else if (tile == Tile::ENEMY_BLUE)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE - 1;
+				EnemyBlue* enemyBlue = new EnemyBlue(pos);
+				enemyBlue->SetTileMap(level);
+				if (enemyBlue->Initialise() == AppStatus::OK) {
+					enemiesBlue.push_back(enemyBlue);
+				}
+				else {
+					LOG("Failed to initialise enemy at (%d, &d)", pos.x, pos.y);
+					delete enemyBlue;
 				}
 				map[i] = 0; //when enemy moves, it places AIR
 			}
@@ -456,8 +485,11 @@ void Scene::Update()
 	level->Update();
 
 	player->Update();
-	for (Enemy* enemy : enemies)
-		enemy->Update();
+	for (EnemyRed* enemyRed : enemiesRed)
+		enemyRed->Update();
+
+	for (EnemyBlue* enemyBlue : enemiesBlue)
+		enemyBlue->Update();
 	CheckCollisions();
 
 	//start of camera following player
@@ -500,8 +532,10 @@ void Scene::Render()
 	{
 		RenderObjects(); 
 		player->Draw();
-		for (Enemy* enemy : enemies)
-			enemy->Draw();
+		for (EnemyRed* enemyRed : enemiesRed)
+			enemyRed->DrawRed();
+		for (EnemyBlue* enemyBlue : enemiesBlue)
+			enemyBlue->DrawBlue();
 	}
 	if (debug == DebugMode::SPRITES_AND_HITBOXES || debug == DebugMode::ONLY_HITBOXES)
 	{
@@ -551,11 +585,15 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
-	for (Enemy* enem : enemies)
+	for (EnemyRed* enemRed : enemiesRed)
 	{
-		delete enem;
+		delete enemRed;
 	}
-	enemies.clear();
+	for (EnemyBlue* enemBlue : enemiesBlue)
+	{
+		delete enemBlue;
+	}
+	enemiesBlue.clear();
 }
 void Scene::RenderObjects() const
 {

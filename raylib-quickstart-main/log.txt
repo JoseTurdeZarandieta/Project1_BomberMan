@@ -1,4 +1,2 @@
-Project executed on 24-05-2025 at 19:09:44.
+Project executed on 24-05-2025 at 20:41:03.
 main.cpp(13): Application start
-main.cpp(36): Application finish
-main.cpp(39): Bye :)

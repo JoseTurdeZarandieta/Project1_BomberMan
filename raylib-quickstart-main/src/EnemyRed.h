@@ -6,12 +6,12 @@
 #include <random>
 
 
-#define ENEMY_FRAME_SIZE      16
-#define ENEMY_PHYSICAL_WIDTH  16
-#define ENEMY_PHYSICAL_HEIGHT 16
-#define ENEMY_SPEED           1.0f
+#define ENEMYRED_FRAME_SIZE      16
+#define ENEMYRED_PHYSICAL_WIDTH  16
+#define ENEMYRED_PHYSICAL_HEIGHT 16
+#define ENEMYRED_SPEED           1.0f
 
-enum class EnemyAnim {
+enum class EnemyRedAnim {
     WALK_RIGHT = 0,
     WALK_LEFT = 1,
     NUM_ANIMATIONS
@@ -19,20 +19,19 @@ enum class EnemyAnim {
 
 class TileMap;
 
-class Enemy : public Entity {
+class EnemyRed : public Entity {
 public:
-    Enemy(const Point& startPos);
-    ~Enemy();
+    EnemyRed(const Point& startPos);
+    ~EnemyRed();
 
-    AppStatus Initialise();
+    AppStatus InitialiseRed();
 
     void SetTileMap(TileMap* tilemap);
 
-    void Update();
-    void Draw() const;
-    void Release();
+    void UpdateRed();
+    void DrawRed() const;
+    void ReleaseRed();
 
-    void SetDirection(int dx, int dy);
 
 private:
     void MoveX();
