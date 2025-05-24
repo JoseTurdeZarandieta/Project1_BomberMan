@@ -499,15 +499,33 @@ void Scene::Update()
 	}
 
 	level->Update();
+
 	player->Update();
 	for (Enemy* enemy : enemies)
 		enemy->Update();
 	CheckCollisions();
 
-	camera.target = {
-		static_cast<float>(player->GetX()), static_cast<float>(player->GetY()) - WINDOW_HEIGHT / 2 + MARGIN_GUI_Y
-	};
+	//start of camera following player
+	Point center = player->GetPos();
+	camera.target = { static_cast<float>(center.x), static_cast<float>(center.y) };
 
+	int mapWidthInPixels = level->width * TILE_SIZE;
+	int mapHeightInPixels = level->height * TILE_SIZE;
+
+	float halfScreenWidth = WINDOW_WIDTH / 4.0f;
+	float halfScreenHeight = WINDOW_HEIGHT / 4.0f; //change to 2.0f, at 4.0f is to check that it works
+
+	float camX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
+	float camY = std::clamp(camera.target.y, halfScreenHeight - 2 * TILE_SIZE, mapHeightInPixels - (halfScreenHeight - 2 * TILE_SIZE));
+
+	camera.target = { camX,camY };
+	camera.offset = { halfScreenWidth, halfScreenHeight };
+
+	/*Point center = player->GetPos();
+	camera.target = { static_cast<float>(center.x), static_cast<float>(center.y) };
+	camera.offset = { WINDOW_WIDTH /4.0f, WINDOW_HEIGHT / 2.0f };*/
+
+	//end of camera following player
 
 }
 void Scene::Render()

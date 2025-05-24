@@ -242,93 +242,173 @@ void Player::StepsBrain() {
 	stepsTimer = 0;
 }
 
+//void Player::MoveX()
+//{
+//	
+//	AABB box;
+//	int prev_x = pos.x;
+//
+//
+//	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT) )
+//	{ 
+//		direction.x = -1;
+//		if (state == State::IDLE) StartWalkingLeft();
+//		else
+//		{
+//			if (IsLookingRight()) ChangeAnimLeft();
+//		}
+//
+//		pos.x += -PLAYER_SPEED;
+//
+//		AABB box = GetHitbox();
+//		if (map->TestCollisionWallLeft(box))
+//		{
+//			pos.x = prev_x;
+//			//if (state == State::WALKING) direction.x = 0;
+//			
+//		}
+//	}
+//	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
+//	{
+//		direction.x = 1;
+//		if (state == State::IDLE) StartWalkingRight();
+//		else
+//		{
+//			if (IsLookingLeft()) ChangeAnimRight();
+//		}
+//
+//		pos.x += PLAYER_SPEED;
+//		AABB box = GetHitbox();
+//		if (map->TestCollisionWallRight(box))
+//		{
+//			pos.x = prev_x;
+//			//if (state == State::WALKING) direction.x = 0;
+//		}
+//	}
+//	//else {
+//	//	direction.x = 0;
+//	//}
+//	if (!IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT)) {
+//		direction.x = 0;
+//	}
+//}
 void Player::MoveX()
 {
-	
 	AABB box;
 	int prev_x = pos.x;
 
-
-	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT) )
-	{ 
-		pos.x += -PLAYER_SPEED;
+	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
+	{
 		direction.x = -1;
-		if (state == State::IDLE) StartWalkingLeft();
-		else
-		{
-			if (IsLookingRight()) ChangeAnimLeft();
-		}
 
+		// Ensure animation matches direction
+		if (state == State::IDLE) StartWalkingLeft();
+		else if (!IsLookingLeft()) ChangeAnimLeft();
+
+		pos.x += -PLAYER_SPEED;
 		box = GetHitbox();
 		if (map->TestCollisionWallLeft(box))
 		{
 			pos.x = prev_x;
-			if (state == State::WALKING) direction.x = 0;
-			
 		}
 	}
 	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
 	{
-		pos.x += PLAYER_SPEED;
 		direction.x = 1;
-		if (state == State::IDLE) StartWalkingRight();
-		else
-		{
-			if (IsLookingLeft()) ChangeAnimRight();
-		}
 
+		if (state == State::IDLE) StartWalkingRight();
+		else if (!IsLookingRight()) ChangeAnimRight();
+
+		pos.x += PLAYER_SPEED;
 		box = GetHitbox();
 		if (map->TestCollisionWallRight(box))
 		{
 			pos.x = prev_x;
-			if (state == State::WALKING) direction.x = 0;
 		}
 	}
 	else {
 		direction.x = 0;
 	}
 }
+//check1
+//void Player::MoveY()
+//{
+//	AABB box;
+//	int prev_y = pos.y;
+//
+//
+//	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
+//	{
+//		pos.y -= PLAYER_SPEED;
+//		direction.y = 1;
+//		if (state == State::IDLE) StartWalkingUp();
+//		else if (!IsLookingUp())
+//			ChangeAnimUp();
+//
+//		box = GetHitbox();
+//		if (map->TestCollisionWallUp(box))
+//		{
+//			pos.y = prev_y;
+//			if (state == State::WALKING) direction.y = 0;
+//		}
+//	}
+//	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
+//	{
+//		pos.y += PLAYER_SPEED;
+//		direction.y = -1;
+//		if (state == State::IDLE) StartWalkingDown();
+//		else if (!IsLookingDown())
+//			ChangeAnimDown();
+//
+//		box = GetHitbox();
+//		if (map->TestCollisionGround(box, &pos.y))
+//		{
+//			pos.y = prev_y;
+//			if (state == State::WALKING) direction.y = 0;
+//		}
+//	}
+//	else {
+//		direction.y = 0;
+//	}
+//}
 void Player::MoveY()
 {
 	AABB box;
 	int prev_y = pos.y;
 
-
 	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
 	{
-		pos.y -= PLAYER_SPEED;
-		direction.y = 1;
-		if (state == State::IDLE) StartWalkingUp();
-		else if (!IsLookingUp())
-			ChangeAnimUp();
+		direction.y = -1;
 
+		if (state == State::IDLE) StartWalkingUp();
+		else if (!IsLookingUp()) ChangeAnimUp();
+
+		pos.y -= PLAYER_SPEED;
 		box = GetHitbox();
 		if (map->TestCollisionWallUp(box))
 		{
 			pos.y = prev_y;
-			if (state == State::WALKING) direction.y = 0;
 		}
 	}
 	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
 	{
-		pos.y += PLAYER_SPEED;
-		direction.y = -1;
-		if (state == State::IDLE) StartWalkingDown();
-		else if (!IsLookingDown())
-			ChangeAnimDown();
+		direction.y = 1;
 
+		if (state == State::IDLE) StartWalkingDown();
+		else if (!IsLookingDown()) ChangeAnimDown();
+
+		pos.y += PLAYER_SPEED;
 		box = GetHitbox();
 		if (map->TestCollisionGround(box, &pos.y))
 		{
 			pos.y = prev_y;
-			if (state == State::WALKING) direction.y = 0;
 		}
 	}
 	else {
 		direction.y = 0;
 	}
 }
-
+//check2
 void Player::DrawDebug(const Color& col) const
 {	
 	Entity::DrawHitbox(pos.x, pos.y, width, height, col);
