@@ -76,12 +76,12 @@ AppStatus Scene::Init()
 		LOG("Failed to initialise Level");
 		return AppStatus::ERROR;
 	}
-	//Load level
-	if (LoadLevel(1) != AppStatus::OK)
-	{
-		LOG("Failed to load Level 1");
-		return AppStatus::ERROR;
-	}
+	
+	showStageScreen = true;
+	stageScreenTimer = 2.0f;
+	nextStageToLoad = 1;
+	currentstage = 1;
+
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
@@ -94,6 +94,7 @@ AppStatus Scene::Init()
 	enemies.push_back(enemy);
 
     return AppStatus::OK;
+
 }
 AppStatus Scene::LoadLevel(int stage)
 {
@@ -195,6 +196,24 @@ bool Scene::LoadMapFromFile(const std::string& filename, int* map, int size)
 }
 void Scene::Update()
 {
+	if (showStageScreen)
+	{
+		stageScreenTimer -= GetFrameTime();
+		if (stageScreenTimer <= 0.0f)
+		{
+			showStageScreen = false;
+			if (LoadLevel(nextStageToLoad) == AppStatus::OK) {
+				currentstage = nextStageToLoad;
+
+				player->SetPos({ 16,32 });
+			}
+			else {
+				victory = true;
+			}
+		}
+		return;
+	}
+
 	Point p1, p2;
 	AABB box;
 
@@ -337,7 +356,7 @@ void Scene::Update()
 				int dx = directions[d][0];
 				int dy = directions[d][1];
 
-				for (int step = 1; step <= 2; ++step)
+				for (int step = 1; step <= 1; ++step)
 				{
 					int adjTileX = tileX + dx * step;
 					int adjTileY = tileY + dy * step;
@@ -404,10 +423,12 @@ void Scene::Update()
 	{
 		player->victory = false;
 		int nextStage = currentstage + 1;
+		showStageScreen = true;
+		stageScreenTimer = 2.0f;
+		nextStageToLoad = nextStage;
 		if (LoadLevel(nextStage) == AppStatus::OK) {
 			currentstage = nextStage;
-			// Opcional: reposiciona al jugador si lo necesitas
-			player->SetPos({16,32});
+			
 		}
 		else {
 			victory = true; // Si no hay más niveles, muestra la pantalla de victoria
@@ -446,6 +467,18 @@ void Scene::Update()
 }
 void Scene::Render()
 {
+	if (showStageScreen)
+	{
+		// Fondo negro
+		DrawRectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+		// Texto centrado
+		std::string stageText = "STAGE " + std::to_string(nextStageToLoad);
+		int fontSize = 40;
+		int textWidth = MeasureText(stageText.c_str(), fontSize);
+		DrawText(stageText.c_str(), (WINDOW_WIDTH - textWidth) / 2, WINDOW_HEIGHT / 2 - fontSize / 2, fontSize, WHITE);
+		return; // No dibujes el resto del juego mientras se muestra la pantalla de stage
+	}
+
 	BeginMode2D(camera);
 
     level->Render();
