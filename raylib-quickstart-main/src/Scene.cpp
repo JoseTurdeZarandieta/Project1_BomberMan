@@ -86,7 +86,7 @@ AppStatus Scene::Init()
 	player->SetTileMap(level);
 
 	//create and initialise enemy
-	Enemy* enemy = new Enemy({ 176, 192 });
+	Enemy* enemy = new Enemy({ 16, 32 });
 	enemy->SetTileMap(level);
 	if (enemy->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;
@@ -164,6 +164,22 @@ AppStatus Scene::LoadLevel(int stage)
 				objects.push_back(obj);
 				map[i] = 0;
 			}
+			else if (tile == Tile::ENEMY)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE;
+				Enemy* enemy = new Enemy(pos);
+				enemy->SetTileMap(level);
+				if (enemy->Initialise() == AppStatus::OK) {
+					enemies.push_back(enemy);
+				}
+				else {
+					LOG("Failed to initialise enemy at (%d, &d)", pos.x, pos.y);
+					delete enemy;
+				}
+				map[i] = 0; //when enemy moves, it places AIR
+			}
+
 			++i;
 		}
 	}
