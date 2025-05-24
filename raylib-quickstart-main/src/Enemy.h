@@ -43,22 +43,19 @@ private:
     void CheckDirection();
 
     bool canMoveLeft    = false;
-    bool canMoveRight   = true;
+    bool canMoveRight   = false;
     bool canMoveUp      = false;
     bool canMoveDown    = false;
 
     float enemyX;
     float enemyY;
 
-    float timer = 2;
+    float timer = 4;
     Point selectedDirection = { 1,0 };
     void LogicBrain();
 
-    bool IsTileAligned() const {
-        return ((int)enemyX % TILE_SIZE == 0) && ((int)enemyY % TILE_SIZE == 0);
-    }
     Point lastDirection = { 0, 0 };
-    bool IsTileWalkable(int x, int y) const;
+    bool IsTileWalkable(int x, int y);
     Point targetTile;
     bool isMoving = false;
 
