@@ -14,10 +14,10 @@ Scene::Scene()
 	player = nullptr;
     level = nullptr;
 	
-	camera.target = { 0, 0 };				//Center of the screen
-	camera.offset = { 0, MARGIN_GUI_Y };	//Offset from the target (center of the screen)
-	camera.rotation = 0.0f;					//No rotation
-	camera.zoom = 1.0f;						//Default zoom
+	camera.target = { 0, 0 };
+	camera.offset = { 0, MARGIN_GUI_Y };
+	camera.rotation = 0.0f;
+	camera.zoom = 1.0f;
 
 	debug = DebugMode::OFF;
 }
@@ -406,11 +406,11 @@ void Scene::Update()
 		int nextStage = currentstage + 1;
 		if (LoadLevel(nextStage) == AppStatus::OK) {
 			currentstage = nextStage;
-			// Opcional: reposiciona al jugador si lo necesitas
+			
 			player->SetPos({16,32});
 		}
 		else {
-			victory = true; // Si no hay más niveles, muestra la pantalla de victoria
+			victory = true;
 		}
 	}
 
@@ -429,17 +429,13 @@ void Scene::Update()
 	int mapHeightInPixels = level->height * TILE_SIZE;
 
 	float halfScreenWidth = WINDOW_WIDTH / 4.0f;
-	float halfScreenHeight = WINDOW_HEIGHT / 4.0f; //change to 2.0f, at 4.0f is to check that it works
+	float halfScreenHeight = WINDOW_HEIGHT / 6.0f; //change to 2.0f, at 4.0f is to check that it works
 
-	float camX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
-	float camY = std::clamp(camera.target.y, halfScreenHeight - 2 * TILE_SIZE, mapHeightInPixels - (halfScreenHeight - 2 * TILE_SIZE));
+	float posCamX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
+	float posCamY = 0;
 
-	camera.target = { camX,camY };
+	camera.target = { posCamX, posCamY };
 	camera.offset = { halfScreenWidth, halfScreenHeight };
-
-	/*Point center = player->GetPos();
-	camera.target = { static_cast<float>(center.x), static_cast<float>(center.y) };
-	camera.offset = { WINDOW_WIDTH /4.0f, WINDOW_HEIGHT / 2.0f };*/
 
 	//end of camera following player
 
