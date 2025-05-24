@@ -104,7 +104,7 @@ Tile TileMap::GetTileIndex(int x, int y) const
 }
 bool TileMap::IsTileSolid(Tile tile) const
 {
-	return (Tile::BLOCK <= tile && tile <= Tile::SOFT_BLOCK);//creo
+	return (tile == Tile::BLOCK || tile == Tile::SOFT_BLOCK);
 }
 
 
@@ -114,7 +114,7 @@ bool TileMap::TestCollisionWallLeft(const AABB& box) const
 }
 bool TileMap::TestCollisionWallRight(const AABB& box) const
 {
-	//comprobar que funcione  
+ 
 	return CollisionX(box.pos + Point(box.width - 1, 0), box.height);
 }
 bool TileMap::TestCollisionWallUp(const AABB& box) const
@@ -123,14 +123,13 @@ bool TileMap::TestCollisionWallUp(const AABB& box) const
 } 
 bool TileMap::TestCollisionWallDown(const AABB& box) const
 {
-	//comprobar que funcione 1
-	//return CollisionY(box.pos + Point(box.width - 1, 0), box.height + Point(box.height - 1, 0));
+
 	return CollisionY(box.pos + Point(box.width - 1, 0), box.height);
 }
 
 bool TileMap::TestCollisionGround(const AABB& box, int* py) const
 {
-	Point p(box.pos.x, *py);	//control point
+	Point p(box.pos.x, *py);
 	int tile_y;
 
 	if (CollisionY(p, box.width))
@@ -147,15 +146,12 @@ bool TileMap::CollisionX(const Point& p, int distance) const
 {
 	int x, y, y0, y1;
 
-	//Calculate the tile coordinates and the range of tiles to check for collision
 	x = p.x / TILE_SIZE;
 	y0 = p.y / TILE_SIZE;
 	y1 = (p.y + distance - 1) / TILE_SIZE;
 	
-	//Iterate over the tiles within the vertical range
 	for (y = y0; y <= y1; ++y)
 	{
-		//One solid tile is sufficient
 		if (IsTileSolid(GetTileIndex(x, y)))
 			return true;
 	}
@@ -166,17 +162,14 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 	int x, y, x0, x1;
 	Tile tile;
 
-	//Calculate the tile coordinates and the range of tiles to check for collision
 	y = p.y / TILE_SIZE;
 	x0 = p.x / TILE_SIZE;
 	x1 = (p.x + distance - 1) / TILE_SIZE;
 
-	//Iterate over the tiles within the horizontal range
 	for (x = x0; x <= x1; ++x)
 	{
 		tile = GetTileIndex(x, y);
 
-		//One solid or laddertop tile is sufficient
 		if (IsTileSolid(tile)  )
 			return true;
 	}
@@ -201,6 +194,9 @@ void TileMap::Render()
 
 				DrawTextureRec(*img_tiles, rc, pos, WHITE);
 			}
+			/*if (IsTileSolid(tile)) {
+				DrawRectangleLines((int)pos.x, (int)pos.y, TILE_SIZE, TILE_SIZE, RED);
+			}*/
 		}
 	}
 }
@@ -219,12 +215,10 @@ Tile TileMap::GetObjectAtPosition(const AABB& box, int* px) const
 	int tx1, tx2, ty;
 	Tile tile1;
 
-	//Control points
 	left = box.pos.x;
 	right = box.pos.x + box.width;
 	bottom = box.pos.y + box.height - 1;
 
-	//Calculate the tile coordinates
 	tx1 = left / TILE_SIZE;
 	tx2 = right / TILE_SIZE;
 	ty = bottom / TILE_SIZE;
