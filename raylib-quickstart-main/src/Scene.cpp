@@ -14,10 +14,10 @@ Scene::Scene()
 	player = nullptr;
     level = nullptr;
 	
-	camera.target = { 0, 0 };				//Center of the screen
-	camera.offset = { 0, MARGIN_GUI_Y };	//Offset from the target (center of the screen)
-	camera.rotation = 0.0f;					//No rotation
-	camera.zoom = 1.0f;						//Default zoom
+	camera.target = { 0, 0 };
+	camera.offset = { 0, MARGIN_GUI_Y };
+	camera.rotation = 0.0f;
+	camera.zoom = 1.0f;
 
 	debug = DebugMode::OFF;
 }
@@ -115,14 +115,14 @@ AppStatus Scene::LoadLevel(int stage)
 		return AppStatus::ERROR;
 	}
 
-	// --- POSICIÓN DE LA PUERTA SEGÚN EL NIVEL ---
+	// --- POSICIï¿½N DE LA PUERTA SEGï¿½N EL NIVEL ---
 	int doorX = 5, doorY = 5; // Por defecto
 	switch (stage) {
 	case 1: doorX = 3;  doorY = 3;  break;
 	case 2: doorX = 10; doorY = 7;  break;
 	case 3: doorX = 19; doorY = 10; break;
 	case 4: doorX = 25; doorY = 5; break;
-		// Añade más casos según tus niveles
+		// Aï¿½ade mï¿½s casos segï¿½n tus niveles
 	default: doorX = 5; doorY = 5; break;
 	}
 	int doorIndex = doorY * LEVEL_WIDTH + doorX;
@@ -306,14 +306,14 @@ void Scene::Update()
 		int tileY = bombPos.y / TILE_SIZE;
 		int tileIndex = tileY * LEVEL_WIDTH + tileX;
 
-		// Solo colocar bomba si la tile está vacía
+		// Solo colocar bomba si la tile estï¿½ vacï¿½a
 		if (level->map[tileIndex] == Tile::AIR)
 		{
 			AudioManager::Instance().PlaySoundByName("BombDown");
 			level->map[tileIndex] = Tile::BOMB;
 			Player::Bomb newBomb = { bombPos, 0.0f };
 			player->activeBombs.push_back(newBomb);
-			player->bombCooldown = 0.2f; // Pequeño cooldown para evitar doble pulsación
+			player->bombCooldown = 0.2f; // Pequeï¿½o cooldown para evitar doble pulsaciï¿½n
 		}
 	}
 
@@ -324,10 +324,10 @@ void Scene::Update()
 
 		if (player->activeBombs[i].timer > 3.0f) {
 			AudioManager::Instance().PlaySoundByName("BombExplode");
-			// Calcular la posición de las tiles adyacentes al jugador
-			int tileX = player->activeBombs[i].position.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
+			// Calcular la posiciï¿½n de las tiles adyacentes al jugador
+			int tileX = player->activeBombs[i].position.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaï¿½o de una tile
 			int tileY = player->activeBombs[i].position.y / TILE_SIZE;
-			// Modificar el valor de las tiles en todas las direcciones a 0, incluyendo la posición del jugador
+			// Modificar el valor de las tiles en todas las direcciones a 0, incluyendo la posiciï¿½n del jugador
 			// Afecta la propia bomba primero
 			int centerTileIndex = tileY * LEVEL_WIDTH + tileX;
 			if (level->map[centerTileIndex] != Tile::BLOCK)
@@ -361,7 +361,7 @@ void Scene::Update()
 					int adjTileX = tileX + dx * step;
 					int adjTileY = tileY + dy * step;
 
-					// Verifica que esté dentro del mapa
+					// Verifica que estï¿½ dentro del mapa
 					if (adjTileX < 0 || adjTileX >= LEVEL_WIDTH || adjTileY < 0 || adjTileY >= LEVEL_HEIGHT)
 						break;
 
@@ -369,7 +369,7 @@ void Scene::Update()
 
 					if (level->map[tileIndex] == Tile::BLOCK)
 					{
-						// Bloque sólido: detener explosión en esta dirección
+						// Bloque sï¿½lido: detener explosiï¿½n en esta direcciï¿½n
 						break;
 					}
 
@@ -377,7 +377,7 @@ void Scene::Update()
 					{
 						level->map[tileIndex] = Tile::DOOR;
 						doorHidden = false;
-						break; // También detener explosión después de revelar puerta
+						break; // Tambiï¿½n detener explosiï¿½n despuï¿½s de revelar puerta
 					}
 					else
 					{
@@ -386,7 +386,7 @@ void Scene::Update()
 
 					if (level->map[tileIndex] == Tile::SOFT_BLOCK)
 					{
-						// Detener explosión si destruye un soft block
+						// Detener explosiï¿½n si destruye un soft block
 						break;
 					}
 				}
@@ -396,7 +396,7 @@ void Scene::Update()
 			int playerTileX = player->GetX() / TILE_SIZE;
 			int playerTileY = player->GetY() / TILE_SIZE;
 
-			// Solo daña si está alineado horizontal o verticalmente y a distancia de 0 a 2 tiles
+			// Solo daï¿½a si estï¿½ alineado horizontal o verticalmente y a distancia de 0 a 2 tiles
 			int dx = std::abs(playerTileX - tileX);
 			int dy = std::abs(playerTileY - tileY);
 
@@ -429,9 +429,11 @@ void Scene::Update()
 		if (LoadLevel(nextStage) == AppStatus::OK) {
 			currentstage = nextStage;
 			
+			player->SetPos({16,32});
+
 		}
 		else {
-			victory = true; // Si no hay más niveles, muestra la pantalla de victoria
+			victory = true;
 		}
 	}
 
@@ -450,17 +452,13 @@ void Scene::Update()
 	int mapHeightInPixels = level->height * TILE_SIZE;
 
 	float halfScreenWidth = WINDOW_WIDTH / 4.0f;
-	float halfScreenHeight = WINDOW_HEIGHT / 4.0f; //change to 2.0f, at 4.0f is to check that it works
+	float halfScreenHeight = WINDOW_HEIGHT / 6.0f; //change to 2.0f, at 4.0f is to check that it works
 
-	float camX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
-	float camY = std::clamp(camera.target.y, halfScreenHeight - 2 * TILE_SIZE, mapHeightInPixels - (halfScreenHeight - 2 * TILE_SIZE));
+	float posCamX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
+	float posCamY = 0;
 
-	camera.target = { camX,camY };
+	camera.target = { posCamX, posCamY };
 	camera.offset = { halfScreenWidth, halfScreenHeight };
-
-	/*Point center = player->GetPos();
-	camera.target = { static_cast<float>(center.x), static_cast<float>(center.y) };
-	camera.offset = { WINDOW_WIDTH /4.0f, WINDOW_HEIGHT / 2.0f };*/
 
 	//end of camera following player
 
