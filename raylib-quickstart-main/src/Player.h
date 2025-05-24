@@ -78,12 +78,14 @@ public:
 	State state;
 	Look look;
 
+
 	TileMap *map;
 
 	struct Bomb {
 		Point position;
 		float timer;
 	};
+	std::vector<Bomb> activeBombs;
 
 	int score;
 	int health = 3;
@@ -93,6 +95,9 @@ private:
 
 	void StepsBrain();
 	float stepsTimer = 1;
+
+
+
 
 	Point direction = { 0, 0 };
 
