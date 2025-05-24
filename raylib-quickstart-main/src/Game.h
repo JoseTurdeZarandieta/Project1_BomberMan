@@ -31,6 +31,7 @@ private:
     const Texture2D* img_screen2;
     const Texture2D* img_win;
     const Texture2D* img_lose;
+    const Texture2D* img_items;
 
     //To work with original game units and then scale the result
     RenderTexture2D target;

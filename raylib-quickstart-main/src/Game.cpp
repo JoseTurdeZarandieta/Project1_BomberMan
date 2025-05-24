@@ -14,6 +14,7 @@ Game::Game()
     img_screen2 = nullptr;
     img_win = nullptr;
     img_lose = nullptr;
+    img_items = nullptr;
 
     target = {};
     src = {};
@@ -93,7 +94,12 @@ AppStatus Game::LoadResources()
     {
         return AppStatus::ERROR;
     }
-    img_lose = data.GetTexture(Resource::IMG_LOSE);
+    img_lose = data.GetTexture(Resource::IMG_LOSE); 
+    if (data.LoadTexture(Resource::IMG_ITEMS, "resources/UI/GameOver.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_items = data.GetTexture(Resource::IMG_ITEMS);
     
     AudioManager::Instance().CreateMusic("resources/Audio/01. TitleScreen_Music.ogg", "TitleMusic");
     AudioManager::Instance().CreateMusic("resources/Audio/03. InGame_Music.ogg", "InGameMusic");

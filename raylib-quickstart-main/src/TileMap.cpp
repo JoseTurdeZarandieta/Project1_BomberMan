@@ -213,7 +213,7 @@ void TileMap::Release()
 
 	dict_rect.clear();
 }
-bool TileMap::TestOnDoor(const AABB& box, int* px) const
+Tile TileMap::GetObjectAtPosition(const AABB& box, int* px) const
 {
 	int left, right, bottom;
 	int tx1, tx2, ty;
@@ -229,14 +229,16 @@ bool TileMap::TestOnDoor(const AABB& box, int* px) const
 	tx2 = right / TILE_SIZE;
 	ty = bottom / TILE_SIZE;
 
-	//To be able to climb up or down, both control points must be on ladder
-	tile1 = GetTileIndex(tx1, ty);
-
-	if (IsTileDoor(tile1))
+	if (tx1 >= 0 && tx1 < LEVEL_WIDTH && ty >= 0 && ty < LEVEL_HEIGHT)
 	{
-		return true;
+		return GetTileIndex(tx1, ty);
 	}
-	return false;
+	else
+	{
+		// Si las coordenadas están fuera del mapa, devuelve un valor que indique "fuera de los límites"
+		return Tile::EMPTY; // Asumiendo que Tile::EMPTY representa un espacio vacío o fuera de los límites
+	}
+
 }
 bool TileMap::IsTileDoor(Tile tile) const
 {

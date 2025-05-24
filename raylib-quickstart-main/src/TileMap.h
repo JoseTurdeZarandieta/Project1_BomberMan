@@ -46,7 +46,7 @@ public:
 	void Render();
 	void Release();
 
-	bool TestOnDoor(const AABB& box, int* px) const;
+	Tile GetObjectAtPosition(const AABB& box, int* px) const;
 
 	bool IsTileDoor(Tile tile) const;
 

@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "Entity.h"
 #include "Enemy.h"
+#include "player.h"
 
 Scene::Scene()
 {
@@ -423,38 +424,38 @@ void Scene::Update()
 	{
 		// Iniciar el temporizador y almacenar la posición actual del jugador
 		AudioManager::Instance().PlaySoundByName("BombDown");
-		startTimer = true;
-		timer = 0.0f;
-		initialPlayerPos = player->GetPos();
 
-		int tileX = initialPlayerPos.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
-		int tileY = initialPlayerPos.y / TILE_SIZE;
+		Point bombPos = player->GetPos();
+		int tileX = bombPos.x / TILE_SIZE;
+		int tileY = bombPos.y / TILE_SIZE;
+
+
+
 
 		// Cambiar la tile en la posición del jugador
+
 		level->map[tileY * LEVEL_WIDTH + tileX] = Tile::BOMB;
+
+		Player::Bomb newBomb = { bombPos, 0.0f };
+		player->activeBombs.push_back(newBomb);
 	}
 
-	// Si el temporizador está activo, actualizarlo
-	if (startTimer)
+	for (int i = 0; i < player->activeBombs.size();)
 	{
-		timer += GetFrameTime(); // Obtener el tiempo transcurrido desde el último frame
+		player->activeBombs[i].timer += GetFrameTime();
 
-
-		// Si han pasado 3 segundos, eliminar las tiles
-		if (timer >= 3.0f)
-		{
+		if (player->activeBombs[i].timer > 3.0f) {
 			AudioManager::Instance().PlaySoundByName("BombExplode");
 			// Calcular la posición de las tiles adyacentes al jugador
-			int tileX = initialPlayerPos.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
-			int tileY = initialPlayerPos.y / TILE_SIZE;
-
+			int tileX = player->activeBombs[i].position.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
+			int tileY = player->activeBombs[i].position.y / TILE_SIZE;
 			// Modificar el valor de las tiles en todas las direcciones a 0, incluyendo la posición del jugador
-			for (int i = -1; i <= 1; ++i)
+			for (int dx = -1; dx <= 1; ++dx)
 			{
-				for (int j = -1; j <= 1; ++j)
+				for (int dy = -1; dy <= 1; ++dy)
 				{
-					int adjTileX = tileX + i;
-					int adjTileY = tileY + j;
+					int adjTileX = tileX + dx;
+					int adjTileY = tileY + dy;
 					int tileIndex = adjTileY * LEVEL_WIDTH + adjTileX;
 
 
@@ -481,12 +482,17 @@ void Scene::Update()
 					}
 				}
 			}
+			player->activeBombs.erase(player->activeBombs.begin() + i);
 
-			// Detener el temporizador
-			startTimer = false;
+
+
+
+		}
+		else
+		{
+			++i;
 		}
 	}
-
 	if (player->victory)
 	{
 		victory = true;
@@ -497,6 +503,8 @@ void Scene::Update()
 	for (Enemy* enemy : enemies)
 		enemy->Update();
 	CheckCollisions();
+
+
 }
 void Scene::Render()
 {

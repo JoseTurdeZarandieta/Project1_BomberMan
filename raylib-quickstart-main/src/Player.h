@@ -80,8 +80,14 @@ public:
 
 	TileMap *map;
 
+	struct Bomb {
+		Point position;
+		float timer;
+	};
+
 	int score;
 	int health = 3;
+	int maxBombs = 1;
 
 private:
 
