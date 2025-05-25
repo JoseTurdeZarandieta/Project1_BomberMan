@@ -83,7 +83,7 @@ AppStatus Scene::Init()
 		LOG("Failed to initialise Level");
 		return AppStatus::ERROR;
 	}
-	
+
 	showStageScreen = true;
 	stageScreenTimer = 2.0f;
 	nextStageToLoad = 1;
@@ -337,32 +337,30 @@ void Scene::Update()
 		int tileY = bombPos.y / TILE_SIZE;
 		int tileIndex = tileY * LEVEL_WIDTH + tileX;
 
-		// Solo colocar bomba si la tile est� vac�a
 		if (level->map[tileIndex] == Tile::AIR)
 		{
 			AudioManager::Instance().PlaySoundByName("BombDown");
 			level->map[tileIndex] = Tile::BOMB;
 			Player::Bomb newBomb = { bombPos, 0.0f };
 			player->activeBombs.push_back(newBomb);
-			player->bombCooldown = 0.2f; // Peque�o cooldown para evitar doble pulsaci�n
+			player->bombCooldown = 0.2f;
 		}
 	}
-
-
 	for (int i = 0; i < player->activeBombs.size();)
 	{
 		player->activeBombs[i].timer += GetFrameTime();
 
 		if (player->activeBombs[i].timer > 3.0f) {
 			AudioManager::Instance().PlaySoundByName("BombExplode");
-			// Calcular la posici�n de las tiles adyacentes al jugador
-			int tileX = player->activeBombs[i].position.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tama�o de una tile
+			int tileX = player->activeBombs[i].position.x / TILE_SIZE;
 			int tileY = player->activeBombs[i].position.y / TILE_SIZE;
-			// Modificar el valor de las tiles en todas las direcciones a 0, incluyendo la posici�n del jugador
-			// Afecta la propia bomba primero
+
+
 			int centerTileIndex = tileY * LEVEL_WIDTH + tileX;
+
 			if (level->map[centerTileIndex] != Tile::BLOCK)
 			{
+
 				if (doorHidden && tileX == doorPos.x && tileY == doorPos.y && level->map[centerTileIndex] == Tile::SOFT_BLOCK)
 				{
 					level->map[centerTileIndex] = Tile::DOOR;
@@ -374,7 +372,6 @@ void Scene::Update()
 				}
 			}
 
-			// Direcciones: derecha, izquierda, abajo, arriba
 			const int directions[4][2] = {
 				{1, 0},   // derecha
 				{-1, 0},  // izquierda
@@ -392,7 +389,6 @@ void Scene::Update()
 					int adjTileX = tileX + dx * step;
 					int adjTileY = tileY + dy * step;
 
-					// Verifica que est� dentro del mapa
 					if (adjTileX < 0 || adjTileX >= LEVEL_WIDTH || adjTileY < 0 || adjTileY >= LEVEL_HEIGHT)
 						break;
 
@@ -400,7 +396,6 @@ void Scene::Update()
 
 					if (level->map[tileIndex] == Tile::BLOCK)
 					{
-						// Bloque s�lido: detener explosi�n en esta direcci�n
 						break;
 					}
 
@@ -408,7 +403,7 @@ void Scene::Update()
 					{
 						level->map[tileIndex] = Tile::DOOR;
 						doorHidden = false;
-						break; // Tambi�n detener explosi�n despu�s de revelar puerta
+						break;
 					}
 					else
 					{
@@ -417,21 +412,17 @@ void Scene::Update()
 
 					if (level->map[tileIndex] == Tile::SOFT_BLOCK)
 					{
-						// Detener explosi�n si destruye un soft block
 						break;
 					}
 				}
 			}
-
-
 			int playerTileX = player->GetX() / TILE_SIZE;
 			int playerTileY = player->GetY() / TILE_SIZE;
 
-			// Solo da�a si est� alineado horizontal o verticalmente y a distancia de 0 a 2 tiles
 			int dx = std::abs(playerTileX - tileX);
 			int dy = std::abs(playerTileY - tileY);
 
-			if ((dx == 0 && dy <= 2) || (dy == 0 && dx <= 2))
+			if ((dx == 0 && dy <= 1) || (dy == 0 && dx <= 1))
 			{
 				player->takeDamage(1);
 				if (player->GetHealth() <= 0)
@@ -440,10 +431,36 @@ void Scene::Update()
 				}
 			}
 
+			const Point bombPos = player->activeBombs[i].position;
 
+			auto* explosion = new Explosion(bombPos, explosionAnim::EXPLOSION_CENTER);
+			if (explosion->Initialise() == AppStatus::OK) {
+				explosions.emplace_back(explosion);
+			}
+			const Point armDirs[4] = { {1,0},{-1,0},{0,1},{0,-1} };
+			const	explosionAnim armTypes[4] = {
+					explosionAnim::EXPLOSION_RIGHT,
+					explosionAnim::EXPLOSION_LEFT,
+					explosionAnim::EXPLOSION_DOWN,
+					explosionAnim::EXPLOSION_UP
+			};
+
+			for (int d = 0; d < 4; ++d) {
+				Point point = { bombPos.x + armDirs[d].x * TILE_SIZE, bombPos.y + armDirs[d].y * TILE_SIZE };
+				int nextTileX = point.x / TILE_SIZE;
+				int nextTileY = point.y / TILE_SIZE;
+
+				if (nextTileX >= 0 && nextTileX < level->width && nextTileY >= 0 && nextTileY < level->height) {
+					Tile tile = level->map[nextTileY * level->width + nextTileX];
+					if (tile == Tile::AIR || tile == Tile::DOOR) {
+						auto* arm = new Explosion(point, armTypes[d]);
+						if (arm->Initialise() == AppStatus::OK) {
+							explosions.emplace_back(arm);
+						}
+					}
+				}
+			}
 			player->activeBombs.erase(player->activeBombs.begin() + i);
-
-
 		}
 		else
 		{
@@ -471,11 +488,24 @@ void Scene::Update()
 	level->Update();
 
 	player->Update();
+
 	for (EnemyRed* enemyRed : enemiesRed)
 		enemyRed->Update();
 
 	for (EnemyBlue* enemyBlue : enemiesBlue)
 		enemyBlue->UpdateBlue();
+
+	for (int i = 0; i < explosions.size();) {
+		explosions[i]->Update(GetFrameTime());
+		if (explosions[i]->IsFinished()) {
+			delete explosions[i];
+			explosions.erase(explosions.begin() + i);
+		}
+		else {
+			++i;
+		}
+	}
+
 	CheckCollisions();
 
 	//start of camera following player
@@ -514,6 +544,9 @@ void Scene::Render()
 	BeginMode2D(camera);
 
     level->Render();
+	for (auto* explosion : explosions) {
+		explosion->Draw();
+	}
 	if (debug == DebugMode::OFF || debug == DebugMode::SPRITES_AND_HITBOXES)
 	{
 		RenderObjects();
@@ -554,14 +587,11 @@ void Scene::CheckCollisions()
 		{
 			player->IncrScore((*it)->Points());
 			
-			//Delete the object
 			delete* it; 
-			//Erase the object from the vector and get the iterator to the next valid element
 			it = objects.erase(it); 
 		}
 		else
 		{
-			//Move to the next object
 			++it; 
 		}
 	}
@@ -573,16 +603,23 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
+	
 	for (EnemyRed* enemyRed : enemiesRed)
 	{
 		delete enemyRed;
 	}
 	enemiesRed.clear();
+	
 	for (EnemyBlue* enemyBlue : enemiesBlue)
 	{
 		delete enemyBlue;
 	}
 	enemiesBlue.clear();
+	
+	for (auto* explosion : explosions) {
+		delete explosion;
+	}
+	explosions.clear();
 }
 void Scene::RenderObjects() const
 {
@@ -600,7 +637,7 @@ void Scene::RenderObjectsDebug(const Color& col) const
 }
 void Scene::RenderGUI() const
 {
-	//Temporal approach
+	//temporal approach
 	DrawText(TextFormat("SCORE : %d", player->GetScore()), 10, 10, 8, LIGHTGRAY);
 	DrawText(TextFormat("HEALTH : %d", player->GetHealth()), 325, 10, 8, LIGHTGRAY);
 }

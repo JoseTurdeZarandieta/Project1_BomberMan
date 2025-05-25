@@ -15,7 +15,8 @@ enum class Resource {
     IMG_TILES,
     IMG_ITEMS,
     IMG_WIN,
-    IMG_LOSE
+    IMG_LOSE,
+    IMG_EXPLOSION
 };
 
 class ResourceManager {

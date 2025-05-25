@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "TileMap.h"
 #include <vector>
+#include "Explosion.h"
 
 //Representation model size: 16x16
 #define PLAYER_FRAME_SIZE		16

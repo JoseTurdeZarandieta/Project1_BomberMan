@@ -5,6 +5,7 @@
 #include "Object.h"
 #include "EnemyRed.h"
 #include "EnemyBlue.h"
+#include "Explosion.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -39,6 +40,7 @@ public:
     std::vector<Object*> objects;
     std::vector<EnemyRed*> enemiesRed;
     std::vector<EnemyBlue*> enemiesBlue;
+    std::vector<Explosion*> explosions;
 
 
     Camera2D camera;

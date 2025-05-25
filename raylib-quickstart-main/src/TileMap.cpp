@@ -27,12 +27,12 @@ void TileMap::InitTileDictionary()
 	const int n = TILE_SIZE;
 
 	dict_rect[(int)Tile::GREEN_BLOCK] =	{ 12 * n, 3 * n , n , n };
-	dict_rect[(int)Tile::SOFT_BLOCK] =	{ n , 6* n , n , n };
-	dict_rect[(int)Tile::BOMB] =		{ 0, 5 * n , n ,  n };
-	dict_rect[(int)Tile::BLOCK] = { 0 , 6 * n , n , n };
+	dict_rect[(int)Tile::SOFT_BLOCK] =	{ 4*n , 3* n , n , n };
+	dict_rect[(int)Tile::BOMB] =		{ 0, 3 * n , n ,  n };
+	dict_rect[(int)Tile::BLOCK] =		{ 3*n , 3 * n , n , n };
 
 
-	dict_rect[(int)Tile::DOOR] = {8 *n , 6*n ,n , n };
+	dict_rect[(int)Tile::DOOR] = {11 *n , 3*n ,n , n };
 
 
 	dict_rect[(int)Tile::ITEM_BOMB_UP] = { 0 , 0 , n , n };
