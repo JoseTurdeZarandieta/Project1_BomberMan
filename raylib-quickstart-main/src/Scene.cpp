@@ -95,7 +95,7 @@ AppStatus Scene::Init()
 	player->SetTileMap(level);
 
 	//create and initialise enemyRed
-	EnemyRed* enemyRed = new EnemyRed({ 16, 32 });
+	EnemyRed* enemyRed = new EnemyRed({ 80, 48 });
 	enemyRed->SetTileMap(level);
 	if (enemyRed->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;
@@ -103,7 +103,7 @@ AppStatus Scene::Init()
 	enemiesRed.push_back(enemyRed);
 
 	//create and initialise enemyBlue
-	EnemyBlue* enemyBlue = new EnemyBlue({ 16, 32 });
+	EnemyBlue* enemyBlue = new EnemyBlue({ 48, 48 });
 	enemyBlue->SetTileMap(level);
 	if (enemyBlue->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;
@@ -504,7 +504,7 @@ void Scene::Update()
 	int mapHeightInPixels = level->height * TILE_SIZE;
 
 	float halfScreenWidth = WINDOW_WIDTH / 4.0f;
-	float halfScreenHeight = WINDOW_HEIGHT / 6.0f; //change to 2.0f, at 4.0f is to check that it works
+	float halfScreenHeight = WINDOW_HEIGHT / 6.0f;
 
 	float posCamX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
 	float posCamY = 0;
@@ -526,7 +526,7 @@ void Scene::Render()
 		int fontSize = 40;
 		int textWidth = MeasureText(stageText.c_str(), fontSize);
 		DrawText(stageText.c_str(), (WINDOW_WIDTH - textWidth) / 2, WINDOW_HEIGHT / 2 - fontSize / 2, fontSize, WHITE);
-		return; // No dibujes el resto del juego mientras se muestra la pantalla de stage
+		return;
 	}
 
 	BeginMode2D(camera);
@@ -537,17 +537,17 @@ void Scene::Render()
 		RenderObjects();
 		player->Draw();
 		for (EnemyRed* enemyRed : enemiesRed) {
-			if (!enemyRed) {
-				LOG("enemyRed pointer is null");
-				continue;
-			}
+			//if (enemyRed->GetX() >= 0 || enemyRed->GetX() < 0) {
+			//	LOG("enemyRed pointer is null");
+			//	continue;
+			//}
 			enemyRed->Draw();
 		}
 		for (EnemyBlue* enemyBlue : enemiesBlue) {
-			if (!enemyBlue) {
-				LOG("enemyBlue pointer is null");
-				continue;
-			}
+			//if (!enemyBlue) {
+			//	LOG("enemyBlue pointer is null");
+			//	continue;
+			//}
 			enemyBlue->DrawBlue();
 		}
 	}
@@ -603,6 +603,7 @@ void Scene::ClearLevel()
 	{
 		delete enemyRed;
 	}
+	enemiesRed.clear();
 	for (EnemyBlue* enemyBlue : enemiesBlue)
 	{
 		delete enemyBlue;

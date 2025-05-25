@@ -62,8 +62,17 @@ void EnemyRed::SetTileMap(TileMap* tilemap) {
 
 void EnemyRed::Update() {
 
-    UpdateAnimation();
+    /*if (GetX() >= 0 || GetX() < 0) {
+        return;
+
+    }
+    else {
+        UpdateAnimation();
+        dynamic_cast<Sprite*>(render)->Update();
+    }*/
     dynamic_cast<Sprite*>(render)->Update();
+    UpdateAnimation();
+
 
     if (!isMoving) {
 
