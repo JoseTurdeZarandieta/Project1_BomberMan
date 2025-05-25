@@ -14,7 +14,10 @@ Scene::Scene()
 {
 	player = nullptr;
     level = nullptr;
-	
+	//Entity* enemyRed = nullptr;
+	//Entity* enemyBlue = nullptr;
+
+
 	camera.target = { 0, 0 };
 	camera.offset = { 0, MARGIN_GUI_Y };
 	camera.rotation = 0.0f;
@@ -42,14 +45,14 @@ Scene::~Scene()
 	}
 	objects.clear();
 	
-	for (Entity* enemRed : enemiesRed)
+	for (Entity* enemyRed : enemiesRed)
 	{
-		delete enemRed;
+		delete enemyRed;
 	}
 	enemiesRed.clear();
-	for (Entity* enemBlue : enemiesBlue)
+	for (Entity* enemyBlue : enemiesBlue)
 	{
-		delete enemBlue;
+		delete enemyBlue;
 	}
 	enemiesBlue.clear();
 }
@@ -251,6 +254,7 @@ void Scene::Update()
 				currentstage = nextStageToLoad;
 
 				player->SetPos({ 16,32 });
+				
 			}
 			else {
 				victory = true;
@@ -530,12 +534,22 @@ void Scene::Render()
     level->Render();
 	if (debug == DebugMode::OFF || debug == DebugMode::SPRITES_AND_HITBOXES)
 	{
-		RenderObjects(); 
+		RenderObjects();
 		player->Draw();
-		for (EnemyRed* enemyRed : enemiesRed)
+		for (EnemyRed* enemyRed : enemiesRed) {
+			if (!enemyRed) {
+				LOG("enemyRed pointer is null");
+				continue;
+			}
 			enemyRed->Draw();
-		for (EnemyBlue* enemyBlue : enemiesBlue)
+		}
+		for (EnemyBlue* enemyBlue : enemiesBlue) {
+			if (!enemyBlue) {
+				LOG("enemyBlue pointer is null");
+				continue;
+			}
 			enemyBlue->DrawBlue();
+		}
 	}
 	if (debug == DebugMode::SPRITES_AND_HITBOXES || debug == DebugMode::ONLY_HITBOXES)
 	{
@@ -585,13 +599,13 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
-	for (EnemyRed* enemRed : enemiesRed)
+	for (EnemyRed* enemyRed : enemiesRed)
 	{
-		delete enemRed;
+		delete enemyRed;
 	}
-	for (EnemyBlue* enemBlue : enemiesBlue)
+	for (EnemyBlue* enemyBlue : enemiesBlue)
 	{
-		delete enemBlue;
+		delete enemyBlue;
 	}
 	enemiesBlue.clear();
 }

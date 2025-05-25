@@ -38,8 +38,6 @@ private:
     void MoveX();
     void MoveY();
 
-
-
     void CheckDirection();
 
     bool canMoveLeft    = false;
