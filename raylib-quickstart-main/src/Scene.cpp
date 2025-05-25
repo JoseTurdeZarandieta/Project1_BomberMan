@@ -13,7 +13,7 @@
 Scene::Scene()
 {
 	player = nullptr;
-    level = nullptr;
+	level = nullptr;
 
 
 	camera.target = { 0, 0 };
@@ -31,18 +31,18 @@ Scene::~Scene()
 		delete player;
 		player = nullptr;
 	}
-    if (level != nullptr)
-    {
+	if (level != nullptr)
+	{
 		level->Release();
-        delete level;
-        level = nullptr;
-    }
+		delete level;
+		level = nullptr;
+	}
 	for (Entity* obj : objects)
 	{
 		delete obj;
 	}
 	objects.clear();
-	
+
 	for (Entity* enemyRed : enemiesRed)
 	{
 		delete enemyRed;
@@ -71,12 +71,12 @@ AppStatus Scene::Init()
 	}
 
 	//Create level 
-    level = new TileMap();
-    if (level == nullptr)
-    {
-        LOG("Failed to allocate memory for Level");
-        return AppStatus::ERROR;
-    }
+	level = new TileMap();
+	if (level == nullptr)
+	{
+		LOG("Failed to allocate memory for Level");
+		return AppStatus::ERROR;
+	}
 	//Initialise level
 	if (level->Initialise() != AppStatus::OK)
 	{
@@ -92,7 +92,7 @@ AppStatus Scene::Init()
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
-    return AppStatus::OK;
+	return AppStatus::OK;
 
 }
 AppStatus Scene::LoadLevel(int stage)
@@ -236,7 +236,7 @@ void Scene::Update()
 				currentstage = nextStageToLoad;
 
 				player->SetPos({ 16,32 });
-				
+
 			}
 			else {
 				victory = true;
@@ -433,7 +433,11 @@ void Scene::Update()
 
 			const Point bombPos = player->activeBombs[i].position;
 
-			auto* explosion = new Explosion(bombPos, explosionAnim::EXPLOSION_CENTER);
+			int newtileX = bombPos.x / TILE_SIZE;
+			int newtileY = bombPos.y / TILE_SIZE;
+			Point center = { newtileX * TILE_SIZE, newtileY * TILE_SIZE };
+
+			auto* explosion = new Explosion(center, explosionAnim::EXPLOSION_CENTER);
 			if (explosion->Initialise() == AppStatus::OK) {
 				explosions.emplace_back(explosion);
 			}
@@ -446,14 +450,15 @@ void Scene::Update()
 			};
 
 			for (int d = 0; d < 4; ++d) {
-				Point point = { bombPos.x + armDirs[d].x * TILE_SIZE, bombPos.y + armDirs[d].y * TILE_SIZE };
-				int nextTileX = point.x / TILE_SIZE;
-				int nextTileY = point.y / TILE_SIZE;
+				Point armPos = { center.x + armDirs[d].x * TILE_SIZE, center.y + armDirs[d].y * TILE_SIZE };
+
+				int nextTileX = newtileX + armDirs[d].x;
+				int nextTileY = newtileY + armDirs[d].y;
 
 				if (nextTileX >= 0 && nextTileX < level->width && nextTileY >= 0 && nextTileY < level->height) {
 					Tile tile = level->map[nextTileY * level->width + nextTileX];
-					if (tile == Tile::AIR || tile == Tile::DOOR) {
-						auto* arm = new Explosion(point, armTypes[d]);
+					if (tile == Tile::AIR /*|| tile == Tile::DOOR*/) {
+						auto* arm = new Explosion(armPos, armTypes[d]);
 						if (arm->Initialise() == AppStatus::OK) {
 							explosions.emplace_back(arm);
 						}
@@ -476,8 +481,8 @@ void Scene::Update()
 		nextStageToLoad = nextStage;
 		if (LoadLevel(nextStage) == AppStatus::OK) {
 			currentstage = nextStage;
-			
-			player->SetPos({16,32});
+
+			player->SetPos({ 16,32 });
 
 		}
 		else {
@@ -543,7 +548,7 @@ void Scene::Render()
 
 	BeginMode2D(camera);
 
-    level->Render();
+	level->Render();
 	for (auto* explosion : explosions) {
 		explosion->Draw();
 	}
@@ -570,29 +575,29 @@ void Scene::Render()
 }
 void Scene::Release()
 {
-    level->Release();
+	level->Release();
 	player->Release();
 	ClearLevel();
 }
 void Scene::CheckCollisions()
 {
 	AABB player_box, obj_box;
-	
+
 	player_box = player->GetHitbox();
 	auto it = objects.begin();
 	while (it != objects.end())
 	{
 		obj_box = (*it)->GetHitbox();
-		if(player_box.TestAABB(obj_box))
+		if (player_box.TestAABB(obj_box))
 		{
 			player->IncrScore((*it)->Points());
-			
-			delete* it; 
-			it = objects.erase(it); 
+
+			delete* it;
+			it = objects.erase(it);
 		}
 		else
 		{
-			++it; 
+			++it;
 		}
 	}
 }
@@ -603,19 +608,19 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
-	
+
 	for (EnemyRed* enemyRed : enemiesRed)
 	{
 		delete enemyRed;
 	}
 	enemiesRed.clear();
-	
+
 	for (EnemyBlue* enemyBlue : enemiesBlue)
 	{
 		delete enemyBlue;
 	}
 	enemiesBlue.clear();
-	
+
 	for (auto* explosion : explosions) {
 		delete explosion;
 	}
