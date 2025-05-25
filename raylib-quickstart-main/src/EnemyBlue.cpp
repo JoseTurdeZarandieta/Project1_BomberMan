@@ -115,7 +115,7 @@ void EnemyBlue::LogicBrain() {
     std::mt19937 gen(rd());
 
     int Px = pos.x / TILE_SIZE;
-    int Py = pos.y / TILE_SIZE + 1;
+    int Py = pos.y / TILE_SIZE - 1;
 
 
     if (IsTileWalkable(Px, Py - 1)) possibleDirection.push_back({ 0, -1 });

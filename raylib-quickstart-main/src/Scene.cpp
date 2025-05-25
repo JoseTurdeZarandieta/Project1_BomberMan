@@ -92,22 +92,6 @@ AppStatus Scene::Init()
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
-	//create and initialise enemyRed
-	EnemyRed* enemyRed = new EnemyRed({ 80, 48 });
-	enemyRed->SetTileMap(level);
-	if (enemyRed->Initialise() != AppStatus::OK) {
-		return AppStatus::ERROR;
-	}
-	enemiesRed.push_back(enemyRed);
-
-	//create and initialise enemyBlue
-	EnemyBlue* enemyBlue = new EnemyBlue({ 32, 16 });
-	enemyBlue->SetTileMap(level);
-	if (enemyBlue->Initialise() != AppStatus::OK) {
-		return AppStatus::ERROR;
-	}
-	enemiesBlue.push_back(enemyBlue);
-
     return AppStatus::OK;
 
 }
@@ -137,7 +121,7 @@ AppStatus Scene::LoadLevel(int stage)
 	case 2: doorX = 10; doorY = 7;  break;
 	case 3: doorX = 19; doorY = 10; break;
 	case 4: doorX = 25; doorY = 5; break;
-		// A�ade m�s casos seg�n tus niveles
+
 	default: doorX = 5; doorY = 5; break;
 	}
 	int doorIndex = doorY * LEVEL_WIDTH + doorX;
@@ -182,7 +166,7 @@ AppStatus Scene::LoadLevel(int stage)
 			else if (tile == Tile::ENEMY_RED)
 			{
 				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE - 1;
+				pos.y = y * TILE_SIZE;
 				EnemyRed* enemyRed = new EnemyRed(pos);
 				enemyRed->SetTileMap(level);
 				if (enemyRed->Initialise() == AppStatus::OK) {
@@ -197,7 +181,7 @@ AppStatus Scene::LoadLevel(int stage)
 			else if (tile == Tile::ENEMY_BLUE)
 			{
 				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE - 1;
+				pos.y = y * TILE_SIZE;
 				EnemyBlue* enemyBlue = new EnemyBlue(pos);
 				enemyBlue->SetTileMap(level);
 				if (enemyBlue->Initialise() == AppStatus::OK) {
