@@ -62,14 +62,6 @@ void EnemyRed::SetTileMap(TileMap* tilemap) {
 
 void EnemyRed::Update() {
 
-    /*if (GetX() >= 0 || GetX() < 0) {
-        return;
-
-    }
-    else {
-        UpdateAnimation();
-        dynamic_cast<Sprite*>(render)->Update();
-    }*/
     dynamic_cast<Sprite*>(render)->Update();
     UpdateAnimation();
 
@@ -127,10 +119,10 @@ void EnemyRed::LogicBrain() {
     int Py = pos.y / TILE_SIZE - 1;
 
 
-    if (IsTileWalkable(Px, Py - 1)) possibleDirection.push_back({ 0, -1 });
-    if (IsTileWalkable(Px, Py + 1)) possibleDirection.push_back({ 0, 1 });
-    if (IsTileWalkable(Px - 1, Py)) possibleDirection.push_back({ -1, 0 });
-    if (IsTileWalkable(Px + 1, Py)) possibleDirection.push_back({ 1, 0 });
+    if (IsTileWalkable(Px, Py - 1)) possibleDirection.emplace_back(Point{ 0, -1 });
+    if (IsTileWalkable(Px, Py + 1)) possibleDirection.emplace_back(Point{ 0, 1 });
+    if (IsTileWalkable(Px - 1, Py)) possibleDirection.emplace_back(Point{ -1, 0 });
+    if (IsTileWalkable(Px + 1, Py)) possibleDirection.emplace_back(Point{ 1, 0 });
     Point reverseMov = { -lastDirection.x, -lastDirection.y };
     possibleDirection.erase(
         std::remove(possibleDirection.begin(), possibleDirection.end(), reverseMov), possibleDirection.end()

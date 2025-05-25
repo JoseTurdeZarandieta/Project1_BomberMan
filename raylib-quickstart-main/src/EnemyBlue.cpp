@@ -23,8 +23,8 @@ EnemyBlue::~EnemyBlue()
 
 AppStatus EnemyBlue::Initialise() {
 
-    enemyX = pos.x;
-    enemyY = pos.y;
+    enemyX = (float)pos.x;
+    enemyY = (float)pos.y;
 
     const int n = ENEMYBLUE_FRAME_SIZE;
 
@@ -62,8 +62,8 @@ void EnemyBlue::SetTileMap(TileMap* tilemap) {
 
 void EnemyBlue::UpdateBlue() {
 
-    UpdateAnimation();
     dynamic_cast<Sprite*>(render)->Update();
+    UpdateAnimation();
 
     if (!isMoving) {
 
@@ -115,7 +115,7 @@ void EnemyBlue::LogicBrain() {
     std::mt19937 gen(rd());
 
     int Px = pos.x / TILE_SIZE;
-    int Py = pos.y / TILE_SIZE - 1;
+    int Py = pos.y / TILE_SIZE + 1;
 
 
     if (IsTileWalkable(Px, Py - 1)) possibleDirection.push_back({ 0, -1 });
@@ -228,11 +228,11 @@ void EnemyBlue::UpdateAnimation() {
     else
         spr->SetAnimation((int)EnemyBlueAnim::WALK_LEFT);
 }
-
 void EnemyBlue::DrawBlue() const {
     dynamic_cast<Sprite*>(render)->Draw((int)pos.x-1, (int)pos.y-height);
-    //Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
+    Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
 }
+
 
 void EnemyBlue::ReleaseBlue() {
     ResourceManager::Instance().ReleaseTexture(Resource::IMG_ENEMY_BLUE);

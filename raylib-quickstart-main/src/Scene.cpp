@@ -14,8 +14,6 @@ Scene::Scene()
 {
 	player = nullptr;
     level = nullptr;
-	//Entity* enemyRed = nullptr;
-	//Entity* enemyBlue = nullptr;
 
 
 	camera.target = { 0, 0 };
@@ -103,7 +101,7 @@ AppStatus Scene::Init()
 	enemiesRed.push_back(enemyRed);
 
 	//create and initialise enemyBlue
-	EnemyBlue* enemyBlue = new EnemyBlue({ 48, 48 });
+	EnemyBlue* enemyBlue = new EnemyBlue({ 32, 16 });
 	enemyBlue->SetTileMap(level);
 	if (enemyBlue->Initialise() != AppStatus::OK) {
 		return AppStatus::ERROR;
@@ -493,7 +491,7 @@ void Scene::Update()
 		enemyRed->Update();
 
 	for (EnemyBlue* enemyBlue : enemiesBlue)
-		enemyBlue->Update();
+		enemyBlue->UpdateBlue();
 	CheckCollisions();
 
 	//start of camera following player
@@ -537,17 +535,9 @@ void Scene::Render()
 		RenderObjects();
 		player->Draw();
 		for (EnemyRed* enemyRed : enemiesRed) {
-			//if (enemyRed->GetX() >= 0 || enemyRed->GetX() < 0) {
-			//	LOG("enemyRed pointer is null");
-			//	continue;
-			//}
 			enemyRed->Draw();
 		}
 		for (EnemyBlue* enemyBlue : enemiesBlue) {
-			//if (!enemyBlue) {
-			//	LOG("enemyBlue pointer is null");
-			//	continue;
-			//}
 			enemyBlue->DrawBlue();
 		}
 	}
