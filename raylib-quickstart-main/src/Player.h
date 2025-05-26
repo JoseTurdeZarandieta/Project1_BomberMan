@@ -92,6 +92,7 @@ public:
 	float bombCooldown = 0.0f;
 	int PLAYER_SPEED = 2;
 	int fire_range = 1;
+	bool remotecontrol = false;
 private:
 
 	void StepsBrain();

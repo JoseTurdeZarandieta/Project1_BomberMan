@@ -225,10 +225,12 @@ void Player::Update()
 		PLAYER_SPEED += 1;
 	}
 	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
-		//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
+		remotecontrol = true;
+		
 
 		// we have to make the timer end to make the bomb explode 
 	}
+	//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
 	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &objectX) == Tile::DOOR)
 	{
 		victory = true;
