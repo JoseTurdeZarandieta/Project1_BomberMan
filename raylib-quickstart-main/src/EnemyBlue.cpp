@@ -230,7 +230,7 @@ void EnemyBlue::UpdateAnimation() {
 }
 void EnemyBlue::DrawBlue() const {
     dynamic_cast<Sprite*>(render)->Draw((int)pos.x-1, (int)pos.y-height);
-    Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
+    //Entity::DrawHitbox(pos.x, pos.y, width, height, WHITE);
 }
 
 

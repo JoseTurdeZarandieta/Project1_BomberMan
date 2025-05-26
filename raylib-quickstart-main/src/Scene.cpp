@@ -394,7 +394,7 @@ void Scene::Update()
 
 					int tileIndex = adjTileY * LEVEL_WIDTH + adjTileX;
 
-					if (level->map[tileIndex] == Tile::BLOCK)
+					if (level->map[tileIndex] == Tile::BLOCK || level->map[tileIndex] == Tile::DOOR)
 					{
 						break;
 					}
@@ -436,7 +436,7 @@ void Scene::Update()
 				int enemyY = (*m)->GetY() / TILE_SIZE;
 				int collEnemX = std::abs(enemyX - tileX);
 				int collEnemY = std::abs(enemyY - tileY);
-				if ((collEnemX < 1 || collEnemY < 1)) {
+				if ((collEnemX == 1 && collEnemY <= 1 || collEnemX <= 1 && collEnemY == 0)) {
 					player->IncrScore(100);
 					delete *m;
 					m = enemiesRed.erase(m);
@@ -449,7 +449,7 @@ void Scene::Update()
 				int enemyY = (*m)->GetY() / TILE_SIZE;
 				int collEnemX = std::abs(enemyX - tileX);
 				int collEnemY = std::abs(enemyY - tileY);
-				if ((collEnemX < 1 || collEnemY < 1)) {
+				if ((collEnemX == 1 && collEnemY <= 1 || collEnemX <= 1 && collEnemY == 0)) {
 					player->IncrScore(200);
 					delete* m;
 					m = enemiesBlue.erase(m);
@@ -485,7 +485,7 @@ void Scene::Update()
 
 				if (nextTileX >= 0 && nextTileX < level->width && nextTileY >= 0 && nextTileY < level->height) {
 					Tile tile = level->map[nextTileY * level->width + nextTileX];
-					if (tile == Tile::AIR /*|| tile == Tile::DOOR*/) {
+					if (tile == Tile::AIR || tile == Tile::DOOR) {
 						auto* arm = new Explosion(armPos, armTypes[d]);
 						if (arm->Initialise() == AppStatus::OK) {
 							explosions.emplace_back(arm);

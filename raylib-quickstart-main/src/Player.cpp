@@ -290,7 +290,8 @@ void Player::MoveX()
 		box = GetHitbox();
 
 		int safeX = pos.x;
-		bool hitRight = false;
+		bool hitRight = map->TestCollisionWallRight(box);
+		
 		if (hitRight && bombCooldown > 0.0f)
 		{
 			int collX = (box.pos.x) / TILE_SIZE;
@@ -376,7 +377,7 @@ void Player::MoveY()
 		box = GetHitbox();
 
 		int safeY = pos.y;
-		bool hitDown = false;
+		bool hitDown = map->TestCollisionGround(box, &safeY);;
 		if (hitDown && bombCooldown > 0.0f)
 		{
 			int collY = (box.pos.y + box.height - 1) / TILE_SIZE;
