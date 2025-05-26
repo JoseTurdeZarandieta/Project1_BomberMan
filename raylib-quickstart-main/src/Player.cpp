@@ -214,17 +214,30 @@ void Player::Update()
 
 	AABB box = GetHitbox();
 	int objectX;
-	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_BOMB_UP) {
-		maxBombs += 1;
-	}
-	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_FIRE_UP) {
-		fire_range += 1;
-	}
-	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_SPEED_UP) {
-		PLAYER_SPEED += 1;
-	}
-	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
-		remotecontrol = true;
+
+	int tileX = (box.pos.x + box.width / 2) / TILE_SIZE;
+	int tileY = (box.pos.y + box.height - 1) / TILE_SIZE;
+
+	if (tileX >= 0 && tileX < map->width && tileY >= 0 && tileY < map->height) {
+		
+		int temporarytile = tileY * map->width + tileX;
+
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_BOMB_UP) {
+			maxBombs += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_FIRE_UP) {
+			fire_range += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_SPEED_UP) {
+			PLAYER_SPEED += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
+			remotecontrol = true;
+			map->map[temporarytile] = Tile::AIR;
+		}
 	}
 
 	//pepe
