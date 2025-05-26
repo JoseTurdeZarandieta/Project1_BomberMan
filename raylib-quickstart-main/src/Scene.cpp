@@ -354,9 +354,16 @@ void Scene::Update()
 			player->bombCooldown = 0.2f;
 		}
 	}
+
 	for (int i = 0; i < player->activeBombs.size();)
 	{
+
+
 		player->activeBombs[i].timer += GetFrameTime();
+
+		if (player->remotecontrol && IsKeyPressed(KEY_E)) {
+			player->activeBombs[i].timer = 3.5f;
+		}
 
 		if (player->activeBombs[i].timer > 3.0f) {
 			AudioManager::Instance().PlaySoundByName("BombExplode");
@@ -439,6 +446,7 @@ void Scene::Update()
 						break;
 					}
 				}
+				player->activeBombs[i].timer = 0;
 			}
 			int playerTileX = player->GetX() / TILE_SIZE;
 			int playerTileY = player->GetY() / TILE_SIZE;
