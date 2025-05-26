@@ -109,7 +109,7 @@ void EnemyRed::Update() {
 }
 
 void EnemyRed::LogicBrain() {
-    printf("Checking walkability at (%d, %d)\n", pos.x, pos.y);
+    //printf("Checking walkability at (%d, %d)\n", pos.x, pos.y);
 
     std::vector<Point> possibleDirection;
     std::random_device rd;

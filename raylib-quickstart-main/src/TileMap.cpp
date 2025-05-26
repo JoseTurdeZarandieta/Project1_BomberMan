@@ -109,7 +109,7 @@ Tile TileMap::GetTileIndex(int x, int y) const
 }
 bool TileMap::IsTileSolid(Tile tile) const
 {
-	return (tile == Tile::BLOCK || tile == Tile::SOFT_BLOCK);
+	return (tile == Tile::BLOCK || tile == Tile::SOFT_BLOCK || tile == Tile::BOMB);
 }
 
 
@@ -204,9 +204,6 @@ void TileMap::Render()
 					DrawTextureRec(*img_tiles, rc, pos, WHITE);
 				}
 			}
-			/*if (IsTileSolid(tile)) {
-				DrawRectangleLines((int)pos.x, (int)pos.y, TILE_SIZE, TILE_SIZE, RED);
-			}*/
 		}
 	}
 }

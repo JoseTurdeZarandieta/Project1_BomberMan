@@ -11,6 +11,8 @@
 #define PLAYER_PHYSICAL_WIDTH	6
 #define PLAYER_PHYSICAL_HEIGHT	6
 
+#define INVINVIBILITY_TIME		1.0f
+
 
 //Logic states
 enum class State { IDLE, WALKING, DEAD };
@@ -90,18 +92,21 @@ public:
 
 	int score;
 	int health = 3;
+
+	bool isPlayerInvincible = false;
+	float invincibiltyTimer;
+	float invincibleSpeed;
+
 	int maxBombs = 1;
 	float bombCooldown = 0.0f;
-	int PLAYER_SPEED = 1;
+	float escapeBombTimer = 0.5f;
+	int PLAYER_SPEED = 1.3;
 	int fire_range = 1;
 	bool remotecontrol = false;
 private:
 
 	void StepsBrain();
 	float stepsTimer = 1;
-
-
-
 
 	Point direction = { 0, 0 };
 

@@ -22,7 +22,15 @@ public:
     void Release();
     bool startTimer;
     float timer;
+    float stageTimer = 0.0f;
+    float anotherTimer = 0.0f;
     Point initialPlayerPos;
+
+    Point level1PlayerPos = { 16,32 };
+    int initialMaxBombs = 1;
+    int initialFireRange = 1;
+    int initialSpeed = 1.3;
+    bool initialRemoteControl = false;
 
 public:
     AppStatus LoadLevel(int stage);

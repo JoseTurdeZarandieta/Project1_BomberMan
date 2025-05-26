@@ -279,7 +279,7 @@ void Player::MoveX()
 		pos.x += -PLAYER_SPEED;
 		box = GetHitbox();
 		bool hitLeft = map->TestCollisionWallLeft(box);
-		if (hitLeft && bombCooldown>0.0f)
+		if (hitLeft && (escapeBombTimer > bombCooldown))
 		{
 			int collX = box.pos.x / TILE_SIZE;
 			int collY1 = box.pos.y / TILE_SIZE;
@@ -315,7 +315,7 @@ void Player::MoveX()
 		int safeX = pos.x;
 		bool hitRight = map->TestCollisionWallRight(box);
 		
-		if (hitRight && bombCooldown > 0.0f)
+		if (hitRight &&(escapeBombTimer > bombCooldown))
 		{
 			int collX = (box.pos.x) / TILE_SIZE;
 			int collY1 = box.pos.y / TILE_SIZE;
@@ -366,7 +366,7 @@ void Player::MoveY()
 		box = GetHitbox();
 		
 		bool hitUp = map->TestCollisionWallUp(box);
-		if (hitUp && bombCooldown > 0.0f)
+		if (hitUp && (escapeBombTimer > bombCooldown))
 		{
 			int collY = box.pos.y / TILE_SIZE;
 			int collX1 = box.pos.x / TILE_SIZE;
@@ -401,7 +401,7 @@ void Player::MoveY()
 
 		int safeY = pos.y;
 		bool hitDown = map->TestCollisionGround(box, &safeY);;
-		if (hitDown && bombCooldown > 0.0f)
+		if (hitDown && (escapeBombTimer > bombCooldown))
 		{
 			int collY = (box.pos.y + box.height - 1) / TILE_SIZE;
 			int collX1 = box.pos.x / TILE_SIZE;
