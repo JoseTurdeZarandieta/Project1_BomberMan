@@ -240,8 +240,6 @@ void Player::Update()
 		}
 	}
 
-	//pepe
-	//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
 	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &objectX) == Tile::DOOR)
 	{
 		victory = true;

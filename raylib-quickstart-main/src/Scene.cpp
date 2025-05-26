@@ -338,7 +338,7 @@ void Scene::Update()
 		if (player->bombCooldown < 0.0f) player->bombCooldown = 0.0f;
 	}
 
-	if (IsKeyPressed(KEY_D) && player->activeBombs.size()< player->maxBombs && player->bombCooldown <= 0.0f)
+	if (IsKeyPressed(KEY_D) && player->activeBombs.size() < player->maxBombs && player->bombCooldown <= 0.0f)
 	{
 		Point bombPos = player->GetPos();
 		int tileX = bombPos.x / TILE_SIZE;
