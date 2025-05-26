@@ -338,7 +338,7 @@ void Scene::Update()
 		if (player->bombCooldown < 0.0f) player->bombCooldown = 0.0f;
 	}
 
-	if (IsKeyPressed(KEY_D) && player->activeBombs.empty() && player->bombCooldown <= 0.0f)
+	if (IsKeyPressed(KEY_D) && player->activeBombs.size() < player->maxBombs && player->bombCooldown <= 0.0f)
 	{
 		Point bombPos = player->GetPos();
 		int tileX = bombPos.x / TILE_SIZE;
@@ -349,7 +349,9 @@ void Scene::Update()
 		{
 			AudioManager::Instance().PlaySoundByName("BombDown");
 			level->map[tileIndex] = Tile::BOMB;
+
 			Player::Bomb newBomb = { bombPos, 0.0f };
+
 			player->activeBombs.push_back(newBomb);
 			player->bombCooldown = 0.2f;
 		}
