@@ -255,9 +255,28 @@ void Player::MoveX()
 
 		pos.x += -PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box))
+		bool hitLeft = map->TestCollisionWallLeft(box);
+		if (hitLeft && bombCooldown>0.0f)
 		{
+			int collX = box.pos.x / TILE_SIZE;
+			int collY1 = box.pos.y / TILE_SIZE;
+			int collY2 = (box.pos.y + box.height - 1) / TILE_SIZE;
+			bool isThatABomb = true;
+			for (int y = collY1; y <= collY2; ++y) {
+				if (map->GetTileIndex(collX, y) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (isThatABomb) {
+				hitLeft = false;
+			}
+		}
+		if (hitLeft) {
 			pos.x = prev_x;
+			if (state == State::WALKING) {
+				direction.x = 0;
+			}
 		}
 	}
 	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
@@ -269,9 +288,37 @@ void Player::MoveX()
 
 		pos.x += PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallRight(box))
+
+		int safeX = pos.x;
+		bool hitRight = false;
+		if (hitRight && bombCooldown > 0.0f)
 		{
+			int collX = (box.pos.x) / TILE_SIZE;
+			int collY1 = box.pos.y / TILE_SIZE;
+			int collY2 = (box.pos.y + box.height - 1) / TILE_SIZE;
+
+			bool isThatABomb = true;
+			for (int y = collY1; y <= collY2; ++y) {
+				if (map->GetTileIndex(collX, y) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (!isThatABomb) {
+				hitRight = map->TestCollisionWallRight(box);
+			}
+		}
+		else {
+			hitRight = hitRight = map->TestCollisionWallRight(box);
+		}
+		if (hitRight) {
 			pos.x = prev_x;
+			if (state == State::WALKING) {
+				direction.x = 0;
+			}
+		}
+		else {
+			pos.x = safeX;
 		}
 	}
 	else {
@@ -293,9 +340,29 @@ void Player::MoveY()
 
 		pos.y -= PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallUp(box))
+		
+		bool hitUp = map->TestCollisionWallUp(box);
+		if (hitUp && bombCooldown > 0.0f)
 		{
+			int collY = box.pos.y / TILE_SIZE;
+			int collX1 = box.pos.x / TILE_SIZE;
+			int collX2 = (box.pos.x + box.width - 1) / TILE_SIZE;
+			bool isThatABomb = true;
+			for (int x = collX1; x <= collX2; ++x) {
+				if (map->GetTileIndex(x, collY) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (isThatABomb) {
+				hitUp = false;
+			}
+		}
+		if (hitUp) {
 			pos.y = prev_y;
+			if (state == State::WALKING) {
+				direction.y = 0;
+			}
 		}
 	}
 	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
@@ -307,9 +374,37 @@ void Player::MoveY()
 
 		pos.y += PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionGround(box, &pos.y))
+
+		int safeY = pos.y;
+		bool hitDown = false;
+		if (hitDown && bombCooldown > 0.0f)
 		{
+			int collY = (box.pos.y + box.height - 1) / TILE_SIZE;
+			int collX1 = box.pos.x / TILE_SIZE;
+			int collX2 = (box.pos.x + box.width - 1) / TILE_SIZE;
+
+			bool isThatABomb = true;
+			for (int x = collX1; x <= collX2; ++x) {
+				if (map->GetTileIndex(x, collY) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (!isThatABomb) {
+				hitDown = map->TestCollisionGround(box, &safeY);
+			}
+		}
+		else {
+			hitDown = map->TestCollisionGround(box, &safeY);
+		}
+		if (hitDown) {
 			pos.y = prev_y;
+			if (state == State::WALKING) {
+				direction.y = 0;
+			}
+		}
+		else {
+			pos.y = safeY;
 		}
 	}
 	else {

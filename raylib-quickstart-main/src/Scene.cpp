@@ -13,7 +13,7 @@
 Scene::Scene()
 {
 	player = nullptr;
-	level = nullptr;
+    level = nullptr;
 
 
 	camera.target = { 0, 0 };
@@ -31,18 +31,18 @@ Scene::~Scene()
 		delete player;
 		player = nullptr;
 	}
-	if (level != nullptr)
-	{
+    if (level != nullptr)
+    {
 		level->Release();
-		delete level;
-		level = nullptr;
-	}
+        delete level;
+        level = nullptr;
+    }
 	for (Entity* obj : objects)
 	{
 		delete obj;
 	}
 	objects.clear();
-
+	
 	for (Entity* enemyRed : enemiesRed)
 	{
 		delete enemyRed;
@@ -71,12 +71,12 @@ AppStatus Scene::Init()
 	}
 
 	//Create level 
-	level = new TileMap();
-	if (level == nullptr)
-	{
-		LOG("Failed to allocate memory for Level");
-		return AppStatus::ERROR;
-	}
+    level = new TileMap();
+    if (level == nullptr)
+    {
+        LOG("Failed to allocate memory for Level");
+        return AppStatus::ERROR;
+    }
 	//Initialise level
 	if (level->Initialise() != AppStatus::OK)
 	{
@@ -92,7 +92,7 @@ AppStatus Scene::Init()
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
-	return AppStatus::OK;
+    return AppStatus::OK;
 
 }
 AppStatus Scene::LoadLevel(int stage)
@@ -114,8 +114,9 @@ AppStatus Scene::LoadLevel(int stage)
 		return AppStatus::ERROR;
 	}
 
-	// --- POSICION DE LA PUERTA SEGUN EL NIVEL ---
-	int doorX = 5, doorY = 5; // Por defecto
+
+	int doorX = 5, doorY = 5;
+
 	switch (stage) {
 	case 1: doorX = 3;  doorY = 3;  break;
 	case 2: doorX = 10; doorY = 7;  break;
@@ -129,7 +130,6 @@ AppStatus Scene::LoadLevel(int stage)
 	doorPos = { doorX, doorY };
 	doorHidden = true;
 
-	// --- PROCESA EL MAPA Y COLOCA OBJETOS/JUGADOR ---
 	i = 0;
 	for (y = 0; y < LEVEL_HEIGHT; ++y)
 	{
@@ -236,7 +236,7 @@ void Scene::Update()
 				currentstage = nextStageToLoad;
 
 				player->SetPos({ 16,32 });
-
+				
 			}
 			else {
 				victory = true;
@@ -422,7 +422,7 @@ void Scene::Update()
 			int dx = std::abs(playerTileX - tileX);
 			int dy = std::abs(playerTileY - tileY);
 
-			if ((dx == 0 && dy <= 1) || (dy == 0 && dx <= 1))
+			if ((dx == 0 && dy <= 1) || (dx <= 1 && dy == 0))
 			{
 				player->takeDamage(1);
 				if (player->GetHealth() <= 0)
@@ -430,6 +430,34 @@ void Scene::Update()
 					game_over = true;
 				}
 			}
+
+			for (auto m = enemiesRed.begin(); m != enemiesRed.end();) {
+				int enemyX = (*m)->GetX() / TILE_SIZE;
+				int enemyY = (*m)->GetY() / TILE_SIZE;
+				int collEnemX = std::abs(enemyX - tileX);
+				int collEnemY = std::abs(enemyY - tileY);
+				if ((collEnemX < 1 || collEnemY < 1)) {
+					player->IncrScore(100);
+					delete *m;
+					m = enemiesRed.erase(m);
+					continue;
+				}
+				++m;
+			}
+			for (auto m = enemiesBlue.begin(); m != enemiesBlue.end();) {
+				int enemyX = (*m)->GetX() / TILE_SIZE;
+				int enemyY = (*m)->GetY() / TILE_SIZE;
+				int collEnemX = std::abs(enemyX - tileX);
+				int collEnemY = std::abs(enemyY - tileY);
+				if ((collEnemX < 1 || collEnemY < 1)) {
+					player->IncrScore(200);
+					delete* m;
+					m = enemiesBlue.erase(m);
+					continue;
+				}
+				++m;
+			}
+
 
 			const Point bombPos = player->activeBombs[i].position;
 
@@ -451,7 +479,7 @@ void Scene::Update()
 
 			for (int d = 0; d < 4; ++d) {
 				Point armPos = { center.x + armDirs[d].x * TILE_SIZE, center.y + armDirs[d].y * TILE_SIZE };
-
+				
 				int nextTileX = newtileX + armDirs[d].x;
 				int nextTileY = newtileY + armDirs[d].y;
 
@@ -481,8 +509,8 @@ void Scene::Update()
 		nextStageToLoad = nextStage;
 		if (LoadLevel(nextStage) == AppStatus::OK) {
 			currentstage = nextStage;
-
-			player->SetPos({ 16,32 });
+			
+			player->SetPos({16,32});
 
 		}
 		else {
@@ -548,7 +576,7 @@ void Scene::Render()
 
 	BeginMode2D(camera);
 
-	level->Render();
+    level->Render();
 	for (auto* explosion : explosions) {
 		explosion->Draw();
 	}
@@ -575,29 +603,29 @@ void Scene::Render()
 }
 void Scene::Release()
 {
-	level->Release();
+    level->Release();
 	player->Release();
 	ClearLevel();
 }
 void Scene::CheckCollisions()
 {
 	AABB player_box, obj_box;
-
+	
 	player_box = player->GetHitbox();
 	auto it = objects.begin();
 	while (it != objects.end())
 	{
 		obj_box = (*it)->GetHitbox();
-		if (player_box.TestAABB(obj_box))
+		if(player_box.TestAABB(obj_box))
 		{
 			player->IncrScore((*it)->Points());
-
-			delete* it;
-			it = objects.erase(it);
+			
+			delete* it; 
+			it = objects.erase(it); 
 		}
 		else
 		{
-			++it;
+			++it; 
 		}
 	}
 }
@@ -608,19 +636,19 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
-
+	
 	for (EnemyRed* enemyRed : enemiesRed)
 	{
 		delete enemyRed;
 	}
 	enemiesRed.clear();
-
+	
 	for (EnemyBlue* enemyBlue : enemiesBlue)
 	{
 		delete enemyBlue;
 	}
 	enemiesBlue.clear();
-
+	
 	for (auto* explosion : explosions) {
 		delete explosion;
 	}
