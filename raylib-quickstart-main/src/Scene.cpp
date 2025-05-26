@@ -395,17 +395,20 @@ void Scene::Update()
 						break;
 					}
 					else if (powerUpHidden && adjTileX == powerUpPos.x && adjTileY == powerUpPos.y && level->map[tileIndex] == Tile::SOFT_BLOCK) {
-						switch (currentstage) {
-						case 1 :level->map[tileIndex] = Tile::ITEM_BOMB_UP;
-						case 2 :level->map[tileIndex] = Tile::ITEM_FIRE_UP;
-						case 3 :level->map[tileIndex] = Tile::ITEM_SPEED_UP;
-						case 4 :level->map[tileIndex] = Tile::ITEM_REMOTE_CONTROL;
-
+						if (currentstage == 1) {
+							level->map[tileIndex] = Tile::ITEM_BOMB_UP;
+						}
+						if (currentstage == 2) {
+							level->map[tileIndex] = Tile::ITEM_FIRE_UP;
+						}
+						if (currentstage == 3) {
+							level->map[tileIndex] = Tile::ITEM_SPEED_UP;
+						}
+						if (currentstage == 4) {
+							level->map[tileIndex] = Tile::ITEM_REMOTE_CONTROL;
 						}
 						powerUpHidden = false;
 						break;
-
-
 					}
 					else
 					{
