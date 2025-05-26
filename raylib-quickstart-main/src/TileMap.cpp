@@ -35,21 +35,21 @@ void TileMap::InitTileDictionary()
 	dict_rect[(int)Tile::DOOR] = {11 *n , 3*n ,n , n };
 
 
-	dict_rect[(int)Tile::ITEM_BOMB_UP] = { 0 , 0 , n , n };
-	dict_rect[(int)Tile::ITEM_FIRE_UP] = { n , 0 , 2*n , n };
-	dict_rect[(int)Tile::ITEM_SPEED_UP] = { 2*n , 0 , 3*n , n };
-	dict_rect[(int)Tile::ITEM_REMOTE_CONTROL] = { 3*n , 0 , 4*n , n };
-	dict_rect[(int)Tile::ITEM_WALL_PASS] = { 4*n , 0 , n , 5*n };
-	dict_rect[(int)Tile::ITEM_BOMB_PASS] = { 5*n , 0 , n , 6*n };
-	dict_rect[(int)Tile::ITEM_FLAME_PASS] = { 6*n , 0 , 7*n , n };
-	dict_rect[(int)Tile::ITEM_INVINCIBLE] = { 7*n , 0 , 8*n , n };
+	dict_rect[(int)Tile::ITEM_BOMB_UP]				= { 0 , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_FIRE_UP]				= { n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_SPEED_UP]				= { 2*n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_REMOTE_CONTROL]		= { 3*n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_WALL_PASS]			= { 4*n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_BOMB_PASS]			= { 5*n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_FLAME_PASS]			= { 6*n , 0 , n , n };
+	dict_rect[(int)Tile::ITEM_INVINCIBLE]			= { 7*n , 0 , n , n };
 
-	dict_rect[(int)Tile::ITEM_B_PANEL] = { 0 , n , n , 2*n };
-	dict_rect[(int)Tile::ITEM_GODDESS] = { n , n , 2*n , 2*n };
-	dict_rect[(int)Tile::ITEM_COLA] = { 2*n ,  n, 3*n , 2*n };
-	dict_rect[(int)Tile::ITEM_FAMICOM] = { 3*n , n , 4*n , 2*n };
-	dict_rect[(int)Tile::ITEM_PROGRAMMER_NAKAMOTO] = { 4*n , n , 5*n , 2*n };
-	dict_rect[(int)Tile::ITEM_DEZENIMAN] = { 5*n , n , 6*n , 2*n };
+	dict_rect[(int)Tile::ITEM_B_PANEL]				= { 0 , n , n , 2*n };
+	dict_rect[(int)Tile::ITEM_GODDESS]				= { n , n , 2*n , 2*n };
+	dict_rect[(int)Tile::ITEM_COLA]					= { 2*n ,  n, 3*n , 2*n };
+	dict_rect[(int)Tile::ITEM_FAMICOM]				= { 3*n , n , 4*n , 2*n };
+	dict_rect[(int)Tile::ITEM_PROGRAMMER_NAKAMOTO]	= { 4*n , n , 5*n , 2*n };
+	dict_rect[(int)Tile::ITEM_DEZENIMAN]			= { 5*n , n , 6*n , 2*n };
 
 	
 

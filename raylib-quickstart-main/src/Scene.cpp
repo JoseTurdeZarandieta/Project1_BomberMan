@@ -260,13 +260,32 @@ void Scene::Update()
 
 	}
 	//Debug levels instantly
-	if (IsKeyPressed(KEY_ONE))		LoadLevel(1);
-	else if (IsKeyPressed(KEY_TWO))	LoadLevel(2);
-	else if (IsKeyPressed(KEY_THREE))	LoadLevel(3);
-	else if (IsKeyPressed(KEY_FOUR))	LoadLevel(4);
-	else if (IsKeyPressed(KEY_FIVE))	LoadLevel(5);
-	else if (IsKeyPressed(KEY_SIX))	LoadLevel(6);
-	/*else if (player->NextLevel() && currentstage == 1)
+	if (IsKeyPressed(KEY_ONE)) {
+		LoadLevel(1);
+		currentstage = 1;
+	}
+	else if (IsKeyPressed(KEY_TWO)) {
+		LoadLevel(2);
+		currentstage = 2;
+	}
+	else if (IsKeyPressed(KEY_THREE)) {
+		LoadLevel(3);
+		currentstage = 3;
+	}
+	else if (IsKeyPressed(KEY_FOUR)) {
+		LoadLevel(4);
+		currentstage = 4;
+	}
+	else if (IsKeyPressed(KEY_FIVE)) {
+		LoadLevel(5);
+		currentstage = 5;
+	}
+	else if (IsKeyPressed(KEY_SIX)) {
+		LoadLevel(6);
+		currentstage = 6;
+	}
+
+	else if (player->NextLevel() && currentstage == 1)
 	{
 		LoadLevel(2);
 
@@ -277,7 +296,7 @@ void Scene::Update()
 		LoadLevel(1);
 
 		player->SetPos({ 390, player->GetY() });
-	}*/
+	}
 	else if (player->NextLevel() && currentstage == 3)
 	{
 		LoadLevel(4);
@@ -436,6 +455,7 @@ void Scene::Update()
 				}
 			}
 
+			// kill enemies
 			for (auto m = enemiesRed.begin(); m != enemiesRed.end();) {
 				int enemyX = (*m)->GetX() / TILE_SIZE;
 				int enemyY = (*m)->GetY() / TILE_SIZE;
@@ -462,8 +482,9 @@ void Scene::Update()
 				}
 				++m;
 			}
+			//end kill enemies
 
-
+			//bomb & anim
 			const Point bombPos = player->activeBombs[i].position;
 
 			int newtileX = bombPos.x / TILE_SIZE;
