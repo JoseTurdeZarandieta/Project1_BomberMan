@@ -1,5 +1,9 @@
-Project executed on 26-05-2025 at 14:31:44.
+Project executed on 26-05-2025 at 14:58:17.
 main.cpp(13): Application start
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
