@@ -82,7 +82,8 @@ public:
 
 	struct Bomb {
 		Point position;
-		float timer;
+		float timer = 0.0f;
+		bool isActive = true;
 	};
 	std::vector<Bomb> activeBombs;
 
