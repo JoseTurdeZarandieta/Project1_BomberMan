@@ -11,8 +11,6 @@
 #define PLAYER_PHYSICAL_WIDTH	6
 #define PLAYER_PHYSICAL_HEIGHT	6
 
-//Horizontal speed and vertical speed while falling down
-#define PLAYER_SPEED			2
 
 //Logic states
 enum class State { IDLE, WALKING, DEAD };
@@ -92,6 +90,9 @@ public:
 	int health = 3;
 	int maxBombs = 1;
 	float bombCooldown = 0.0f;
+	int PLAYER_SPEED = 2;
+	int fire_range = 1;
+	bool remotecontrol = false;
 private:
 
 	void StepsBrain();
