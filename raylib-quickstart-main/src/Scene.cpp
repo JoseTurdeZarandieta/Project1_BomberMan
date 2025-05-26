@@ -114,21 +114,26 @@ AppStatus Scene::LoadLevel(int stage)
 		return AppStatus::ERROR;
 	}
 
-
-	int doorX = 5, doorY = 5;
-
+	int doorX = 5, doorY = 5; // Por defecto
+	int PowerUpX = 3, PowerUpY = 3;
 	switch (stage) {
-	case 1: doorX = 3;  doorY = 3;  break;
-	case 2: doorX = 10; doorY = 7;  break;
-	case 3: doorX = 19; doorY = 10; break;
-	case 4: doorX = 25; doorY = 5; break;
+	case 1: doorX = 3;  doorY = 3; PowerUpX = 4; PowerUpY = 7; break;
+	case 2: doorX = 10; doorY = 7;  PowerUpX = 3; PowerUpY = 4; break;
+	case 3: doorX = 19; doorY = 10; PowerUpX = 5; PowerUpY = 5; break;
+	case 4: doorX = 25; doorY = 5; PowerUpX = 3; PowerUpY = 3; break;
 
-	default: doorX = 5; doorY = 5; break;
+	default: doorX = 5; doorY = 5; PowerUpX = 3; PowerUpY = 3; break;
 	}
 	int doorIndex = doorY * LEVEL_WIDTH + doorX;
+	int powerUpIndex = PowerUpY * LEVEL_WIDTH + PowerUpX;
 	map[doorIndex] = static_cast<int>(Tile::SOFT_BLOCK);
+	map[powerUpIndex] = static_cast<int>(Tile::SOFT_BLOCK);
+
 	doorPos = { doorX, doorY };
 	doorHidden = true;
+	powerUpPos = { PowerUpX, PowerUpY };
+	powerUpHidden = true;
+
 
 	i = 0;
 	for (y = 0; y < LEVEL_HEIGHT; ++y)
@@ -145,22 +150,6 @@ AppStatus Scene::LoadLevel(int stage)
 				pos.x = x * TILE_SIZE;
 				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
 				player->SetPos(pos);
-				map[i] = 0;
-			}
-			else if (tile == Tile::ITEM_BOMB_UP)
-			{
-				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				obj = new Object(pos, ObjectType::BOMB_UP);
-				objects.push_back(obj);
-				map[i] = 0;
-			}
-			else if (tile == Tile::ITEM_FIRE_UP)
-			{
-				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				obj = new Object(pos, ObjectType::FIRE_UP);
-				objects.push_back(obj);
 				map[i] = 0;
 			}
 			else if (tile == Tile::ENEMY_RED)
@@ -404,6 +393,19 @@ void Scene::Update()
 						level->map[tileIndex] = Tile::DOOR;
 						doorHidden = false;
 						break;
+					}
+					else if (powerUpHidden && adjTileX == powerUpPos.x && adjTileY == powerUpPos.y && level->map[tileIndex] == Tile::SOFT_BLOCK) {
+						switch (currentstage) {
+						case 1 :level->map[tileIndex] = Tile::ITEM_BOMB_UP;
+						case 2 :level->map[tileIndex] = Tile::ITEM_FIRE_UP;
+						case 3 :level->map[tileIndex] = Tile::ITEM_SPEED_UP;
+						case 4 :level->map[tileIndex] = Tile::ITEM_REMOTE_CONTROL;
+
+						}
+						powerUpHidden = false;
+						break;
+
+
 					}
 					else
 					{

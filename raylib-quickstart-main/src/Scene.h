@@ -50,6 +50,8 @@ public:
     bool victory = false;
     Point doorPos;
     bool doorHidden;
+    Point powerUpPos;
+    bool powerUpHidden;
     bool showStageScreen = false;
     float stageScreenTimer = 0.0f;
     int nextStageToLoad = -1;

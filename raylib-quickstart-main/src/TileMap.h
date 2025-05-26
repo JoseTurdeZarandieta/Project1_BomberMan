@@ -80,4 +80,5 @@ public:
 
 	//Tile sheet
 	const Texture2D *img_tiles;
+	const Texture2D *img_Items;
 };

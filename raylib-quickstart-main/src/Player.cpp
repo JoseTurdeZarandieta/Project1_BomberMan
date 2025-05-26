@@ -213,11 +213,23 @@ void Player::Update()
 
 
 	AABB box = GetHitbox();
-	int doorX;
-	if (map->GetObjectAtPosition(box, &doorX) == Tile::ITEM_BOMB_UP) {
+	int objectX;
+	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_BOMB_UP) {
 		maxBombs += 1;
 	}
-	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &doorX) == Tile::DOOR)
+	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_FIRE_UP) {
+		fire_range += 1;
+		//no se como funcionan las bombas ahora mismo 
+	}
+	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_SPEED_UP) {
+		PLAYER_SPEED += 1;
+	}
+	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
+		//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
+
+		// we have to make the timer end to make the bomb explode 
+	}
+	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &objectX) == Tile::DOOR)
 	{
 		victory = true;
 	}

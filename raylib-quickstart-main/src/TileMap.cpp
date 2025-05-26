@@ -62,8 +62,13 @@ AppStatus TileMap::Initialise()
 	{
 		return AppStatus::ERROR;
 	}
+	if (data.LoadTexture(Resource::IMG_ITEMS, "resources/Sprites/Items.png") != AppStatus::OK)
+	{
+		return AppStatus::ERROR;
+	}
+	
 	img_tiles = data.GetTexture(Resource::IMG_TILES);
-
+	img_Items = data.GetTexture(Resource::IMG_ITEMS);
 	
 	return AppStatus::OK;
 }
@@ -191,8 +196,13 @@ void TileMap::Render()
 				rc = dict_rect[(int)tile];
 				pos.x = (float)j * TILE_SIZE;
 				pos.y = (float)i * TILE_SIZE;
+				if (tile >= Tile::ITEM_BOMB_UP && tile < Tile::ITEM_DEZENIMAN) {
+					DrawTextureRec(*img_items, rc, pos, WHITE);
 
-				DrawTextureRec(*img_tiles, rc, pos, WHITE);
+				}
+				else {
+					DrawTextureRec(*img_tiles, rc, pos, WHITE);
+				}
 			}
 			/*if (IsTileSolid(tile)) {
 				DrawRectangleLines((int)pos.x, (int)pos.y, TILE_SIZE, TILE_SIZE, RED);
@@ -204,6 +214,7 @@ void TileMap::Release()
 {
 	ResourceManager& data = ResourceManager::Instance(); 
 	data.ReleaseTexture(Resource::IMG_TILES);
+	data.ReleaseTexture(Resource::IMG_ITEMS);
 
 
 
