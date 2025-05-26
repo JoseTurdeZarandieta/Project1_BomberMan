@@ -417,13 +417,13 @@ void Scene::Update()
 						if (currentstage == 1) {
 							level->map[tileIndex] = Tile::ITEM_BOMB_UP;
 						}
-						if (currentstage == 2) {
+						else if (currentstage == 2) {
 							level->map[tileIndex] = Tile::ITEM_FIRE_UP;
 						}
-						if (currentstage == 3) {
+						else if (currentstage == 3) {
 							level->map[tileIndex] = Tile::ITEM_SPEED_UP;
 						}
-						if (currentstage == 4) {
+						else if (currentstage == 4) {
 							level->map[tileIndex] = Tile::ITEM_REMOTE_CONTROL;
 						}
 						powerUpHidden = false;
