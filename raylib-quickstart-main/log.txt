@@ -1,4 +1,4 @@
-Project executed on 26-05-2025 at 13:24:06.
+Project executed on 26-05-2025 at 13:40:52.
 main.cpp(13): Application start
 Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
@@ -68,5 +68,437 @@ Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
 Player.cpp(154): Started walking UP
-main.cpp(36): Application finish
-main.cpp(39): Bye :)
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 294)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 294)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 311)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 311)
+Player.cpp(154): Started walking UP
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 294)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 90)
+Player.cpp(154): Started walking UP
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 22)
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-11, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-28, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-45, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-62, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-79, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-96, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-113, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-96, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-96, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-79, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-79, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-62, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-62, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-45, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-45, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-45, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-28, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-28, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-28, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-11, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-11, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-11, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (5, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (22, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (22, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (22, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (39, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (39, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-15, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-32, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-49, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-66, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-83, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-100, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-117, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-100, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-100, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-83, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-83, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-66, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-66, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-49, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-49, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-32, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-32, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-15, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-15, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (1, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (18, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (35, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-15, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-32, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-49, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-66, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-83, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-100, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-117, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-151, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-168, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-185, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-202, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-219, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-236, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-253, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 22)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-270, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-253, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-253, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-236, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-236, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-219, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-219, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-202, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-202, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-185, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-185, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-168, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-168, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-151, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-151, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 277)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 277)
+Player.cpp(154): Started walking UP
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 260)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 243)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 226)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 209)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 192)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 39)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 56)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 73)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 90)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 107)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 124)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 141)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 158)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 175)
+TileMap.cpp(105): Error: Index out of bounds. Tile map dimensions: 31x13. Given index: (-134, 175)
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
+Player.cpp(154): Started walking UP
