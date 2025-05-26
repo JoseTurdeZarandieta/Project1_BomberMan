@@ -109,7 +109,7 @@ Tile TileMap::GetTileIndex(int x, int y) const
 }
 bool TileMap::IsTileSolid(Tile tile) const
 {
-	return (tile == Tile::BLOCK || tile == Tile::SOFT_BLOCK || tile == Tile::BOMB);
+	return (tile == Tile::BLOCK || tile == Tile::SOFT_BLOCK);
 }
 
 
