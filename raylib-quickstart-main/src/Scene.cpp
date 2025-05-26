@@ -3,18 +3,23 @@
 #include <stdio.h>
 #include "Globals.h"
 #include "Entity.h"
-#include "Enemy.h"
+#include "EnemyRed.h"
+#include "EnemyBlue.h"
 #include "player.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 Scene::Scene()
 {
 	player = nullptr;
     level = nullptr;
-	
-	camera.target = { 0, 0 };				//Center of the screen
-	camera.offset = { 0, MARGIN_GUI_Y };	//Offset from the target (center of the screen)
-	camera.rotation = 0.0f;					//No rotation
-	camera.zoom = 1.0f;						//Default zoom
+
+
+	camera.target = { 0, 0 };
+	camera.offset = { 0, MARGIN_GUI_Y };
+	camera.rotation = 0.0f;
+	camera.zoom = 1.0f;
 
 	debug = DebugMode::OFF;
 }
@@ -38,11 +43,16 @@ Scene::~Scene()
 	}
 	objects.clear();
 	
-	for (Entity* enem : enemies)
+	for (Entity* enemyRed : enemiesRed)
 	{
-		delete enem;
+		delete enemyRed;
 	}
-	enemies.clear();
+	enemiesRed.clear();
+	for (Entity* enemyBlue : enemiesBlue)
+	{
+		delete enemyBlue;
+	}
+	enemiesBlue.clear();
 }
 AppStatus Scene::Init()
 {
@@ -73,230 +83,58 @@ AppStatus Scene::Init()
 		LOG("Failed to initialise Level");
 		return AppStatus::ERROR;
 	}
-	//Load level
-	if (LoadLevel(1) != AppStatus::OK)
-	{
-		LOG("Failed to load Level 1");
-		return AppStatus::ERROR;
-	}
+
+	showStageScreen = true;
+	stageScreenTimer = 2.0f;
+	nextStageToLoad = 1;
+	currentstage = 1;
+
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
-	//create and initialise enemy
-	Enemy* enemy = new Enemy({ 160, 184 });
-	enemy->SetTileMap(level);
-	if (enemy->Initialise() != AppStatus::OK) {
-		return AppStatus::ERROR;
-	}
-	enemies.push_back(enemy);
-
     return AppStatus::OK;
+
 }
 AppStatus Scene::LoadLevel(int stage)
 {
-	int size;
 	int x, y, i;
 	Tile tile;
 	Point pos;
-	int *map = nullptr;
-	Object *obj;
-	
+	Object* obj;
+
 	ClearLevel();
 
-	size = LEVEL_WIDTH * LEVEL_HEIGHT;
-	if (stage == 1)
-	{
-		currentstage = 1;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   3,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   3,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   3,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-		player->InitScore();
-	}
-	else if (stage == 2)
-	{
-		currentstage = 2;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 3)
-	{
-	currentstage = 3;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   3,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   3,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   3,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 4)
-	{
-	currentstage = 4;
-		map = new int[size] {
-			  2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 5)
-	{
-	currentstage = 5;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   3,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 6)
-	{
-	currentstage = 6;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   3,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 7)
-	{
-	currentstage = 7;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   0,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else if (stage == 8)
-	{
-	currentstage = 8;
-		map = new int[size] {
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,	  2,   2,   2,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,   0,   2,	  0,   2,   0,   2,
-			 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,	  0,   0,   0,   2,
-			 2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2
-		};
-	}
-	else
-	{
-		//Error level doesn't exist or incorrect level number
-		LOG("Failed to load level, stage %d doesn't exist", stage);
-		return AppStatus::ERROR;	
+	int size = LEVEL_WIDTH * LEVEL_HEIGHT;
+	int* map = new int[size];
+
+	std::string filename = "level" + std::to_string(stage) + ".txt";
+	if (!LoadMapFromFile(filename, map, size)) {
+		LOG("Failed to load level file: %s", filename.c_str());
+		delete[] map;
+		return AppStatus::ERROR;
 	}
 
-	//Entities and objects
+	int doorX = 5, doorY = 5; // Por defecto
+	int PowerUpX = 3, PowerUpY = 3;
+	switch (stage) {
+	case 1: doorX = 3;  doorY = 3; PowerUpX = 4; PowerUpY = 7; break;
+	case 2: doorX = 10; doorY = 7;  PowerUpX = 3; PowerUpY = 4; break;
+	case 3: doorX = 19; doorY = 10; PowerUpX = 5; PowerUpY = 5; break;
+	case 4: doorX = 25; doorY = 5; PowerUpX = 3; PowerUpY = 3; break;
+
+	default: doorX = 5; doorY = 5; PowerUpX = 3; PowerUpY = 3; break;
+	}
+	int doorIndex = doorY * LEVEL_WIDTH + doorX;
+	int powerUpIndex = PowerUpY * LEVEL_WIDTH + PowerUpX;
+	map[doorIndex] = static_cast<int>(Tile::SOFT_BLOCK);
+	map[powerUpIndex] = static_cast<int>(Tile::SOFT_BLOCK);
+
+	doorPos = { doorX, doorY };
+	doorHidden = true;
+	powerUpPos = { PowerUpX, PowerUpY };
+	powerUpHidden = true;
+
+
 	i = 0;
 	for (y = 0; y < LEVEL_HEIGHT; ++y)
 	{
@@ -314,32 +152,88 @@ AppStatus Scene::LoadLevel(int stage)
 				player->SetPos(pos);
 				map[i] = 0;
 			}
-			else if (tile == Tile::ITEM_BOMB_UP)
+			else if (tile == Tile::ENEMY_RED)
 			{
 				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				obj = new Object(pos, ObjectType::BOMB_UP);
-				objects.push_back(obj);
-				map[i] = 0;
+				pos.y = y * TILE_SIZE;
+				EnemyRed* enemyRed = new EnemyRed(pos);
+				enemyRed->SetTileMap(level);
+				if (enemyRed->Initialise() == AppStatus::OK) {
+					enemiesRed.push_back(enemyRed);
+				}
+				else {
+					LOG("Failed to initialise enemy at (%d, &d)", pos.x, pos.y);
+					delete enemyRed;
+				}
+				map[i] = 0; //when enemy moves, it places AIR
 			}
-			else if (tile == Tile::ITEM_FIRE_UP)
+			else if (tile == Tile::ENEMY_BLUE)
 			{
 				pos.x = x * TILE_SIZE;
-				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				obj = new Object(pos, ObjectType::FIRE_UP);
-				objects.push_back(obj);
-				map[i] = 0;
+				pos.y = y * TILE_SIZE;
+				EnemyBlue* enemyBlue = new EnemyBlue(pos);
+				enemyBlue->SetTileMap(level);
+				if (enemyBlue->Initialise() == AppStatus::OK) {
+					enemiesBlue.push_back(enemyBlue);
+				}
+				else {
+					LOG("Failed to initialise enemy at (%d, &d)", pos.x, pos.y);
+					delete enemyBlue;
+				}
+				map[i] = 0; //when enemy moves, it places AIR
 			}
+
 			++i;
 		}
 	}
-	//Tile map
+
 	level->Load(map, LEVEL_WIDTH, LEVEL_HEIGHT);
+	delete[] map;
 
 	return AppStatus::OK;
 }
+
+
+bool Scene::LoadMapFromFile(const std::string& filename, int* map, int size)
+{
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		LOG("No se pudo abrir el archivo: %s", filename.c_str());
+		return false;
+	}
+
+	int value, count = 0;
+	while (file >> value && count < size) {
+		map[count++] = value;
+	}
+	file.close();
+	if (count != size) {
+		LOG("El archivo %s no tiene el nÃºmero correcto de tiles (%d/%d)", filename.c_str(), count, size);
+		return false;
+	}
+	return true;
+}
 void Scene::Update()
 {
+	if (showStageScreen)
+	{
+		stageScreenTimer -= GetFrameTime();
+		if (stageScreenTimer <= 0.0f)
+		{
+			showStageScreen = false;
+			if (LoadLevel(nextStageToLoad) == AppStatus::OK) {
+				currentstage = nextStageToLoad;
+
+				player->SetPos({ 16,32 });
+				
+			}
+			else {
+				victory = true;
+			}
+		}
+		return;
+	}
+
 	Point p1, p2;
 	AABB box;
 
@@ -366,12 +260,31 @@ void Scene::Update()
 
 	}
 	//Debug levels instantly
-	if (IsKeyPressed(KEY_ONE))		LoadLevel(1);
-	else if (IsKeyPressed(KEY_TWO))	LoadLevel(2);
-	else if (IsKeyPressed(KEY_THREE))	LoadLevel(3);
-	else if (IsKeyPressed(KEY_FOUR))	LoadLevel(4);
-	else if (IsKeyPressed(KEY_FIVE))	LoadLevel(5);
-	else if (IsKeyPressed(KEY_SIX))	LoadLevel(6);
+	if (IsKeyPressed(KEY_ONE)) {
+		LoadLevel(1);
+		currentstage = 1;
+	}
+	else if (IsKeyPressed(KEY_TWO)) {
+		LoadLevel(2);
+		currentstage = 2;
+	}
+	else if (IsKeyPressed(KEY_THREE)) {
+		LoadLevel(3);
+		currentstage = 3;
+	}
+	else if (IsKeyPressed(KEY_FOUR)) {
+		LoadLevel(4);
+		currentstage = 4;
+	}
+	else if (IsKeyPressed(KEY_FIVE)) {
+		LoadLevel(5);
+		currentstage = 5;
+	}
+	else if (IsKeyPressed(KEY_SIX)) {
+		LoadLevel(6);
+		currentstage = 6;
+	}
+
 	else if (player->NextLevel() && currentstage == 1)
 	{
 		LoadLevel(2);
@@ -420,73 +333,201 @@ void Scene::Update()
 
 		player->SetPos({ 390, player->GetY() });
 	}
-	if (IsKeyPressed(KEY_D))
-	{
-		// Iniciar el temporizador y almacenar la posición actual del jugador
-		AudioManager::Instance().PlaySoundByName("BombDown");
+	if (player->bombCooldown > 0.0f) {
+		player->bombCooldown -= GetFrameTime();
+		if (player->bombCooldown < 0.0f) player->bombCooldown = 0.0f;
+	}
 
+	if (IsKeyPressed(KEY_D) && player->activeBombs.empty() && player->bombCooldown <= 0.0f)
+	{
 		Point bombPos = player->GetPos();
 		int tileX = bombPos.x / TILE_SIZE;
 		int tileY = bombPos.y / TILE_SIZE;
+		int tileIndex = tileY * LEVEL_WIDTH + tileX;
 
-
-
-
-		// Cambiar la tile en la posición del jugador
-
-		level->map[tileY * LEVEL_WIDTH + tileX] = Tile::BOMB;
-
-		Player::Bomb newBomb = { bombPos, 0.0f };
-		player->activeBombs.push_back(newBomb);
+		if (level->map[tileIndex] == Tile::AIR)
+		{
+			AudioManager::Instance().PlaySoundByName("BombDown");
+			level->map[tileIndex] = Tile::BOMB;
+			Player::Bomb newBomb = { bombPos, 0.0f };
+			player->activeBombs.push_back(newBomb);
+			player->bombCooldown = 0.2f;
+		}
 	}
 
 	for (int i = 0; i < player->activeBombs.size();)
 	{
+
+
 		player->activeBombs[i].timer += GetFrameTime();
+
+		if (player->remotecontrol && IsKeyPressed(KEY_E)) {
+			player->activeBombs[i].timer = 3.5f;
+		}
 
 		if (player->activeBombs[i].timer > 3.0f) {
 			AudioManager::Instance().PlaySoundByName("BombExplode");
-			// Calcular la posición de las tiles adyacentes al jugador
-			int tileX = player->activeBombs[i].position.x / TILE_SIZE; // Asumiendo que TILE_SIZE es el tamaño de una tile
+			int tileX = player->activeBombs[i].position.x / TILE_SIZE;
 			int tileY = player->activeBombs[i].position.y / TILE_SIZE;
-			// Modificar el valor de las tiles en todas las direcciones a 0, incluyendo la posición del jugador
-			for (int dx = -1; dx <= 1; ++dx)
+
+
+			int centerTileIndex = tileY * LEVEL_WIDTH + tileX;
+
+			if (level->map[centerTileIndex] != Tile::BLOCK)
 			{
-				for (int dy = -1; dy <= 1; ++dy)
+
+				if (doorHidden && tileX == doorPos.x && tileY == doorPos.y && level->map[centerTileIndex] == Tile::SOFT_BLOCK)
 				{
-					int adjTileX = tileX + dx;
-					int adjTileY = tileY + dy;
+					level->map[centerTileIndex] = Tile::DOOR;
+					doorHidden = false;
+				}
+				else
+				{
+					level->map[centerTileIndex] = Tile::AIR;
+				}
+			}
+
+			const int directions[4][2] = {
+				{1, 0},   // derecha
+				{-1, 0},  // izquierda
+				{0, 1},   // abajo
+				{0, -1}   // arriba
+			};
+
+			for (int d = 0; d < 4; ++d)
+			{
+				int dx = directions[d][0];
+				int dy = directions[d][1];
+
+				for (int step = 1; step <= 1; ++step)
+				{
+					int adjTileX = tileX + dx * step;
+					int adjTileY = tileY + dy * step;
+
+					if (adjTileX < 0 || adjTileX >= LEVEL_WIDTH || adjTileY < 0 || adjTileY >= LEVEL_HEIGHT)
+						break;
+
 					int tileIndex = adjTileY * LEVEL_WIDTH + adjTileX;
 
-
-					if (level->map[tileIndex] != Tile::BLOCK)
+					if (level->map[tileIndex] == Tile::BLOCK || level->map[tileIndex] == Tile::DOOR)
 					{
-						if (adjTileX == 5 && adjTileY == 5)
-						{
-							level->map[tileIndex] = Tile::DOOR;
-						}
-						else {
-
-							level->map[tileIndex] = Tile::AIR;
-						}// Asumiendo que Tile::AIR es el valor para una tile vacía
+						break;
 					}
-					//else if (adjTileX == enemy)
-					if (adjTileX == player->GetX() / TILE_SIZE && adjTileY == player->GetY() / TILE_SIZE)
-					{
-						player->takeDamage(1);
-						if (player->GetHealth() <= 0)
-						{
-							game_over = true;
 
+					if (doorHidden && adjTileX == doorPos.x && adjTileY == doorPos.y && level->map[tileIndex] == Tile::SOFT_BLOCK)
+					{
+						level->map[tileIndex] = Tile::DOOR;
+						doorHidden = false;
+						break;
+					}
+					else if (powerUpHidden && adjTileX == powerUpPos.x && adjTileY == powerUpPos.y && level->map[tileIndex] == Tile::SOFT_BLOCK) {
+						if (currentstage == 1) {
+							level->map[tileIndex] = Tile::ITEM_BOMB_UP;
+						}
+						else if (currentstage == 2) {
+							level->map[tileIndex] = Tile::ITEM_FIRE_UP;
+						}
+						else if (currentstage == 3) {
+							level->map[tileIndex] = Tile::ITEM_SPEED_UP;
+						}
+						else if (currentstage == 4) {
+							level->map[tileIndex] = Tile::ITEM_REMOTE_CONTROL;
+						}
+						powerUpHidden = false;
+						break;
+					}
+					else
+					{
+						level->map[tileIndex] = Tile::AIR;
+					}
+
+					if (level->map[tileIndex] == Tile::SOFT_BLOCK)
+					{
+						break;
+					}
+				}
+				player->activeBombs[i].timer = 0;
+			}
+			int playerTileX = player->GetX() / TILE_SIZE;
+			int playerTileY = player->GetY() / TILE_SIZE;
+
+			int dx = std::abs(playerTileX - tileX);
+			int dy = std::abs(playerTileY - tileY);
+
+			if ((dx == 0 && dy <= 1) || (dx <= 1 && dy == 0))
+			{
+				player->takeDamage(1);
+				if (player->GetHealth() <= 0)
+				{
+					game_over = true;
+				}
+			}
+
+			// kill enemies
+			for (auto m = enemiesRed.begin(); m != enemiesRed.end();) {
+				int enemyX = (*m)->GetX() / TILE_SIZE;
+				int enemyY = (*m)->GetY() / TILE_SIZE;
+				int collEnemX = std::abs(enemyX - tileX);
+				int collEnemY = std::abs(enemyY - tileY);
+				if ((collEnemX == 1 && collEnemY <= 1 || collEnemX <= 1 && collEnemY == 0)) {
+					player->IncrScore(100);
+					delete *m;
+					m = enemiesRed.erase(m);
+					continue;
+				}
+				++m;
+			}
+			for (auto m = enemiesBlue.begin(); m != enemiesBlue.end();) {
+				int enemyX = (*m)->GetX() / TILE_SIZE;
+				int enemyY = (*m)->GetY() / TILE_SIZE;
+				int collEnemX = std::abs(enemyX - tileX);
+				int collEnemY = std::abs(enemyY - tileY);
+				if ((collEnemX == 1 && collEnemY <= 1 || collEnemX <= 1 && collEnemY == 0)) {
+					player->IncrScore(200);
+					delete* m;
+					m = enemiesBlue.erase(m);
+					continue;
+				}
+				++m;
+			}
+			//end kill enemies
+
+			//bomb & anim
+			const Point bombPos = player->activeBombs[i].position;
+
+			int newtileX = bombPos.x / TILE_SIZE;
+			int newtileY = bombPos.y / TILE_SIZE;
+			Point center = { newtileX * TILE_SIZE, newtileY * TILE_SIZE };
+
+			auto* explosion = new Explosion(center, explosionAnim::EXPLOSION_CENTER);
+			if (explosion->Initialise() == AppStatus::OK) {
+				explosions.emplace_back(explosion);
+			}
+			const Point armDirs[4] = { {1,0},{-1,0},{0,1},{0,-1} };
+			const	explosionAnim armTypes[4] = {
+					explosionAnim::EXPLOSION_RIGHT,
+					explosionAnim::EXPLOSION_LEFT,
+					explosionAnim::EXPLOSION_DOWN,
+					explosionAnim::EXPLOSION_UP
+			};
+
+			for (int d = 0; d < 4; ++d) {
+				Point armPos = { center.x + armDirs[d].x * TILE_SIZE, center.y + armDirs[d].y * TILE_SIZE };
+				
+				int nextTileX = newtileX + armDirs[d].x;
+				int nextTileY = newtileY + armDirs[d].y;
+
+				if (nextTileX >= 0 && nextTileX < level->width && nextTileY >= 0 && nextTileY < level->height) {
+					Tile tile = level->map[nextTileY * level->width + nextTileX];
+					if (tile == Tile::AIR || tile == Tile::DOOR) {
+						auto* arm = new Explosion(armPos, armTypes[d]);
+						if (arm->Initialise() == AppStatus::OK) {
+							explosions.emplace_back(arm);
 						}
 					}
 				}
 			}
 			player->activeBombs.erase(player->activeBombs.begin() + i);
-
-
-
-
 		}
 		else
 		{
@@ -495,28 +536,94 @@ void Scene::Update()
 	}
 	if (player->victory)
 	{
-		victory = true;
+		player->victory = false;
+		int nextStage = currentstage + 1;
+		showStageScreen = true;
+		stageScreenTimer = 2.0f;
+		nextStageToLoad = nextStage;
+		if (LoadLevel(nextStage) == AppStatus::OK) {
+			currentstage = nextStage;
+			
+			player->SetPos({16,32});
+
+		}
+		else {
+			victory = true;
+		}
 	}
 
 	level->Update();
+
 	player->Update();
-	for (Enemy* enemy : enemies)
-		enemy->Update();
+
+	for (EnemyRed* enemyRed : enemiesRed)
+		enemyRed->Update();
+
+	for (EnemyBlue* enemyBlue : enemiesBlue)
+		enemyBlue->UpdateBlue();
+
+	for (int i = 0; i < explosions.size();) {
+		explosions[i]->Update(GetFrameTime());
+		if (explosions[i]->IsFinished()) {
+			delete explosions[i];
+			explosions.erase(explosions.begin() + i);
+		}
+		else {
+			++i;
+		}
+	}
+
 	CheckCollisions();
 
+	//start of camera following player
+	Point center = player->GetPos();
+	camera.target = { static_cast<float>(center.x), static_cast<float>(center.y) };
+
+	int mapWidthInPixels = level->width * TILE_SIZE;
+	int mapHeightInPixels = level->height * TILE_SIZE;
+
+	float halfScreenWidth = WINDOW_WIDTH / 4.0f;
+	float halfScreenHeight = WINDOW_HEIGHT / 6.0f;
+
+	float posCamX = std::clamp(camera.target.x, halfScreenWidth, mapWidthInPixels - halfScreenWidth);
+	float posCamY = 0;
+
+	camera.target = { posCamX, posCamY };
+	camera.offset = { halfScreenWidth, halfScreenHeight };
+
+	//end of camera following player
 
 }
 void Scene::Render()
 {
+	if (showStageScreen)
+	{
+		// Fondo negro
+		DrawRectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+		// Texto centrado
+		std::string stageText = "STAGE " + std::to_string(nextStageToLoad);
+		int fontSize = 40;
+		int textWidth = MeasureText(stageText.c_str(), fontSize);
+		DrawText(stageText.c_str(), (WINDOW_WIDTH - textWidth) / 2, WINDOW_HEIGHT / 2 - fontSize / 2, fontSize, WHITE);
+		return;
+	}
+
 	BeginMode2D(camera);
 
     level->Render();
+	for (auto* explosion : explosions) {
+		explosion->Draw();
+	}
 	if (debug == DebugMode::OFF || debug == DebugMode::SPRITES_AND_HITBOXES)
 	{
-		RenderObjects(); 
+		RenderObjects();
 		player->Draw();
-		for (Enemy* enemy : enemies)
-			enemy->Draw();
+		for (EnemyRed* enemyRed : enemiesRed) {
+			enemyRed->Draw();
+		}
+		for (EnemyBlue* enemyBlue : enemiesBlue) {
+			enemyBlue->DrawBlue();
+		}
 	}
 	if (debug == DebugMode::SPRITES_AND_HITBOXES || debug == DebugMode::ONLY_HITBOXES)
 	{
@@ -547,14 +654,11 @@ void Scene::CheckCollisions()
 		{
 			player->IncrScore((*it)->Points());
 			
-			//Delete the object
 			delete* it; 
-			//Erase the object from the vector and get the iterator to the next valid element
 			it = objects.erase(it); 
 		}
 		else
 		{
-			//Move to the next object
 			++it; 
 		}
 	}
@@ -566,11 +670,23 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
-	for (Enemy* enem : enemies)
+	
+	for (EnemyRed* enemyRed : enemiesRed)
 	{
-		delete enem;
+		delete enemyRed;
 	}
-	enemies.clear();
+	enemiesRed.clear();
+	
+	for (EnemyBlue* enemyBlue : enemiesBlue)
+	{
+		delete enemyBlue;
+	}
+	enemiesBlue.clear();
+	
+	for (auto* explosion : explosions) {
+		delete explosion;
+	}
+	explosions.clear();
 }
 void Scene::RenderObjects() const
 {
@@ -588,7 +704,7 @@ void Scene::RenderObjectsDebug(const Color& col) const
 }
 void Scene::RenderGUI() const
 {
-	//Temporal approach
+	//temporal approach
 	DrawText(TextFormat("SCORE : %d", player->GetScore()), 10, 10, 8, LIGHTGRAY);
 	DrawText(TextFormat("HEALTH : %d", player->GetHealth()), 325, 10, 8, LIGHTGRAY);
 }

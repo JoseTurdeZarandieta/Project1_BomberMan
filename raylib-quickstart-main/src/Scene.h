@@ -3,7 +3,9 @@
 #include "Player.h"
 #include "TileMap.h"
 #include "Object.h"
-#include "Enemy.h"
+#include "EnemyRed.h"
+#include "EnemyBlue.h"
+#include "Explosion.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -14,6 +16,7 @@ public:
     ~Scene();
 
     AppStatus Init();
+    bool LoadMapFromFile(const std::string& filename, int* map, int size);
     void Update();
     void Render();
     void Release();
@@ -31,16 +34,26 @@ public:
 
     void RenderGUI() const;
    
-    int currentstage = 0;
+    int currentstage = 1;
     Player *player;
     TileMap *level;
     std::vector<Object*> objects;
-    std::vector<Enemy*> enemies;
+    std::vector<EnemyRed*> enemiesRed;
+    std::vector<EnemyBlue*> enemiesBlue;
+    std::vector<Explosion*> explosions;
+
 
     Camera2D camera;
     DebugMode debug;
 
     bool game_over = false;
     bool victory = false;
+    Point doorPos;
+    bool doorHidden;
+    Point powerUpPos;
+    bool powerUpHidden;
+    bool showStageScreen = false;
+    float stageScreenTimer = 0.0f;
+    int nextStageToLoad = -1;
 };
 

@@ -10,11 +10,13 @@ enum class Resource {
     IMG_SCREEN2,
     IMG_MENU,
     IMG_PLAYER,
-    IMG_ENEMY,
+    IMG_ENEMY_RED,
+    IMG_ENEMY_BLUE,
     IMG_TILES,
     IMG_ITEMS,
     IMG_WIN,
-    IMG_LOSE
+    IMG_LOSE,
+    IMG_EXPLOSION
 };
 
 class ResourceManager {

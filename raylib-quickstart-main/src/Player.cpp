@@ -39,31 +39,31 @@ AppStatus Player::Initialise()
 	sprite->SetNumberAnimations((int)PlayerAnim::NUM_ANIMATIONS);
 
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { n, n, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { n, 0, n, n });
 
 	
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_UP, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 0, 3*n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_UP, { 4*n, n, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_DOWN, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 0,2*n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::IDLE_DOWN, { 4*n,0, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_RIGHT, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i * n, 0, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_RIGHT, { (float)i * n, n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_LEFT, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i * n, n, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i * n, 0, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_UP, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_UP, { (float)i * n, 3*n, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_UP, { (float)(i+3) * n, n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_DOWN, ANIM_DELAY);
 	for (i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::WALKING_DOWN, { (float)i * n, 2*n, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::WALKING_DOWN, { (float)(i+3) * n, 0, n, n });
 
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
 
@@ -129,6 +129,7 @@ void Player::Stop()
 	else if(IsLookingLeft())		 			SetAnimation((int)PlayerAnim::IDLE_LEFT);
 	else if(IsLookingDown())		 			SetAnimation((int)PlayerAnim::IDLE_DOWN);
 	else 		SetAnimation((int)PlayerAnim::IDLE_UP);
+
 }
 void Player::StartWalkingLeft()
 {
@@ -201,8 +202,6 @@ void Player::ChangeAnimUp()
 void Player::Update()
 {
 
-	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
-	//Instead, uses an independent behaviour for each axis.
 	MoveY();
 	MoveX();
 	StepsBrain();
@@ -214,11 +213,36 @@ void Player::Update()
 
 
 	AABB box = GetHitbox();
-	int doorX;
-	if (map->GetObjectAtPosition(box, &doorX) == Tile::ITEM_BOMB_UP) {
-		maxBombs += 1;
+	int objectX;
+
+	int tileX = (box.pos.x + box.width / 2) / TILE_SIZE;
+	int tileY = (box.pos.y + box.height - 1) / TILE_SIZE;
+
+	if (tileX >= 0 && tileX < map->width && tileY >= 0 && tileY < map->height) {
+		
+		int temporarytile = tileY * map->width + tileX;
+
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_BOMB_UP) {
+			maxBombs += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_FIRE_UP) {
+			fire_range += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_SPEED_UP) {
+			PLAYER_SPEED += 1;
+			map->map[temporarytile] = Tile::AIR;
+		}
+		if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
+			remotecontrol = true;
+			map->map[temporarytile] = Tile::AIR;
+		}
 	}
-	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &doorX) == Tile::DOOR)
+
+	//pepe
+	//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
+	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &objectX) == Tile::DOOR)
 	{
 		victory = true;
 	}
@@ -244,84 +268,169 @@ void Player::StepsBrain() {
 
 void Player::MoveX()
 {
-	
 	AABB box;
 	int prev_x = pos.x;
 
-
-	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT) )
-	{ 
-		pos.x += -PLAYER_SPEED;
+	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
+	{
 		direction.x = -1;
-		if (state == State::IDLE) StartWalkingLeft();
-		else
-		{
-			if (IsLookingRight()) ChangeAnimLeft();
-		}
 
+		if (state == State::IDLE) StartWalkingLeft();
+		else if (!IsLookingLeft()) ChangeAnimLeft();
+
+		pos.x += -PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box))
+		bool hitLeft = map->TestCollisionWallLeft(box);
+		if (hitLeft && bombCooldown>0.0f)
 		{
+			int collX = box.pos.x / TILE_SIZE;
+			int collY1 = box.pos.y / TILE_SIZE;
+			int collY2 = (box.pos.y + box.height - 1) / TILE_SIZE;
+			bool isThatABomb = true;
+			for (int y = collY1; y <= collY2; ++y) {
+				if (map->GetTileIndex(collX, y) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (isThatABomb) {
+				hitLeft = false;
+			}
+		}
+		if (hitLeft) {
 			pos.x = prev_x;
-			if (state == State::WALKING) direction.x = 0;
-			
+			if (state == State::WALKING) {
+				direction.x = 0;
+			}
 		}
 	}
 	else if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
 	{
-		pos.x += PLAYER_SPEED;
 		direction.x = 1;
-		if (state == State::IDLE) StartWalkingRight();
-		else
-		{
-			if (IsLookingLeft()) ChangeAnimRight();
-		}
 
+		if (state == State::IDLE) StartWalkingRight();
+		else if (!IsLookingRight()) ChangeAnimRight();
+
+		pos.x += PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallRight(box))
+
+		int safeX = pos.x;
+		bool hitRight = map->TestCollisionWallRight(box);
+		
+		if (hitRight && bombCooldown > 0.0f)
 		{
+			int collX = (box.pos.x) / TILE_SIZE;
+			int collY1 = box.pos.y / TILE_SIZE;
+			int collY2 = (box.pos.y + box.height - 1) / TILE_SIZE;
+
+			bool isThatABomb = true;
+			for (int y = collY1; y <= collY2; ++y) {
+				if (map->GetTileIndex(collX, y) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (!isThatABomb) {
+				hitRight = map->TestCollisionWallRight(box);
+			}
+		}
+		else {
+			hitRight = hitRight = map->TestCollisionWallRight(box);
+		}
+		if (hitRight) {
 			pos.x = prev_x;
-			if (state == State::WALKING) direction.x = 0;
+			if (state == State::WALKING) {
+				direction.x = 0;
+			}
+		}
+		else {
+			pos.x = safeX;
 		}
 	}
 	else {
 		direction.x = 0;
 	}
 }
+
 void Player::MoveY()
 {
 	AABB box;
 	int prev_y = pos.y;
 
-
 	if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
 	{
-		pos.y -= PLAYER_SPEED;
-		direction.y = 1;
-		if (state == State::IDLE) StartWalkingUp();
-		else if (!IsLookingUp())
-			ChangeAnimUp();
+		direction.y = -1;
 
+		if (state == State::IDLE) StartWalkingUp();
+		else if (!IsLookingUp()) ChangeAnimUp();
+
+		pos.y -= PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionWallUp(box))
+		
+		bool hitUp = map->TestCollisionWallUp(box);
+		if (hitUp && bombCooldown > 0.0f)
 		{
+			int collY = box.pos.y / TILE_SIZE;
+			int collX1 = box.pos.x / TILE_SIZE;
+			int collX2 = (box.pos.x + box.width - 1) / TILE_SIZE;
+			bool isThatABomb = true;
+			for (int x = collX1; x <= collX2; ++x) {
+				if (map->GetTileIndex(x, collY) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (isThatABomb) {
+				hitUp = false;
+			}
+		}
+		if (hitUp) {
 			pos.y = prev_y;
-			if (state == State::WALKING) direction.y = 0;
+			if (state == State::WALKING) {
+				direction.y = 0;
+			}
 		}
 	}
 	else if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
 	{
-		pos.y += PLAYER_SPEED;
-		direction.y = -1;
-		if (state == State::IDLE) StartWalkingDown();
-		else if (!IsLookingDown())
-			ChangeAnimDown();
+		direction.y = 1;
 
+		if (state == State::IDLE) StartWalkingDown();
+		else if (!IsLookingDown()) ChangeAnimDown();
+
+		pos.y += PLAYER_SPEED;
 		box = GetHitbox();
-		if (map->TestCollisionGround(box, &pos.y))
+
+		int safeY = pos.y;
+		bool hitDown = map->TestCollisionGround(box, &safeY);;
+		if (hitDown && bombCooldown > 0.0f)
 		{
+			int collY = (box.pos.y + box.height - 1) / TILE_SIZE;
+			int collX1 = box.pos.x / TILE_SIZE;
+			int collX2 = (box.pos.x + box.width - 1) / TILE_SIZE;
+
+			bool isThatABomb = true;
+			for (int x = collX1; x <= collX2; ++x) {
+				if (map->GetTileIndex(x, collY) != Tile::BOMB) {
+					isThatABomb = false;
+					break;
+				}
+			}
+			if (!isThatABomb) {
+				hitDown = map->TestCollisionGround(box, &safeY);
+			}
+		}
+		else {
+			hitDown = map->TestCollisionGround(box, &safeY);
+		}
+		if (hitDown) {
 			pos.y = prev_y;
-			if (state == State::WALKING) direction.y = 0;
+			if (state == State::WALKING) {
+				direction.y = 0;
+			}
+		}
+		else {
+			pos.y = safeY;
 		}
 	}
 	else {

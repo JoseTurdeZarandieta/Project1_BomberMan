@@ -6,12 +6,12 @@
 #include <random>
 
 
-#define ENEMY_FRAME_SIZE      16
-#define ENEMY_PHYSICAL_WIDTH  16
-#define ENEMY_PHYSICAL_HEIGHT 16
-#define ENEMY_SPEED           0.5
+#define ENEMYRED_FRAME_SIZE      16
+#define ENEMYRED_PHYSICAL_WIDTH  16
+#define ENEMYRED_PHYSICAL_HEIGHT 16
+#define ENEMYRED_SPEED           1.0f
 
-enum class EnemyAnim {
+enum class EnemyRedAnim {
     WALK_RIGHT = 0,
     WALK_LEFT = 1,
     NUM_ANIMATIONS
@@ -19,10 +19,10 @@ enum class EnemyAnim {
 
 class TileMap;
 
-class Enemy : public Entity {
+class EnemyRed : public Entity {
 public:
-    Enemy(const Point& startPos);
-    ~Enemy();
+    EnemyRed(const Point& startPos);
+    ~EnemyRed();
 
     AppStatus Initialise();
 
@@ -32,27 +32,30 @@ public:
     void Draw() const;
     void Release();
 
-    void SetDirection(int dx, int dy);
+    void UpdateAnimation();
 
 private:
     void MoveX();
     void MoveY();
 
-    void UpdateAnimation();
-
     void CheckDirection();
 
     bool canMoveLeft    = false;
-    bool canMoveRight   = true;
+    bool canMoveRight   = false;
     bool canMoveUp      = false;
     bool canMoveDown    = false;
 
     float enemyX;
     float enemyY;
 
-    float timer = 2;
+    float timer = 4;
     Point selectedDirection = { 1,0 };
     void LogicBrain();
+
+    Point lastDirection = { 0, 0 };
+    bool IsTileWalkable(int x, int y);
+    Point targetTile;
+    bool isMoving = false;
 
     Point       e_direction;
     TileMap*    e_tileMap;
