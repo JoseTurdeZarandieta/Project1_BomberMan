@@ -219,17 +219,15 @@ void Player::Update()
 	}
 	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_FIRE_UP) {
 		fire_range += 1;
-		//no se como funcionan las bombas ahora mismo 
 	}
 	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_SPEED_UP) {
 		PLAYER_SPEED += 1;
 	}
 	if (map->GetObjectAtPosition(box, &objectX) == Tile::ITEM_REMOTE_CONTROL) {
 		remotecontrol = true;
-		
-
-		// we have to make the timer end to make the bomb explode 
 	}
+
+	//pepe
 	//if(KEY_PRESSED(KEY_S)){		timer bomb stop		}
 	if (IsKeyPressed(KEY_SPACE) && map->GetObjectAtPosition(box, &objectX) == Tile::DOOR)
 	{

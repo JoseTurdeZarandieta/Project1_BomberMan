@@ -90,7 +90,7 @@ public:
 	int health = 3;
 	int maxBombs = 1;
 	float bombCooldown = 0.0f;
-	int PLAYER_SPEED = 2;
+	int PLAYER_SPEED = 1;
 	int fire_range = 1;
 	bool remotecontrol = false;
 private:
