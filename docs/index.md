@@ -20,33 +20,33 @@ _Project Camel Members_
 
 <h1>CONTROLS</h1>
 
-### Intro
-
-    * ESC -> Exit Game
+## Game Controls
+### Intro    
     * SPACE -> Skip Menus
-    * RIGHT_SHIFT -> Insert Coin (not implemented yet)
-   
-### Player 1 (Keyboard)
-
-    * W -> Jump
-    * A -> Move to the left
-    * D -> Move to the right
-    * LEFT_SHIFT -> Bubble
-    
+### Player
+    * Player movement -> Direction keys
+    * D -> Bomb
+    * Space -> Door
 ## Debug Tools
-
     * F1 -> Check hitboxes
+    * F2 -> Victory
+    * F3 -> Lose
+    * F4 -> Take Lives
+    * 1 -> Lvl. 1
+    * 2 -> Lvl. 2
+    * 3 -> Lvl. 3
+    * 4 -> Lvl. 4
 
 <h1>YOUTUBE VIDEO</h1>
 
 <h3>V0.5</h3>
-<iframe width="740" height="590" src="https://www.youtube.com/embed/ze9YP9dbtJI" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="740" height="590" src="" frameborder="0" allowfullscreen=""></iframe>
 
 <h3>V1.0</h3>
-<iframe width="740" height="590" src="https://www.youtube.com/embed/0Gqjm8cHbeI" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="740" height="590" src="https://www.youtube.com/watch?v=eYDO6CIsfkE" frameborder="0" allowfullscreen=""></iframe>
 
-<h1>INSTALL LATEST <a href = "https://github.com/Vequi/BubbleBobble-QuilmoStudios/releases/tag/v1.0">RELEASE</a></h1>
+<h1>INSTALL LATEST <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/releases/tag/v.1.0">RELEASE</a></h1>
 
-<h1>CHECK OUR REPOSITORY <a href = "https://github.com/Vequi/BubbleBobble-QuilmoStudios">HERE</a></h1>
+<h1>CHECK OUR REPOSITORY <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan">HERE</a></h1>
 
-<h1>FOR MORE INFORMATION <a href = "https://github.com/Vequi/BubbleBobble-QuilmoStudios/wiki">WIKI</a></h1>
+<h1>FOR MORE INFORMATION <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/wiki">WIKI</a></h1>
