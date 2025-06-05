@@ -2,8 +2,7 @@
 
 Bomberman is a game in which the player controls a robot that places bombs to destroy obstacles and defeat enemies. The goal is to eliminate all enemies and find the hidden exit before time runs out.
 
-image(https://github.com/JoseTurdeZarandieta/Project1_BomberMan/blob/assets/Bomberman_NES_US_Box.webp)
-![image](./assets/Bomberman_NES_US_Box.webp)
+![image](./docs/assets/Bomberman_NES_US_Box.webp)
 
 
 _Bomberman logo_
