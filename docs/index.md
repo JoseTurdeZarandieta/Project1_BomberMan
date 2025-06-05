@@ -8,10 +8,6 @@ _Bomberman logo_
 
 <h1>Project Camel MEMBERS</h1>
 
-![image]
-
-_Quilmo Studios logo_
-
 <h2>Iker Salas Gallardo</h2> <h3>Code, Design & Management - <a href = "https://github.com/Biker13">Github Account</a></h3>
 <h2>Jose Tur de Zarandieta</h2> <h3>Code, Design & Management - <a href = "https://github.com/JoseTurdeZarandieta">Github Account</a></h3>
 <h2>Marc Amo Mateu</h2> <h3>Code,Designer & Management - <a href = "https://github.com/mxarc">Github Account</a></h3>
