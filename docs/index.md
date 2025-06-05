@@ -1,6 +1,6 @@
-<h1>BUBBLE BOBBLE 1986</h1>
+<h1>BOMBERMAN</h1>
 
-Bubble Bobble is an arcade platform game from Fukio Mitsuji, originally developed and published by Taito in 1986. The players will control two dragons, the green one named Bub and the blue one named Bob who need to pass 100 levels to save their girlfriends. In each level, Bub and Bob must defeat each enemy with bubbles that they shoot from their mouths.
+Bomberman is a game in which the player controls a robot that places bombs to destroy obstacles and defeat enemies. The goal is to eliminate all enemies and find the hidden exit before time runs out.
 
 ![image](https://github.com/JoseTurdeZarandieta/Project1_BomberMan/assets/Bomberman_NES_US_Box.webp)
 
