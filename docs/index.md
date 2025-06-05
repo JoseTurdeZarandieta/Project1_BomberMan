@@ -40,7 +40,7 @@ _Project Camel Members_
 <h1>YOUTUBE VIDEO</h1>
 
 <h3>V1.0</h3>
-<iframe width="740" height="590" src="https://youtu.be/embed/eYDO6ClsfkE" frameborder="0" allowfullscreen=""></iframe>
+<iframe width="740" height="590" src="https://www.youtube.com/embed/eYDO6ClsfkE" frameborder="0" allowfullscreen=""></iframe>
 
 <h1>INSTALL LATEST <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/releases/tag/v.1.0">RELEASE</a></h1>
 
