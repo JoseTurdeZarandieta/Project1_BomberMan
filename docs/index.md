@@ -3,6 +3,7 @@
 Bomberman is a game in which the player controls a robot that places bombs to destroy obstacles and defeat enemies. The goal is to eliminate all enemies and find the hidden exit before time runs out.
 
 ![Bomberman Cover](assets/Bomberman_NES_US_Box.jpg)
+
 _Bomberman Cover_
 
 <h1>Project Camel\0 MEMBERS</h1>
@@ -47,4 +48,4 @@ _Project Camel Members_
 _ProjectCamel0 logo_
 
 
-- Academic year 2024-2025 -
+- Academic year 2024-2025
