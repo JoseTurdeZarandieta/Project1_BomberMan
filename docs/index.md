@@ -7,8 +7,8 @@ _Bomberman Cover_
 
 <h1>Project Camel\0 MEMBERS</h1>
 
-![Camel0 logo](assets/ProjectCamel0_Logo.jpg)
-_ProjectCamel\0 logo_
+![Camel0 logo](assets/ProjectCamel0_Logo.png)
+_ProjectCamel0 logo_
 
 <h2>Iker Salas Gallardo</h2> <h3>Code, Design & Management - <a href = "https://github.com/Biker13">Github Account</a></h3>
 <h2>Jose Tur de Zarandieta</h2> <h3>Code, Design & Management - <a href = "https://github.com/JoseTurdeZarandieta">Github Account</a></h3>
