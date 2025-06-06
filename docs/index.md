@@ -34,6 +34,10 @@ _Project Camel Members_
     * 3 -> Lvl. 3
     * 4 -> Lvl. 4
 
+
+![image](https://github.com/JoseTurdeZarandieta/Project1_BomberMan/github_pages/docs/assets/0_ProjectCamel0_Logo.png)
+_ProjectCamel\0 logo_
+
 <h1>YOUTUBE VIDEO</h1>
 
 <h3>V1.0</h3>
@@ -45,5 +49,5 @@ _Project Camel Members_
 
 <h1>FOR MORE INFORMATION <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/wiki">WIKI</a></h1>
 
-![image](https://github.com/JoseTurdeZarandieta/Project1_BomberMan/blob/github_pages/docs/assets/0_ProjectCamel0_Logo.jpg)
+![image](https://github.com/JoseTurdeZarandieta/Project1_BomberMan/blob/github_pages/docs/assets/0_ProjectCamel0_Logo.png)
 _ProjectCamel\0 logo_
