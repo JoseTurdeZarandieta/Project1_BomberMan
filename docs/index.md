@@ -2,11 +2,6 @@
 
 Bomberman is a game in which the player controls a robot that places bombs to destroy obstacles and defeat enemies. The goal is to eliminate all enemies and find the hidden exit before time runs out.
 
-![image](./assets/Bomberman_NES_US_Box.png)
-
-
-_Bomberman logo_
-
 <h1>Project Camel MEMBERS</h1>
 
 <h2>Iker Salas Gallardo</h2> <h3>Code, Design & Management - <a href = "https://github.com/Biker13">Github Account</a></h3>
@@ -44,5 +39,3 @@ _Project Camel Members_
 <h1>CHECK OUR REPOSITORY <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan">HERE</a></h1>
 
 <h1>FOR MORE INFORMATION <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/wiki">WIKI</a></h1>
-
-
