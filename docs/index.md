@@ -47,4 +47,4 @@ _Project Camel Members_
 _ProjectCamel0 logo_
 
 
-\ - Academic year 2024-2025 -
+- Academic year 2024-2025 -
