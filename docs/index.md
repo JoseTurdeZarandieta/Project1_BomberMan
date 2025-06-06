@@ -5,16 +5,10 @@ Bomberman is a game in which the player controls a robot that places bombs to de
 ![image](/assets/Bomberman_NES_US_Box.png)
 _Bomberman logo_
 
+<h1>Project Camel\0 MEMBERS</h1>
 
-
-![image](https://github.com/JoseTurdeZarandieta/Project1_BomberMan/blob/github_pages/docs/assets/0_ProjectCamel0_Logo.png)
+![image](github_pages/docs/assets/0_ProjectCamel0_Logo.png)
 _ProjectCamel\0 logo_
-
-
-
-
-
-<h1>Project Camel MEMBERS</h1>
 
 <h2>Iker Salas Gallardo</h2> <h3>Code, Design & Management - <a href = "https://github.com/Biker13">Github Account</a></h3>
 <h2>Jose Tur de Zarandieta</h2> <h3>Code, Design & Management - <a href = "https://github.com/JoseTurdeZarandieta">Github Account</a></h3>
