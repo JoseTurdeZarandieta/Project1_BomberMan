@@ -7,9 +7,6 @@ _Bomberman Cover_
 
 <h1>Project Camel\0 MEMBERS</h1>
 
-![Camel0 logo](assets/ProjectCamel0_Logo.png)
-_ProjectCamel0 logo_
-
 <h2>Iker Salas Gallardo</h2> <h3>Code, Design & Management - <a href = "https://github.com/Biker13">Github Account</a></h3>
 <h2>Jose Tur de Zarandieta</h2> <h3>Code, Design & Management - <a href = "https://github.com/JoseTurdeZarandieta">Github Account</a></h3>
 <h2>Marc Amo Mateu</h2> <h3>Code,Designer & Management - <a href = "https://github.com/mxarc">Github Account</a></h3>
@@ -45,3 +42,6 @@ _Project Camel Members_
 <h1>CHECK OUR REPOSITORY <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan">HERE</a></h1>
 
 <h1>FOR MORE INFORMATION <a href = "https://github.com/JoseTurdeZarandieta/Project1_BomberMan/wiki">WIKI</a></h1>
+
+![Camel0 logo](assets/ProjectCamel0_Logo.png)
+_ProjectCamel0 logo_
